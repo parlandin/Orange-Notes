@@ -1,7 +1,7 @@
 import { Outlet, Navigate } from "react-router-dom";
 
 const PrivateRoute = () => {
-  const isUser = true;
+  const isUser = false;
 
   return isUser ? <Outlet /> : <Navigate to={"/login"} />;
 };
