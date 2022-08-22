@@ -2,11 +2,14 @@ import { createGlobalStyle } from "styled-components";
 
 const Colors = createGlobalStyle`
     :root {
-        --color--white: #FFFFFF;
-        --color--white100: #F7FAFC;
-        --color--white200: #EDF2F7;
-        --color--blue600: #3182CE;
-        --color--blue900: #2A4365;
+        --color--red-orange-color: "FE4400"
+        --color--orange-pantone: #FF5F19;
+        --color--black-coffee70: #332d2db3;
+        --color--eerie-black: #1E1E1E;
+        --color--eerie-black81: #1e1e1ecf;
+        --color--white: #2fff;
+        --color--platinum: #E6E8E6
+        --color--black: #000
         --color--red500: #ef4444;
     }
 `;
