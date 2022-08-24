@@ -4,6 +4,35 @@ const Container = styled.section`
   background-color: var(${({ theme }) => theme.color.secondary});
   border-radius: 6px 0 0 6px;
   position: relative;
+
+  @media (max-width: 570px) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 380px;
+    z-index: -1;
+    opacity: 0;
+
+    transition: opacity 0.3s ease-in-out;
+
+    &.active {
+      z-index: 1;
+      opacity: 1;
+    }
+  }
+`;
+
+const CloserModal = styled.button`
+  position: absolute;
+  z-index: 3;
+  cursor: pointer;
+  border-radius: 6px;
+  background-color: transparent;
+
+  @media (min-width: 570px) {
+    display: none;
+  }
 `;
 
 const Logo = styled.div`
@@ -31,9 +60,10 @@ const Img = styled.div`
 
 const ContainerInfos = styled.div`
   width: 100%;
-  margin-top: calc(50% - 100px);
+  margin-top: calc(50% - 131px);
   padding: 10px;
   z-index: 2;
+  box-sizing: border-box;
 `;
 
 const Text = styled.p`
@@ -41,23 +71,14 @@ const Text = styled.p`
   font-size: 1, 5rem;
   color: var(${({ theme }) => theme.color.text});
   margin: 20px 0;
-  word-wrap: break-word;
 `;
 
-const Vectors = styled.div`
-  position: absolute;
-  & > .react {
-    position: absolute;
-    z-index: 1;
-    left: 5%;
-    top: 90px;
-  }
-
-  & > .star {
-    position: absolute;
-    left: 5.22%;
-    top: 6.18%;
-  }
-`;
-
-export default { Container, Logo, Title, Img, ContainerInfos, Text, Vectors };
+export default {
+  Container,
+  Logo,
+  Title,
+  Img,
+  ContainerInfos,
+  Text,
+  CloserModal,
+};

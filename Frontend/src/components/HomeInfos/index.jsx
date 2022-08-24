@@ -1,16 +1,18 @@
 import React from "react";
 import S from "./homeInfos.style";
 import Icon from "../../assets/images/logoIcon.svg";
-import ReactIcon from "../../assets/images/react.svg";
-import StarIcon from "../../assets/images/star.svg";
+import Vectors from "../Vectors";
+import { FiX } from "react-icons/fi";
 
-const HomeInfos = () => {
+const HomeInfos = ({ modalIsOpen, setModalIsOpen }) => {
   return (
-    <S.Container>
-      <S.Vectors>
-        <img className="react" src={ReactIcon} />
-        <img className="star" src={StarIcon} />
-      </S.Vectors>
+    <S.Container className={modalIsOpen ? "active" : "not"}>
+      <Vectors />
+
+      <S.CloserModal onClick={() => setModalIsOpen(false)}>
+        <FiX size="1.6rem" />
+      </S.CloserModal>
+
       <S.Logo>
         <S.Img>
           <img src={Icon} alt="logo do site orange notes" />
@@ -23,6 +25,7 @@ const HomeInfos = () => {
         <S.Text>Crie listas de tarefas (kanban, todo)</S.Text>
         <S.Text>Organize suas ideias com mapas mentais</S.Text>
         <S.Text>Pomodoro Time para focar nos estudos </S.Text>
+        <S.Text>Salvamento na nuvem</S.Text>
       </S.ContainerInfos>
     </S.Container>
   );

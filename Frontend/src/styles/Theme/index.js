@@ -5,5 +5,6 @@ export const ligthTheme = {
     background: "--color--white",
     secondary: "--color--orange-pantone",
     black70: "--color--black-coffee70",
+    placeholder: "--color--eerie-black81",
   },
 };
