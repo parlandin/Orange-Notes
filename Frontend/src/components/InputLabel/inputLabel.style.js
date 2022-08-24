@@ -4,10 +4,9 @@ const Label = styled.label`
   border-radius: 20px;
   border: 2px solid var(${({ theme }) => theme.color.secondary});
   padding: 5px;
-  max-width: 300px;
+  max-width: 350px;
   min-width: 190px;
   width: 100%;
-  height: 30px;
   display: flex;
   align-items: center;
   flex-wrap: nowrap;

@@ -20,6 +20,14 @@ const Container = styled.section`
       z-index: 1;
       opacity: 1;
     }
+
+    @media (max-width: 422px) {
+      min-width: 300px;
+    }
+
+    @media (max-width: 300px) {
+      min-width: 200px;
+    }
   }
 `;
 

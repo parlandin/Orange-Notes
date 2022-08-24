@@ -9,7 +9,10 @@ const HomeInfos = ({ modalIsOpen, setModalIsOpen }) => {
     <S.Container className={modalIsOpen ? "active" : "not"}>
       <Vectors />
 
-      <S.CloserModal onClick={() => setModalIsOpen(false)}>
+      <S.CloserModal
+        onClick={() => setModalIsOpen(false)}
+        aria-label="botão para fechar o modal"
+      >
         <FiX size="1.6rem" />
       </S.CloserModal>
 

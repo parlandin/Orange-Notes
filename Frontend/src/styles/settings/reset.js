@@ -24,6 +24,7 @@ time, mark, audio, video {
 	border: 0;
     font-size: 16px;
 	vertical-align: baseline;
+    box-sizing: border-box;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 

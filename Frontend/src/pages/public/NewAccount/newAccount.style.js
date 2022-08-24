@@ -45,18 +45,18 @@ const Title = styled.h2`
   color: var(${({ theme }) => theme.color.text});
   font-weight: 600;
   font-size: 1.8rem;
-  margin-top: 40px;
+  margin-top: 18px;
 `;
 
 const Form = styled.form`
-  margin-top: 60px;
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
 
 const WrapperGeneric = styled.div`
-  margin: 20px 0;
+  margin: 15px 0;
   width: 100%;
 `;
 
@@ -86,7 +86,7 @@ const ButtonModal = styled.button`
   width: 20px;
   height: 20px;
   position: absolute;
-  top: 107px;
+  top: 66px;
   left: 50%;
   transform: translateX(-50%);
   cursor: pointer;

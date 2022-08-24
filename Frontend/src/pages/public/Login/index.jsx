@@ -12,7 +12,11 @@ const Login = () => {
       <S.Wrapper>
         <HomeInfos modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen} />
 
-        <S.ButtonModal onClick={() => setModalIsOpen(true)}>
+        <S.ButtonModal
+          onClick={() => setModalIsOpen(true)}
+          aria-label="botão para abri o modal"
+          title="Clique para ver informações"
+        >
           <BiInfoCircle size="1.6rem" />
         </S.ButtonModal>
 

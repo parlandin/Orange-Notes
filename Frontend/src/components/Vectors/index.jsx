@@ -16,24 +16,24 @@ import RootIcon from "../../assets/images/root.svg";
 const Vectors = () => {
   return (
     <Container>
-      <img className="react" src={ReactIcon} />
-      <img className="star" src={StarIcon} />
-      <img className="star1" src={StarIcon} />
-      <img className="star2" src={StarIcon} />
-      <img className="a" src={AIcon} />
-      <img className="a1" src={AIcon} />
-      <img className="book2" src={Book2Icon} />
-      <img className="booktrans" src={BookTransIcon} />
-      <img className="booktrans1" src={BookTransIcon} />
-      <img className="brain" src={BrainIcon} />
-      <img className="brain1" src={BrainIcon} />
-      <img className="date" src={DateIcon} />
-      <img className="eng" src={EngIcon} />
-      <img className="molec" src={MolecIcon} />
-      <img className="res" src={ResIcon} />
-      <img className="res1" src={ResIcon} />
-      <img className="root" src={RootIcon} />
-      <img className="book" src={BookIcon} />
+      <img className="react" src={ReactIcon} alt="vector icone react" />
+      <img className="star" src={StarIcon} alt="vector icone star" />
+      <img className="star1" src={StarIcon} alt="vector icone star" />
+      <img className="star2" src={StarIcon} alt="vector icone star" />
+      <img className="a" src={AIcon} alt="vector icone a" />
+      <img className="a1" src={AIcon} alt="vector icone a" />
+      <img className="book2" src={Book2Icon} alt="vector icone book" />
+      <img className="booktrans" src={BookTransIcon} alt="vector icone book" />
+      <img className="booktrans1" src={BookTransIcon} alt="vector icone book" />
+      <img className="brain" src={BrainIcon} alt="vector icone brain" />
+      <img className="brain1" src={BrainIcon} alt="vector icone brain" />
+      <img className="date" src={DateIcon} alt="vector icone date" />
+      <img className="eng" src={EngIcon} alt="vector icone gear" />
+      <img className="molec" src={MolecIcon} alt="vector icone molecule" />
+      <img className="res" src={ResIcon} alt="vector icone res" />
+      <img className="res1" src={ResIcon} alt="vector icone res" />
+      <img className="root" src={RootIcon} alt="vector icone root" />
+      <img className="book" src={BookIcon} alt="vector icone book" />
     </Container>
   );
 };
