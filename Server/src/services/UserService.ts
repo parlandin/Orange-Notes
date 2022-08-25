@@ -25,6 +25,12 @@ class UserService {
 
     return rows[0];
   }
+
+  public async getUserById(id: number): Promise<object> {
+    const { rows } = await userRepositorie.getUserByID(id);
+
+    return rows[0];
+  }
 }
 
 export default new UserService();

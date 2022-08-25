@@ -9,6 +9,7 @@ declare global {
       PASSWORD: string;
       DBPORT: string;
       PORT: number;
+      SECRET_JWT: Secret;
       NODE_ENV: "development" | "production";
     }
   }

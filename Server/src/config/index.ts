@@ -7,4 +7,5 @@ export default {
   PASSWORD: process.env.PASSWORD,
   DBPORT: process.env.DBPORT,
   PORT: process.env.PORT,
+  SECRET_JWT: process.env.SECRET_JWT,
 };

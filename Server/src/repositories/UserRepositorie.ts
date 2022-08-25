@@ -15,7 +15,8 @@ class UserRepositorie {
   }
 
   public async getUserByID(id: number): Promise<QueryResultRow> {
-    const query = "SELECT * from users WHERE id = $1;";
+    const query =
+      "SELECT name, email, picture, created_at from users WHERE id = $1;";
     return db.query(query, [id]);
   }
 

@@ -3,6 +3,7 @@ import cors from "cors";
 import config from "./config";
 import userRoute from "./routes/userRoute";
 import authRoute from "./routes/authRoute";
+import verifyToken from "./middlewares/verifyToken.middle";
 
 const app = express();
 
@@ -13,8 +14,12 @@ app.use(json());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// routes
+//routes
+// publicas
 app.use(authRoute);
+
+// prividas
+app.use(verifyToken);
 app.use(userRoute);
 
 app.get("/", async (req, res) => {
