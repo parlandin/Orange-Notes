@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -48,38 +47,6 @@ const Title = styled.h2`
   margin-top: 18px;
 `;
 
-const Form = styled.form`
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const WrapperGeneric = styled.div`
-  margin: 15px 0;
-  width: 100%;
-`;
-
-const Button = styled.button`
-  border-radius: 20px;
-  border: 2px solid var(${({ theme }) => theme.color.secondary});
-  padding: 6px;
-  max-width: 300px;
-  width: 100%;
-  color: var(${({ theme }) => theme.color.text});
-  font-size: 1.4rem;
-  cursor: pointer;
-  font-weight: 600;
-  margin: 20px 0;
-`;
-
-const LinkNewAccount = styled(Link)`
-  border-bottom: 1px solid var(${({ theme }) => theme.color.secondary});
-  text-decoration: none;
-  color: var(${({ theme }) => theme.color.text});
-  margin-top: 20px;
-`;
-
 const ButtonModal = styled.button`
   background: transparent;
   border: none;
@@ -101,9 +68,5 @@ export default {
   Wrapper,
   Title,
   WrapperForm,
-  Form,
-  WrapperGeneric,
-  Button,
-  LinkNewAccount,
   ButtonModal,
 };
