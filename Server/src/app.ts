@@ -13,7 +13,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.get("/", async (req, res) => {
-  res.status(404).json({ exemple: "exemple" });
+  const data = await UserRepositorie.getUserByID(1);
+  console.log(data);
+  res.status(200).json({ status: "ok" });
 });
 
 app.listen(PORT, () => {
