@@ -1,7 +1,8 @@
 import express, { json } from "express";
-import config from "./config";
 import cors from "cors";
-import UserRepositorie from "./repositories/userRepositorie";
+import config from "./config";
+import userRoute from "./routes/userRoute";
+import authRoute from "./routes/authRoute";
 
 const app = express();
 
@@ -12,14 +13,14 @@ app.use(json());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+// routes
+app.use(authRoute);
+app.use(userRoute);
+
 app.get("/", async (req, res) => {
-  const data = await UserRepositorie.getUserByID(1);
-  console.log(data);
   res.status(200).json({ status: "ok" });
 });
 
 app.listen(PORT, () => {
   console.log(`serve on port: ${PORT}`);
 });
-
-//"https://avatars.dicebear.com/api/croodles-neutral/your-112seed.svg"
