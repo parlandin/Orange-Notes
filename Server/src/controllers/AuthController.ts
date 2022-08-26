@@ -13,6 +13,7 @@ class AuthController {
     }
   }
 
+  //mudar para validations, temporario
   public checkToken(req: Request, res: Response) {
     const { token } = req.body;
 

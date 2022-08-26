@@ -7,7 +7,7 @@ class AuthService {
   public async login(email: string, loginPassword: string): Promise<object> {
     const { rows } = await userRepositorie.getUserByEmail(email);
 
-    if (!rows) throw Error("Email ou senha invalido");
+    if (!rows.length) throw Error("Email ou senha invalido");
 
     const { password, id, name, picture } = rows[0];
     const isValidPassword = await compare(loginPassword, password);

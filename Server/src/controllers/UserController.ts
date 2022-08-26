@@ -11,9 +11,9 @@ class UserController {
       console.log(err);
       //@ts-ignore
       if (err.code == "23505")
-        return res.status(404).json({ error: "Esse email já existe" });
+        return res.status(400).json({ error: "Esse email já existe" });
       return res
-        .status(201)
+        .status(500)
         .json({ error: "Ocorreu um erro ao criar usuario" });
     }
   }
