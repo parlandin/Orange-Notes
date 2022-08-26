@@ -14,7 +14,7 @@ const LoginForm = () => {
     message: "",
   });
 
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -26,15 +26,16 @@ const LoginForm = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await api.post("/auth", data, {
-        onUploadProgress: (event) => {
-          console.log(Math.round((event.loaded * 100) / event.total));
-        },
-      });
+      setIsLoading(true);
+      const response = await api.post("/auth", data);
       console.log(response.data);
+
+      setIsLoading(false);
     } catch (err) {
-      if (err.response.data?.error)
+      if (err.response.data?.error) {
         setISError({ error: true, message: err.response.data?.error });
+      }
+      setIsLoading(false);
       console.log("error: ", err);
     }
   };
