@@ -37,9 +37,26 @@ const LinkWithStyle = styled(Link)`
 const Span = styled.span`
   position: absolute;
   color: red;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   bottom: -14px;
   left: 5px;
 `;
 
-export default { Form, WrapperGeneric, Button, LinkWithStyle, Span };
+const SpanErr = styled.p`
+  position: absolute;
+  color: #cc2525;
+  font-size: 0.9rem;
+  bottom: 126px;
+
+  @media (max-width: 680px) {
+    bottom: 150px;
+    font-size: 1rem;
+  }
+
+  @media (max-width: 570px) {
+    bottom: 153px;
+    font-size: 1.1rem;
+  }
+`;
+
+export default { Form, WrapperGeneric, Button, LinkWithStyle, Span, SpanErr };

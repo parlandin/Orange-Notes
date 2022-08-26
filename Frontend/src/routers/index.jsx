@@ -5,6 +5,7 @@ import NewAccount from "../pages/public/NewAccount";
 import NotFound from "../pages/public/NotFound";
 import PrivateRoute from "./PrivateRoute";
 import Home from "../pages/private/Home";
+import SucessCreateAccount from "../pages/public/SucessCreateAccount";
 
 const Routers = () => {
   return (
@@ -16,6 +17,7 @@ const Routers = () => {
 
         <Route path="/login" element={<Login />} />
         <Route path="/newaccount" element={<NewAccount />} />
+        <Route path="/sucesscreateAccount" element={<SucessCreateAccount />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

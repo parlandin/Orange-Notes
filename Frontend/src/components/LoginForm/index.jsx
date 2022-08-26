@@ -25,8 +25,8 @@ const LoginForm = () => {
   });
 
   const onSubmit = async (data) => {
+    setIsLoading(true);
     try {
-      setIsLoading(true);
       const response = await api.post("/auth", data);
       console.log(response.data);
 
@@ -46,7 +46,7 @@ const LoginForm = () => {
         <Loading />
       ) : (
         <S.Form onSubmit={handleSubmit(onSubmit)}>
-          {isError.error && <p>{isError.message}</p>}
+          {isError.error && <S.SpanErr>{isError.message}</S.SpanErr>}
           <S.WrapperGeneric>
             <InputLabel
               icon={<FiMail size="1.6rem" color="1E1E1E" />}

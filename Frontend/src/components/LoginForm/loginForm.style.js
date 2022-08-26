@@ -42,4 +42,15 @@ const Span = styled.span`
   left: 5px;
 `;
 
-export default { Form, WrapperGeneric, Button, LinkWithStyle, Span };
+const SpanErr = styled.p`
+  position: absolute;
+  color: #cc2525;
+  font-size: 1.1rem;
+  top: 116px;
+
+  @media (max-width: 570px) {
+    top: 133px;
+  }
+`;
+
+export default { Form, WrapperGeneric, Button, LinkWithStyle, Span, SpanErr };

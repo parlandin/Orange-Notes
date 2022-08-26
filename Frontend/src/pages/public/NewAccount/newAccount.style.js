@@ -34,6 +34,7 @@ const WrapperForm = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 20px 0 5px;
+  position: relative;
 
   @media (max-width: 570px) {
     opacity: ${({ modalIsOpen }) => (modalIsOpen ? 0 : 1)};
@@ -57,6 +58,7 @@ const ButtonModal = styled.button`
   left: 50%;
   transform: translateX(-50%);
   cursor: pointer;
+  z-index: 1;
 
   @media (min-width: 570px) {
     display: none;

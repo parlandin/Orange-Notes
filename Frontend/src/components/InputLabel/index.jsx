@@ -1,7 +1,7 @@
 import React from "react";
 import S from "./inputLabel.style";
 
-const InputLabel = ({ icon, name, placeholder, type, register }) => {
+const InputLabel = ({ icon, name, placeholder, type, register, onFocus }) => {
   return (
     <S.Label>
       {icon}
@@ -10,6 +10,7 @@ const InputLabel = ({ icon, name, placeholder, type, register }) => {
         name={name}
         placeholder={placeholder}
         type={type}
+        onFocus={onFocus}
       />
     </S.Label>
   );
