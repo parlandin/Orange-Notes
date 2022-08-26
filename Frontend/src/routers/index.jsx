@@ -6,13 +6,16 @@ import NotFound from "../pages/public/NotFound";
 import PrivateRoute from "./PrivateRoute";
 import Home from "../pages/private/Home";
 import SucessCreateAccount from "../pages/public/SucessCreateAccount";
+import PrivateArea from "../components/PrivateArea";
 
 const Routers = () => {
   return (
     <Router>
       <Routes>
         <Route element={<PrivateRoute />}>
-          <Route path="/" element={<Home />} />
+          <Route element={<PrivateArea />}>
+            <Route path="/" element={<Home />} />
+          </Route>
         </Route>
 
         <Route path="/login" element={<Login />} />
