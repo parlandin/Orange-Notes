@@ -6,7 +6,7 @@ class UserController {
     const { name, email, password } = req.body;
     try {
       const data = await UserService.createUser(name, email, password);
-      return res.json({ data });
+      return res.json(data);
     } catch (err) {
       console.log(err);
       //@ts-ignore
@@ -23,7 +23,7 @@ class UserController {
     try {
       const data = await UserService.getUserById(parseInt(id));
 
-      return res.status(200).json({ data });
+      return res.status(200).json(data);
     } catch (err) {
       return res
         .status(404)

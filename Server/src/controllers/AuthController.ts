@@ -6,12 +6,10 @@ class AuthController {
     const { email, password } = req.body;
     try {
       const data = await AuthService.login(email, password);
-      return res.json({ data });
+      return res.json(data);
     } catch (err) {
       console.log(err);
-      return res
-        .status(404)
-        .json({ error: "Ocorreu um erro ao carregar usuario" });
+      return res.status(401).json({ error: "Email ou senha invalido" });
     }
   }
 
