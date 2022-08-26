@@ -17,7 +17,7 @@ const Container = styled.section`
     transition: opacity 0.3s ease-in-out;
 
     &.active {
-      z-index: 1;
+      z-index: 2;
       opacity: 1;
     }
 
