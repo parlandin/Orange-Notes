@@ -22,8 +22,23 @@ class UserController {
     const { id } = req.params;
     try {
       const data = await UserService.getUserById(parseInt(id));
-
       return res.status(200).json(data);
+    } catch (err) {
+      return res
+        .status(404)
+        .json({ error: "Ocorreu um erro ao carregar usuario" });
+    }
+  }
+
+  public async getBasicUserInfo(
+    req: Request,
+    res: Response
+  ): Promise<Response> {
+    const { id } = req.params;
+    try {
+      const data = await UserService.getUserById(parseInt(id));
+      const { id: user_id, picture, name } = data;
+      return res.status(200).json({ user_id, picture, name });
     } catch (err) {
       return res
         .status(404)

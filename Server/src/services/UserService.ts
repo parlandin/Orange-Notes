@@ -2,6 +2,12 @@ import userRepositorie from "../repositories/UserRepositorie";
 import { hash, genSalt } from "bcrypt";
 import { randomBytes } from "crypto";
 
+interface user {
+  name: string;
+  picture: string;
+  id: string;
+}
+
 class UserService {
   public async createUser(
     name: string,
@@ -26,7 +32,7 @@ class UserService {
     return rows[0];
   }
 
-  public async getUserById(id: number): Promise<object> {
+  public async getUserById(id: number): Promise<user> {
     const { rows } = await userRepositorie.getUserByID(id);
 
     return rows[0];
