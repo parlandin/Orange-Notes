@@ -13,9 +13,9 @@ const AccountForm = () => {
   const navigate = useNavigate();
 
   const [isError, setISError] = useState({
-    error: true,
+    error: false,
     isInEmail: false,
-    message: "ola mundos tudo bem?",
+    message: "",
   });
 
   const [isLoading, setIsLoading] = useState(false);

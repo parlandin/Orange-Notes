@@ -7,6 +7,7 @@ import PrivateRoute from "./PrivateRoute";
 import Home from "../pages/private/Home";
 import SucessCreateAccount from "../pages/public/SucessCreateAccount";
 import PrivateArea from "../components/PrivateArea";
+import Notes from "../pages/private/Notes";
 
 const Routers = () => {
   return (
@@ -15,6 +16,7 @@ const Routers = () => {
         <Route element={<PrivateRoute />}>
           <Route element={<PrivateArea />}>
             <Route path="/" element={<Home />} />
+            <Route path="/notes" element={<Notes />} />
           </Route>
         </Route>
 

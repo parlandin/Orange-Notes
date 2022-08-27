@@ -2,4 +2,9 @@ import styled from "styled-components";
 
 const Container = styled.section``;
 
-export default { Container };
+const Main = styled.main`
+  display: flex;
+  width: 100%;
+`;
+
+export default { Container, Main };
