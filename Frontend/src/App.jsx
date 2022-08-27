@@ -3,12 +3,15 @@ import Routers from "./routers";
 import GlobalStyles from "./styles/GlobalStyles";
 import { ligthTheme } from "./styles/Theme";
 import { ThemeProvider } from "styled-components";
+import { AuthContextProvide } from "./context/authContext";
 
 const App = () => {
   return (
     <ThemeProvider theme={ligthTheme}>
-      <GlobalStyles />
-      <Routers />
+      <AuthContextProvide>
+        <GlobalStyles />
+        <Routers />
+      </AuthContextProvide>
     </ThemeProvider>
   );
 };

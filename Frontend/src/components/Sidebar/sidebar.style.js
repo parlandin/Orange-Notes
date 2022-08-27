@@ -43,9 +43,9 @@ const Item = styled.div`
 `;
 
 const Icon = styled.div`
-  min-width: 1.9rem;
-  width: 1.9rem;
-  height: 1.9rem;
+  min-width: 1.7rem;
+  width: 1.7rem;
+  height: 1.7rem;
 `;
 
 const Text = styled.p`

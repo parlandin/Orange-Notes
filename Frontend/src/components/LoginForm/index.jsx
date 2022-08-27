@@ -7,8 +7,14 @@ import { useForm } from "react-hook-form";
 import schema from "./validation";
 import api from "../../api";
 import Loading from "../Loading";
+import { setToken } from "../../services/authToken";
+import { useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const LoginForm = () => {
+  const navigate = useNavigate();
+  const [, setAuthUser] = useAuth();
+
   const [isError, setISError] = useState({
     error: false,
     message: "",
@@ -28,9 +34,27 @@ const LoginForm = () => {
     setIsLoading(true);
     try {
       const response = await api.post("/auth", data);
-      console.log(response.data);
+      const { id, name, picture, token } = response.data;
+
+      setToken(token);
+      setAuthUser((prev) => {
+        return {
+          ...prev,
+          isLoading: false,
+          isUser: true,
+          validToken: true,
+          token: token,
+          user: {
+            username: name,
+            picture: picture,
+            id: id,
+          },
+        };
+      });
 
       setIsLoading(false);
+
+      return navigate("/");
     } catch (err) {
       if (err.response.data?.error) {
         setISError({ error: true, message: err.response.data?.error });
