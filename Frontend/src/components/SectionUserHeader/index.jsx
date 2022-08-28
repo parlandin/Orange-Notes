@@ -3,7 +3,7 @@ import S from "./sectionUser.style";
 //import Picture from "../../assets/images/croodlesNeutral.svg";
 import useAuth from "../../hooks/useAuth";
 
-const SectionUserHeader = () => {
+const SectionUserHeader = ({ setIsOpenModal }) => {
   const [authUser] = useAuth();
   const { id, username, picture, consecutive_days } = authUser.user;
 
@@ -22,7 +22,7 @@ const SectionUserHeader = () => {
           Dias consecutivo: <span className="day">{consecutive_days}</span>
         </span>
       </S.WelcomeUser>
-      <S.UserPicture>
+      <S.UserPicture onClick={() => setIsOpenModal((prev) => !prev)}>
         <img src={picture} alt="foto de usuario" />
       </S.UserPicture>
     </S.WrapperUser>

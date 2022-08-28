@@ -31,6 +31,10 @@ const Item = styled.div`
     &.active {
       color: #972906;
     }
+
+    &:hover {
+      color: #201f22;
+    }
   }
 `;
 

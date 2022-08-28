@@ -4,12 +4,23 @@ import { Link } from "react-router-dom";
 const Container = styled.nav`
   position: absolute;
   width: 80px;
-  height: 100px;
   border-radius: 6px;
   right: 2px;
   top: 60px;
   box-shadow: -1px 1px 3px 0px #bfb0b0, 1px -1px 3px 0px #bfb0b0;
   background-color: #fff;
+  transition: all 200ms ease-in-out;
+  z-index: -1;
+  height: 0px;
+  overflow: hidden;
+  opacity: 0;
+
+  &.open {
+    opacity: 1;
+    height: 100px;
+    z-index: 2;
+    overflow: visible;
+  }
 
   &:after {
     content: "";
@@ -58,4 +69,15 @@ const Item = styled(Link)`
   }
 `;
 
-export default { Container, List, Span, Item };
+const CloseModal = styled.div`
+  position: absolute;
+
+  &.open {
+    height: 100vh;
+    width: 100%;
+    inset: 0;
+    z-index: 1;
+  }
+`;
+
+export default { Container, List, Span, Item, CloseModal };

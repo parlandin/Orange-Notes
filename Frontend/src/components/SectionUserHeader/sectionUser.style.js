@@ -55,6 +55,11 @@ const UserPicture = styled.div`
     width: 100%;
     height: 100%;
   }
+
+  &:hover {
+    cursor: pointer;
+    border-color: #ff5f19;
+  }
 `;
 
 export default { WrapperUser, WrapperUser, UserPicture, WelcomeUser };
