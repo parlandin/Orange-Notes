@@ -53,7 +53,7 @@ const Sidebar = () => {
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
     >
-      <S.Menu>
+      <S.Menu isOpen={isOpen}>
         {menuLlist.map((item) => (
           <S.Item isOpen={isOpen} key={item.name}>
             <NavLink

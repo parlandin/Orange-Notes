@@ -1,7 +1,6 @@
 import React from "react";
 import S from "./dropDown.style";
 import { GoSignOut } from "react-icons/go";
-import { Link } from "react-router-dom";
 
 const DropDownMenu = ({ isOpenModal, setIsOpenModal }) => {
   return (

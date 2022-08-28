@@ -10,7 +10,9 @@ const PrivateArea = () => {
       <Header />
       <S.Main>
         <Sidebar />
-        <Outlet />
+        <S.Section>
+          <Outlet />
+        </S.Section>
       </S.Main>
     </S.Container>
   );

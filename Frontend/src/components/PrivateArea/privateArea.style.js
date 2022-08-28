@@ -7,4 +7,10 @@ const Main = styled.main`
   width: 100%;
 `;
 
-export default { Container, Main };
+const Section = styled.section`
+  width: 100%;
+  padding: 10px;
+  background-color: #fff;
+`;
+
+export default { Container, Main, Section };

@@ -1,20 +1,25 @@
 import styled from "styled-components";
 
 const Container = styled.div`
-  width: ${({ isOpen }) => (isOpen ? "180px" : "55px")};
+  min-width: 55px;
   height: calc(100vh - 55px);
-  border-right: 1px solid rgba(0, 0, 0, 0.21);
-  transition: width 300ms ease-in-out;
   overflow: hidden;
+  position: relative;
 `;
 
 const Menu = styled.nav`
   display: flex;
   flex-direction: column;
+  transition: width 300ms ease-in-out;
+  background-color: #fff;
+  z-index: 1;
   align-items: flex-start;
-  width: 100%;
+  width: ${({ isOpen }) => (isOpen ? "190px" : "55px")};
   height: 100%;
-  margin-top: 10px;
+  position: fixed;
+  overflow: hidden;
+  border-right: 1px solid rgba(0, 0, 0, 0.21);
+  padding-top: 10px;
 `;
 
 const Item = styled.div`
@@ -49,7 +54,7 @@ const Text = styled.p`
   margin-left: 5px;
   font-size: 1rem;
   font-weight: 500;
-  transition: opacity 200ms ease-in-out;
+  transition: opacity 400ms ease-in-out;
 `;
 
 export default { Container, Menu, Item, Text, Icon };
