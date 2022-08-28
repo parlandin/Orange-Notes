@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Logo = styled.div`
-  padding: 10px;
+  padding: 10px 15px;
   display: flex;
   align-items: center;
 `;

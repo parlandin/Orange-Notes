@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const WrapperUser = styled.div`
   display: flex;
-  padding: 10px;
+  padding: 10px 15px;
 `;
 
 const WelcomeUser = styled.div`
