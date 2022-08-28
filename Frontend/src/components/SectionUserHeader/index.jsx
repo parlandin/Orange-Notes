@@ -5,7 +5,7 @@ import useAuth from "../../hooks/useAuth";
 
 const SectionUserHeader = () => {
   const [authUser] = useAuth();
-  const { id, username, picture } = authUser.user;
+  const { id, username, picture, consecutive_days } = authUser.user;
   return (
     <S.WrapperUser>
       <S.WelcomeUser>
@@ -13,7 +13,7 @@ const SectionUserHeader = () => {
           Bem vindo, <span className="name">{username}</span>
         </p>
         <span className="days">
-          Dias consecutivo: <span className="day">{1}</span>
+          Dias consecutivo: <span className="day">{consecutive_days}</span>
         </span>
       </S.WelcomeUser>
       <S.UserPicture>

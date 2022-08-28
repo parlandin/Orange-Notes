@@ -34,7 +34,7 @@ const LoginForm = () => {
     setIsLoading(true);
     try {
       const response = await api.post("/auth", data);
-      const { id, name, picture, token } = response.data;
+      const { id, name, picture, token, consecutive_days } = response.data;
 
       setToken(token);
       setAuthUser((prev) => {
@@ -48,6 +48,7 @@ const LoginForm = () => {
             username: name,
             picture: picture,
             id: id,
+            consecutive_days: consecutive_days,
           },
         };
       });

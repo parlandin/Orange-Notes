@@ -1,10 +1,12 @@
 import { createContext, useState, useEffect } from "react";
 import { getToken } from "../services/authToken";
 import api from "../api";
+import decodeJWT from "../services/decodeJwt";
 
 export const AuthContext = createContext({});
 
 export const AuthContextProvide = ({ children }) => {
+  //TODO: refazer essa parte e adicionar refesh token
   const [authUser, setAuthUser] = useState({
     isLoading: true,
     isUser: false,
@@ -14,6 +16,7 @@ export const AuthContextProvide = ({ children }) => {
       username: null,
       picture: null,
       id: null,
+      consecutive_days: 0,
     },
   });
 
@@ -33,7 +36,9 @@ export const AuthContextProvide = ({ children }) => {
           const config = {
             headers: { Authorization: `Bearer ${isToken}` },
           };
-          const { data } = await api.get(`/user/logged/${1}`, config);
+          const { id } = decodeJWT(isToken);
+
+          const { data } = await api.get(`/user/logged/${id}`, config);
 
           return setAuthUser((prev) => {
             return {
@@ -46,6 +51,7 @@ export const AuthContextProvide = ({ children }) => {
                 username: data.name,
                 picture: data.picture,
                 id: data.user_id,
+                consecutive_days: data.consecutive_days,
               },
             };
           });

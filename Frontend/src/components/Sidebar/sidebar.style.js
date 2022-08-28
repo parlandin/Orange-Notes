@@ -29,15 +29,7 @@ const Item = styled.div`
     position: relative;
 
     &.active {
-      &::after {
-        content: "";
-        transition: width 200ms ease-in-out;
-        width: ${({ isOpen }) => (isOpen ? "100%" : "1.9rem")};
-        position: absolute;
-        height: 2px;
-        background-color: #454c4f;
-        bottom: -5px;
-      }
+      color: #972906;
     }
   }
 `;
