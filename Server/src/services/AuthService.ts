@@ -2,6 +2,7 @@ import userRepositorie from "../repositories/UserRepositorie";
 import { compare } from "bcrypt";
 import Config from "../config/index";
 import { sign, verify } from "jsonwebtoken";
+import UserService from "./UserService";
 
 class AuthService {
   public async login(email: string, loginPassword: string): Promise<object> {
@@ -9,17 +10,25 @@ class AuthService {
 
     if (!rows.length) throw Error("Email ou senha invalido");
 
-    const { password, id, name, picture } = rows[0];
+    const { password, id, name, picture, last_login, consecutive_days } =
+      rows[0];
     const isValidPassword = await compare(loginPassword, password);
 
     if (!isValidPassword) throw Error("Email ou senha invalido");
+
+    //TODO: organizar essa parte de services e controllers
+    const days = await UserService.updateConsecutiveDays(
+      last_login,
+      consecutive_days,
+      parseInt(id)
+    );
 
     //@ts-ignore
     const token = sign({ id }, Config.SECRET_JWT, {
       expiresIn: "1d",
     });
 
-    return { id, name, picture, token };
+    return { id, name, picture, token, consecutive_days: days };
   }
 
   public checkTokenIsValid(token: string) {
