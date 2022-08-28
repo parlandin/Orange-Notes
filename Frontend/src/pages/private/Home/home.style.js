@@ -1,12 +1,11 @@
 import styled from "styled-components";
-import Slider from "react-slick";
 
 const Container = styled.section`
   width: 100%;
   height: 200px;
 `;
 
-const SliderContainer = styled(Slider)`
+const SliderContainer = styled.div`
   width: 100%;
 `;
 

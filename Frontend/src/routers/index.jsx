@@ -8,7 +8,8 @@ import Home from "../pages/private/Home";
 import SucessCreateAccount from "../pages/public/SucessCreateAccount";
 import PrivateArea from "../components/PrivateArea";
 import Notes from "../pages/private/Notes";
-import Logout from "../pages/private/logout";
+import Logout from "../pages/private/Logout";
+import Pomodoro from "../pages/private/Pomodoro";
 
 const Routers = () => {
   return (
@@ -19,6 +20,7 @@ const Routers = () => {
             <Route path="/" element={<Home />} />
             <Route path="/notes" element={<Notes />} />
             <Route path="/logout" element={<Logout />} />
+            <Route path="/pomodorotime" element={<Pomodoro />} />
           </Route>
         </Route>
 
