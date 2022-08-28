@@ -1,11 +1,14 @@
 import userRepositorie from "../repositories/UserRepositorie";
 import { hash, genSalt } from "bcrypt";
 import { randomBytes } from "crypto";
+import getDiffDay from "../utils/getDiffDay";
 
 interface user {
   name: string;
   picture: string;
   id: string;
+  last_login: string;
+  consecutive_days: number;
 }
 
 class UserService {
@@ -36,6 +39,28 @@ class UserService {
     const { rows } = await userRepositorie.getUserByID(id);
 
     return rows[0];
+  }
+
+  public async updateConsecutiveDays(
+    last_login: string,
+    consecutive_days: number,
+    id: number
+  ) {
+    const { totalDays, totalHours } = getDiffDay(last_login);
+    const now = new Date();
+
+    if (totalDays <= 1 && totalHours <= 24) {
+      if (totalHours > 1) {
+        const totalIncrement = consecutive_days + 1;
+        userRepositorie.updateLastLogin(now, totalIncrement, id);
+        return totalIncrement;
+      } else {
+        userRepositorie.updateLastLogin(now, consecutive_days, id);
+        return consecutive_days;
+      }
+    }
+
+    return 1;
   }
 }
 

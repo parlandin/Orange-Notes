@@ -37,8 +37,17 @@ class UserController {
     const { id } = req.params;
     try {
       const data = await UserService.getUserById(parseInt(id));
-      const { id: user_id, picture, name } = data;
-      return res.status(200).json({ user_id, picture, name });
+      const { id: user_id, picture, name, last_login, consecutive_days } = data;
+
+      const days = await UserService.updateConsecutiveDays(
+        last_login,
+        consecutive_days,
+        parseInt(id)
+      );
+
+      return res
+        .status(200)
+        .json({ user_id, picture, name, consecutive_days: days });
     } catch (err) {
       return res
         .status(404)

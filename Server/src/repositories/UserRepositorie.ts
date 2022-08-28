@@ -15,14 +15,23 @@ class UserRepositorie {
   }
 
   public async getUserByID(id: number): Promise<QueryResultRow> {
-    const query =
-      "SELECT name, email, picture, created_at from users WHERE id = $1;";
+    const query = "SELECT * from users WHERE id = $1;";
     return db.query(query, [id]);
   }
 
   public async getUserByEmail(email: string): Promise<QueryResultRow> {
     const query = "SELECT * from users WHERE email = $1;";
     return db.query(query, [email]);
+  }
+
+  public async updateLastLogin(
+    today: Date,
+    consecutive_days: number,
+    id: number
+  ) {
+    const query =
+      "UPDATE users SET last_login = $1, consecutive_days = $2 WHERE users.id = $3;";
+    return db.query(query, [today, consecutive_days, id]);
   }
 }
 
