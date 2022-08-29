@@ -5,6 +5,7 @@ const Button = styled.button`
   align-items: center;
   flex-direction: ${({ reverse }) => (reverse ? "row-reverse" : "row")};
   padding: ${({ padding }) => (padding ? padding : "5px")};
+  margin: ${({ margin }) => (margin ? margin : "1px")};
   color: ${({ color }) => (color ? color : "#1E1E1E")};
   background-color: ${({ backgroudFill }) =>
     backgroudFill ? "#FF5F19" : "transparent"};

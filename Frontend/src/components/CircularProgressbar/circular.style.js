@@ -17,7 +17,7 @@ const Timming = styled.div`
   position: relative;
 
   background: conic-gradient(
-    #67a442 ${({ time }) => time * 3.6 + "deg"},
+    ${({ time, color }) => `${color} ${time * 3.6}deg`},
     #97989fd1 ${({ time }) => time * 3.6 + "deg"}
   );
 

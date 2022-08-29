@@ -1,11 +1,11 @@
 import React from "react";
 import S from "./circular.style";
 
-const CircularProgressbar = ({ timing }) => {
+const CircularProgressbar = ({ time, progress, color }) => {
   return (
     <S.ContainerTiming>
-      <S.Timming time={timing}>
-        <p>{"05:10"}</p>
+      <S.Timming time={progress} color={color}>
+        <p>{time}</p>
       </S.Timming>
     </S.ContainerTiming>
   );

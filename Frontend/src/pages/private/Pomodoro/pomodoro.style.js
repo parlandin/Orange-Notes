@@ -6,6 +6,18 @@ const Container = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #fff;
 `;
 
-export default { Container };
+const PomodoroSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const WrapperButtons = styled.div`
+  display: flex;
+  margin-top: 20px;
+`;
+
+export default { Container, WrapperButtons, PomodoroSection };
