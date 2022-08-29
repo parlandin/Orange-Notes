@@ -2,22 +2,22 @@ import styled from "styled-components";
 
 const Container = styled.div`
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-43%, -50%);
   box-shadow: 2px 1px 7px #d3cfcf, -2px -1px 7px #d3cfcf;
   padding: 20px;
   border-radius: 6px;
   opacity: 0;
-  width: 0;
   height: 0;
+  overflow: hidden;
 
   &.active {
+    top: 50%;
+    left: 50%;
     z-index: 2;
     background-color: #fff;
     opacity: 1;
     width: auto;
     height: auto;
+    transform: translate(-50%, -50%);
   }
 `;
 

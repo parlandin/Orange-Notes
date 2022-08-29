@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import S from "./pomodoro.style";
 import CircularProgressbar from "../../../components/CircularProgressbar";
 import ButtonWithIcon from "../../../components/ButtonWithIcon";
-import { FaPlayCircle, FaRedoAlt, FaCog } from "react-icons/fa";
+import { FaPlayCircle, FaRedoAlt, FaCog, FaPauseCircle } from "react-icons/fa";
 import PomodoroModal from "../../../components/PomodoroModal";
 
 const Pomodoro = () => {
@@ -16,10 +16,20 @@ const Pomodoro = () => {
   const secondsLeftRef = useRef(secondsLeft);
   const isPausedRef = useRef(isPaused);
   const currentStateRef = useRef(currentState);
-  const renders = useRef(0);
 
   const tick = () => {
     secondsLeftRef.current--;
+    setSecondsLeft(secondsLeftRef.current);
+  };
+
+  const restartTiming = () => {
+    setIsPaused(true);
+    isPausedRef.current = true;
+
+    setCurrentState("focus");
+    currentStateRef.current = "focus";
+
+    secondsLeftRef.current = focusMinutes * 60;
     setSecondsLeft(secondsLeftRef.current);
   };
 
@@ -34,7 +44,6 @@ const Pomodoro = () => {
   };
 
   useEffect(() => {
-    renders.current = renders.current + 1;
     const changeCurrentState = () => {
       const next = currentStateRef.current == "focus" ? "break" : "focus";
       const nextSeconds =
@@ -51,7 +60,6 @@ const Pomodoro = () => {
     setSecondsLeft(secondsLeftRef.current);
 
     const time = setInterval(() => {
-      console.log("caiu aqui");
       if (isPausedRef.current) {
         return;
       }
@@ -64,6 +72,7 @@ const Pomodoro = () => {
     return () => clearInterval(time);
   }, [focusMinutes, breakMinutes]);
 
+  //
   const totalSeconds =
     currentState === "focus" ? focusMinutes * 60 : breakMinutes * 60;
   const percentage = Math.round((secondsLeft / totalSeconds) * 100);
@@ -95,13 +104,19 @@ const Pomodoro = () => {
           color={currentState == "focus" ? "#E32626" : "#57b91cbd"}
         />
 
-        <p>{renders.current}</p>
+        <S.Span>{currentState == "focus" ? "Focalize" : "Descanse"}</S.Span>
 
         <S.WrapperButtons>
           <ButtonWithIcon
-            icon={<FaPlayCircle size="100%" />}
+            icon={
+              isPaused ? (
+                <FaPlayCircle size="100%" />
+              ) : (
+                <FaPauseCircle size="100%" />
+              )
+            }
             backgroudFill={true}
-            label="Iniciar"
+            label={isPaused ? "Iniciar" : "Pausar"}
             padding="4px 8px"
             margin="10px"
             onClick={handleOnClick}
@@ -112,6 +127,7 @@ const Pomodoro = () => {
             label="Reiniciar"
             padding="4px 8px"
             margin="10px"
+            onClick={restartTiming}
           />
           <ButtonWithIcon
             icon={<FaCog size="100%" />}

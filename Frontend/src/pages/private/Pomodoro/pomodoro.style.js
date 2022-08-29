@@ -7,6 +7,7 @@ const Container = styled.section`
   justify-content: center;
   align-items: center;
   background-color: #fff;
+  position: relative;
 `;
 
 const PomodoroSection = styled.div`
@@ -20,4 +21,10 @@ const WrapperButtons = styled.div`
   margin-top: 20px;
 `;
 
-export default { Container, WrapperButtons, PomodoroSection };
+const Span = styled.span`
+  margin-top: 16px;
+  font-weight: 600;
+  font-size: 1.2rem;
+`;
+
+export default { Container, WrapperButtons, PomodoroSection, Span };
