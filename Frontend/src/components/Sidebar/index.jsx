@@ -1,14 +1,7 @@
 import React, { useState } from "react";
 import S from "./sidebar.style";
 import { NavLink } from "react-router-dom";
-import {
-  FaCog,
-  FaHome,
-  FaBrain,
-  FaTasks,
-  FaFileAlt,
-  FaClock,
-} from "react-icons/fa";
+import { FaCog, FaHome, FaTasks, FaFileAlt, FaClock } from "react-icons/fa";
 
 import { RiMindMap } from "react-icons/ri";
 

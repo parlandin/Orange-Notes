@@ -28,6 +28,20 @@ const PomodoroSection = styled.div`
 const WrapperButtons = styled.div`
   display: flex;
   margin-top: 20px;
+
+  //TODO: remover
+  @media (max-width: 423px) {
+    & button {
+      margin: 5px;
+      & span {
+        font-size: 0.7rem;
+      }
+      & div {
+        width: 10px;
+        height: 10px;
+      }
+    }
+  }
 `;
 
 const Span = styled.span`

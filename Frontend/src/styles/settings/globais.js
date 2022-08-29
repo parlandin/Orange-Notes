@@ -10,6 +10,7 @@ const Globais = createGlobalStyle`
     body {
         background-color: var(${({ theme }) => theme.color.primary});
         font-family: 'Poppins', sans-serif;
+        background-color: #fff;
     }
 `;
 

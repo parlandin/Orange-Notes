@@ -17,8 +17,8 @@ const PomodoroModal = ({
   const [breakValue, setBreakValue] = useState(1);
 
   const handleSubmit = () => {
-    setFocusMinutes(focusValue);
-    setBreakMinutes(breakValue);
+    setFocusMinutes(focusValue == 0 ? 1 : focusValue);
+    setBreakMinutes(breakValue == 0 ? 1 : breakValue);
     return setIsOpenModal(false);
   };
   return (
