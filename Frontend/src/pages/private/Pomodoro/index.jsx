@@ -4,7 +4,9 @@ import CircularProgressbar from "../../../components/CircularProgressbar";
 import ButtonWithIcon from "../../../components/ButtonWithIcon";
 import { FaPlayCircle, FaRedoAlt, FaCog, FaPauseCircle } from "react-icons/fa";
 import PomodoroModal from "../../../components/PomodoroModal";
+import Sound from "../../../assets/sound/notification.mp3";
 
+//TODO: refazer todo esse component
 const Pomodoro = () => {
   const [isPaused, setIsPaused] = useState(true);
   const [secondsLeft, setSecondsLeft] = useState();
@@ -16,6 +18,8 @@ const Pomodoro = () => {
   const secondsLeftRef = useRef(secondsLeft);
   const isPausedRef = useRef(isPaused);
   const currentStateRef = useRef(currentState);
+
+  const [audio] = useState(new Audio(Sound));
 
   const tick = () => {
     secondsLeftRef.current--;
@@ -64,6 +68,7 @@ const Pomodoro = () => {
         return;
       }
       if (secondsLeftRef.current === 0) {
+        audio.play();
         return changeCurrentState();
       }
       tick();
@@ -89,57 +94,62 @@ const Pomodoro = () => {
   };
 
   return (
-    <S.Container>
-      <PomodoroModal
-        isOpen={isOpenModal}
-        setIsOpenModal={setIsOpenModal}
-        setFocusMinutes={setFocusMinutes}
-        setBreakMinutes={setBreakMinutes}
-      />
-
-      <S.PomodoroSection>
-        <CircularProgressbar
-          time={`${twoNumber(minutes)}:${twoNumber(seconds)}`}
-          progress={percentage}
-          color={currentState == "focus" ? "#E32626" : "#57b91cbd"}
+    <>
+      <S.Header>
+        <S.Title>Pomodoro Time</S.Title>
+      </S.Header>
+      <S.Container>
+        <PomodoroModal
+          isOpen={isOpenModal}
+          setIsOpenModal={setIsOpenModal}
+          setFocusMinutes={setFocusMinutes}
+          setBreakMinutes={setBreakMinutes}
         />
 
-        <S.Span>{currentState == "focus" ? "Focalize" : "Descanse"}</S.Span>
+        <S.PomodoroSection>
+          <CircularProgressbar
+            time={`${twoNumber(minutes)}:${twoNumber(seconds)}`}
+            progress={percentage}
+            color={currentState == "focus" ? "#E32626" : "#57b91cbd"}
+          />
 
-        <S.WrapperButtons>
-          <ButtonWithIcon
-            icon={
-              isPaused ? (
-                <FaPlayCircle size="100%" />
-              ) : (
-                <FaPauseCircle size="100%" />
-              )
-            }
-            backgroudFill={true}
-            label={isPaused ? "Iniciar" : "Pausar"}
-            padding="4px 8px"
-            margin="10px"
-            onClick={handleOnClick}
-          />
-          <ButtonWithIcon
-            icon={<FaRedoAlt size="100%" />}
-            backgroudFill={true}
-            label="Reiniciar"
-            padding="4px 8px"
-            margin="10px"
-            onClick={restartTiming}
-          />
-          <ButtonWithIcon
-            icon={<FaCog size="100%" />}
-            backgroudFill={true}
-            label="Configurar"
-            padding="4px 8px"
-            margin="10px"
-            onClick={() => setIsOpenModal(true)}
-          />
-        </S.WrapperButtons>
-      </S.PomodoroSection>
-    </S.Container>
+          <S.Span>{currentState == "focus" ? "Focalize" : "Descanse"}</S.Span>
+
+          <S.WrapperButtons>
+            <ButtonWithIcon
+              icon={
+                isPaused ? (
+                  <FaPlayCircle size="100%" />
+                ) : (
+                  <FaPauseCircle size="100%" />
+                )
+              }
+              backgroudFill={true}
+              label={isPaused ? "Iniciar" : "Pausar"}
+              padding="4px 8px"
+              margin="10px"
+              onClick={handleOnClick}
+            />
+            <ButtonWithIcon
+              icon={<FaRedoAlt size="100%" />}
+              backgroudFill={true}
+              label="Reiniciar"
+              padding="4px 8px"
+              margin="10px"
+              onClick={restartTiming}
+            />
+            <ButtonWithIcon
+              icon={<FaCog size="100%" />}
+              backgroudFill={true}
+              label="Configurar"
+              padding="4px 8px"
+              margin="10px"
+              onClick={() => setIsOpenModal(true)}
+            />
+          </S.WrapperButtons>
+        </S.PomodoroSection>
+      </S.Container>
+    </>
   );
 };
 
