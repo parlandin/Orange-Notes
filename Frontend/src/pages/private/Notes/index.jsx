@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import S from "./notes.style";
 import ButtonWithIcon from "../../../components/ButtonWithIcon";
-import { FaPlus } from "react-icons/fa";
-import { IoSearch } from "react-icons/io5";
 import notesData from "./notesdata";
 import { BsGrid1X2Fill } from "react-icons/bs";
-import { FaList } from "react-icons/fa";
+import { FaList, FaPlus } from "react-icons/fa";
+import { IoSearch } from "react-icons/io5";
 import NotesCard from "../../../components/NotesCard";
 import { useNavigate } from "react-router-dom";
 
@@ -14,7 +13,7 @@ const Notes = () => {
   const navigate = useNavigate();
 
   const handleOnClick = () => {
-    navigate("/newnote", { replace: true });
+    navigate("/notes/newnote", { replace: true });
   };
 
   return (

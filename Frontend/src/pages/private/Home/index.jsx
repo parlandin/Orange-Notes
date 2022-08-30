@@ -5,6 +5,7 @@ import { FaTasks, FaFileAlt, FaClock } from "react-icons/fa";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { RiMindMap } from "react-icons/ri";
 import MenuCard from "../../../components/MenuCard";
+import getRandomQuote from "../../../services/getRandomQuote";
 
 const Home = () => {
   const menuRef = useRef(null);
@@ -41,6 +42,8 @@ const Home = () => {
     },
   ];
 
+  const quote = getRandomQuote(quotes);
+
   return (
     <S.Container>
       <S.Header>
@@ -48,8 +51,8 @@ const Home = () => {
       </S.Header>
 
       <S.QuoteSection>
-        <p>"{quotes[1].quote}"</p>
-        <span>-{quotes[1].author}</span>
+        <p>"{quote.quote}"</p>
+        <span>-{quote.author}</span>
       </S.QuoteSection>
 
       <S.Carrousel>
