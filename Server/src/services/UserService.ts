@@ -8,6 +8,7 @@ interface user {
   picture: string;
   id: string;
   last_login: string;
+  latest_day: string;
   consecutive_days: number;
 }
 
@@ -43,23 +44,43 @@ class UserService {
 
   public async updateConsecutiveDays(
     last_login: string,
+    latest_day: string,
     consecutive_days: number,
     id: number
   ) {
     const { totalDays, totalHours } = getDiffDay(last_login);
     const now = new Date();
+    //TODO: criar uma "utils" para isso
+    const latestDay = new Date(latest_day).toLocaleDateString();
+    const today = new Date().toLocaleDateString();
+
+    if (latestDay == today) {
+      await userRepositorie.updateLastLogin(
+        now,
+        latest_day,
+        consecutive_days,
+        id
+      );
+      return consecutive_days;
+    }
 
     if (totalDays <= 1 && totalHours <= 24) {
-      if (totalDays === 1 && totalHours > 1) {
+      if (totalDays === 1) {
         const totalIncrement = consecutive_days + 1;
-        userRepositorie.updateLastLogin(now, totalIncrement, id);
+        await userRepositorie.updateLastLogin(now, now, totalIncrement, id);
         return totalIncrement;
       } else {
-        userRepositorie.updateLastLogin(now, consecutive_days, id);
+        await userRepositorie.updateLastLogin(
+          now,
+          latest_day,
+          consecutive_days,
+          id
+        );
         return consecutive_days;
       }
     }
-
+    //
+    await userRepositorie.updateLastLogin(now, latest_day, 1, id);
     return 1;
   }
 }

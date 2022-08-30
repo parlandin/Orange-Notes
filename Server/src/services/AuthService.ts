@@ -10,8 +10,15 @@ class AuthService {
 
     if (!rows.length) throw Error("Email ou senha invalido");
 
-    const { password, id, name, picture, last_login, consecutive_days } =
-      rows[0];
+    const {
+      password,
+      id,
+      name,
+      picture,
+      last_login,
+      latest_day,
+      consecutive_days,
+    } = rows[0];
     const isValidPassword = await compare(loginPassword, password);
 
     if (!isValidPassword) throw Error("Email ou senha invalido");
@@ -19,6 +26,7 @@ class AuthService {
     //TODO: organizar essa parte de services e controllers
     const days = await UserService.updateConsecutiveDays(
       last_login,
+      latest_day,
       consecutive_days,
       parseInt(id)
     );

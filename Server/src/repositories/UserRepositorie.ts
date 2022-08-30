@@ -26,12 +26,13 @@ class UserRepositorie {
 
   public async updateLastLogin(
     today: Date,
+    latest_day: string | Date,
     consecutive_days: number,
     id: number
   ) {
     const query =
-      "UPDATE users SET last_login = $1, consecutive_days = $2 WHERE users.id = $3;";
-    return db.query(query, [today, consecutive_days, id]);
+      "UPDATE users SET last_login = $1, latest_day = $2 , consecutive_days = $3 WHERE users.id = $4;";
+    return db.query(query, [today, latest_day, consecutive_days, id]);
   }
 }
 
