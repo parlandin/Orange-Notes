@@ -21,7 +21,7 @@ const Button = styled.button`
 
   & span {
     font-weight: 500;
-    font-size: 1rem;
+    font-size: ${({ fontSize }) => (fontSize ? fontSize : "1rem")};
     font-family: "Poppins", sans-serif;
   }
 `;

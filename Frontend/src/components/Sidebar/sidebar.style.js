@@ -55,6 +55,7 @@ const Text = styled.p`
   font-size: 1rem;
   font-weight: 500;
   transition: opacity 400ms ease-in-out;
+  white-space: nowrap;
 `;
 
 export default { Container, Menu, Item, Text, Icon };

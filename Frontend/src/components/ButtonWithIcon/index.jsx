@@ -10,6 +10,7 @@ const ButtonWithIcon = ({
   reverse,
   backgroudFill,
   margin,
+  fontSize,
 }) => {
   return (
     <S.Button
@@ -19,6 +20,7 @@ const ButtonWithIcon = ({
       reverse={reverse}
       backgroudFill={backgroudFill}
       margin={margin}
+      fontSize={fontSize}
     >
       <span>{label}</span>
       <S.Icon>{icon}</S.Icon>

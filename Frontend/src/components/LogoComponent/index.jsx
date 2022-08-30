@@ -6,7 +6,7 @@ const Logo = () => {
   return (
     <S.Logo>
       <S.LogoImg>
-        <img src={LogoSvg} atl="logo do orange notes" />
+        <img src={LogoSvg} alt="logo do orange notes" />
       </S.LogoImg>
       <S.LogoText>Orange Notes</S.LogoText>
     </S.Logo>

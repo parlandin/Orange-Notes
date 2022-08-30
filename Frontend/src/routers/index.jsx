@@ -10,6 +10,8 @@ import PrivateArea from "../components/PrivateArea";
 import Notes from "../pages/private/Notes";
 import Logout from "../pages/private/Logout";
 import Pomodoro from "../pages/private/Pomodoro";
+import Note from "../pages/private/Notes/Note";
+import NewNote from "../pages/private/Notes/NewNote";
 
 const Routers = () => {
   return (
@@ -19,6 +21,8 @@ const Routers = () => {
           <Route element={<PrivateArea />}>
             <Route path="/" element={<Home />} />
             <Route path="/notes" element={<Notes />} />
+            <Route path="/notes/:id" element={<Note />} />
+            <Route path="/notes/newnote" element={<NewNote />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/pomodorotime" element={<Pomodoro />} />
           </Route>
