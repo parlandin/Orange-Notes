@@ -50,7 +50,7 @@ class UserService {
     const now = new Date();
 
     if (totalDays <= 1 && totalHours <= 24) {
-      if (totalHours > 1) {
+      if (totalDays === 1 && totalHours > 1) {
         const totalIncrement = consecutive_days + 1;
         userRepositorie.updateLastLogin(now, totalIncrement, id);
         return totalIncrement;
