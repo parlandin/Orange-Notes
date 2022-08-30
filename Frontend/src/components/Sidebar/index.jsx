@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import S from "./sidebar.style";
 import { NavLink } from "react-router-dom";
 import { FaCog, FaHome, FaTasks, FaFileAlt, FaClock } from "react-icons/fa";
-
 import { RiMindMap } from "react-icons/ri";
 
 const menuLlist = [
@@ -40,6 +39,11 @@ const menuLlist = [
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleOnClick = () => {
+    return setIsOpen(false);
+  };
+
   return (
     <S.Container
       isOpen={isOpen}
@@ -52,6 +56,7 @@ const Sidebar = () => {
             <NavLink
               className={(navData) => (navData.isActive ? "active" : "")}
               to={item.path}
+              onClick={handleOnClick}
             >
               <S.Icon>{item.icon}</S.Icon>
               <S.Text isOpen={isOpen}>{item.name}</S.Text>

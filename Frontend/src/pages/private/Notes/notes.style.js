@@ -2,6 +2,30 @@ import styled from "styled-components";
 
 const Container = styled.div``;
 
+const TopFixedContainer = styled.div`
+  width: 100%;
+  height: 109px;
+  position: relative;
+  @media (max-width: 580px) {
+    height: 145px;
+  }
+`;
+
+const FixedContainer = styled.div`
+  position: fixed;
+  top: 55px;
+  left: 55px;
+  height: 109px;
+  width: calc(100% - 55px);
+  background-color: #fff;
+  z-index: 1;
+  padding: 10px;
+  //box-shadow: 0px 1px 3px #e3e3e3;
+  @media (max-width: 580px) {
+    height: 145px;
+  }
+`;
+
 const Header = styled.div`
   padding: 10px;
   display: flex;
@@ -19,6 +43,7 @@ const GenericSection = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
 `;
 
 const InputLabel = styled.label`
@@ -49,7 +74,11 @@ const Input = styled.input`
   }
 `;
 
-const SectionButtons = styled.div``;
+const SectionButtons = styled.div`
+  @media (max-width: 580px) {
+    margin: 10px 0;
+  }
+`;
 
 const Button = styled.button`
   color: #ff5f19;
@@ -145,4 +174,6 @@ export default {
   CardContent,
   SectionButtons,
   Button,
+  TopFixedContainer,
+  FixedContainer,
 };

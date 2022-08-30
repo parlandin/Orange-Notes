@@ -30,43 +30,47 @@ const Notes = () => {
   const [currentMode, setCurrentMode] = useState("grid");
   return (
     <S.Container>
-      <S.Header>
-        <S.Title>Anotações</S.Title>
-        <ButtonWithIcon
-          icon={<FaPlus size="100%" />}
-          label="Nova anotação"
-          padding="2px 4px"
-          backgroudFill={true}
-          color="#000"
-          margin="0px 0px 0px 10px"
-          fontSize={"0.8rem"}
-        />
-      </S.Header>
+      <S.TopFixedContainer>
+        <S.FixedContainer>
+          <S.Header>
+            <S.Title>Anotações</S.Title>
+            <ButtonWithIcon
+              icon={<FaPlus size="100%" />}
+              label="Nova anotação"
+              padding="2px 4px"
+              backgroudFill={true}
+              color="#000"
+              margin="0px 0px 0px 10px"
+              fontSize={"0.8rem"}
+            />
+          </S.Header>
 
-      <S.GenericSection>
-        <S.InputLabel>
-          <S.Input type="text" placeholder="Pesquisar anotação" />
-          <IoSearch size="100%" />
-        </S.InputLabel>
+          <S.GenericSection>
+            <S.InputLabel>
+              <S.Input type="text" placeholder="Pesquisar anotação" />
+              <IoSearch size="100%" />
+            </S.InputLabel>
 
-        <S.SectionButtons>
-          <S.Button
-            aria-label="botão: mudar para modo lista"
-            className={currentMode == "list" ? "active" : "disable"}
-            onClick={() => setCurrentMode("list")}
-          >
-            <FaList className="list" size="100%" />
-          </S.Button>
+            <S.SectionButtons>
+              <S.Button
+                aria-label="botão: mudar para modo lista"
+                className={currentMode == "list" ? "active" : "disable"}
+                onClick={() => setCurrentMode("list")}
+              >
+                <FaList className="list" size="100%" />
+              </S.Button>
 
-          <S.Button
-            aria-label="botão: mudar para modo grid"
-            className={currentMode == "grid" ? "active" : "disable"}
-            onClick={() => setCurrentMode("grid")}
-          >
-            <BsGrid1X2Fill size="100%" />
-          </S.Button>
-        </S.SectionButtons>
-      </S.GenericSection>
+              <S.Button
+                aria-label="botão: mudar para modo grid"
+                className={currentMode == "grid" ? "active" : "disable"}
+                onClick={() => setCurrentMode("grid")}
+              >
+                <BsGrid1X2Fill size="100%" />
+              </S.Button>
+            </S.SectionButtons>
+          </S.GenericSection>
+        </S.FixedContainer>
+      </S.TopFixedContainer>
 
       <S.SectionNotes
         className={currentMode == "grid" ? "gridActive" : "listActive"}

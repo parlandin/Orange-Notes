@@ -16,7 +16,7 @@ const HeaderFix = styled.div`
   display: flex;
   justify-content: space-between;
   background-color: #fff;
-  z-index: 2;
+  z-index: 4;
 `;
 
 export default {

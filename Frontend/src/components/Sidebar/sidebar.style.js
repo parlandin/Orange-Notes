@@ -12,7 +12,7 @@ const Menu = styled.nav`
   flex-direction: column;
   transition: width 300ms ease-in-out;
   background-color: #fff;
-  z-index: 1;
+  z-index: 3;
   align-items: flex-start;
   width: ${({ isOpen }) => (isOpen ? "190px" : "55px")};
   height: 100%;
