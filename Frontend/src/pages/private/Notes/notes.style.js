@@ -109,7 +109,7 @@ const SectionNotes = styled.div`
 
   &.gridActive {
     grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: minmax(150px, 280px);
+    grid-auto-rows: minmax(150px, 286px);
 
     @media (min-width: 200px) {
       grid-template-columns: repeat(5, 1fr);
@@ -133,34 +133,6 @@ const SectionNotes = styled.div`
   }
 `;
 
-const Card = styled.div`
-  border-radius: 6px;
-  padding: 20px;
-  background-color: ${({ boxColor }) => (boxColor ? boxColor : "#fff")};
-  margin: 20px;
-  overflow: hidden;
-  box-shadow: 1px 1px 4px #c1bebe;
-
-  @media (max-width: 330px) {
-    margin: 5px;
-  }
-`;
-
-const CardTitle = styled.h4`
-  color: ${({ titleColor }) => (titleColor ? titleColor : "#000")};
-  font-size: 1.1rem;
-`;
-
-const CardContent = styled.p`
-  color: ${({ contentColor }) => (contentColor ? contentColor : "#000")};
-  font-size: 0.9rem;
-  margin-top: 10px;
-  font-weight: 500;
-  line-height: 18px;
-  overflow: hidden;
-  height: 80%;
-`;
-
 export default {
   Container,
   Header,
@@ -169,9 +141,6 @@ export default {
   InputLabel,
   Input,
   SectionNotes,
-  Card,
-  CardTitle,
-  CardContent,
   SectionButtons,
   Button,
   TopFixedContainer,

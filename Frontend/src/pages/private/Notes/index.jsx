@@ -6,28 +6,17 @@ import { IoSearch } from "react-icons/io5";
 import notesData from "./notesdata";
 import { BsGrid1X2Fill } from "react-icons/bs";
 import { FaList } from "react-icons/fa";
-
-const NoteCardComponent = ({
-  id,
-  title,
-  content,
-  titleColor,
-  contentColor,
-  boxColor,
-  currentMode,
-}) => {
-  return (
-    <S.Card boxColor={boxColor}>
-      <S.CardTitle titleColor={titleColor}>{title}</S.CardTitle>
-      {currentMode == "grid" && (
-        <S.CardContent contentColor={contentColor}>{content}</S.CardContent>
-      )}
-    </S.Card>
-  );
-};
+import NotesCard from "../../../components/NotesCard";
+import { useNavigate } from "react-router-dom";
 
 const Notes = () => {
   const [currentMode, setCurrentMode] = useState("grid");
+  const navigate = useNavigate();
+
+  const handleOnClick = () => {
+    navigate("/newnote", { replace: true });
+  };
+
   return (
     <S.Container>
       <S.TopFixedContainer>
@@ -42,6 +31,7 @@ const Notes = () => {
               color="#000"
               margin="0px 0px 0px 10px"
               fontSize={"0.8rem"}
+              onClick={handleOnClick}
             />
           </S.Header>
 
@@ -77,8 +67,9 @@ const Notes = () => {
       >
         {notesData.map(
           ({ id, title, content, title_color, content_color, box_color }) => (
-            <NoteCardComponent
+            <NotesCard
               key={id}
+              id={id}
               title={title}
               content={content}
               titleColor={title_color}
