@@ -19,11 +19,19 @@ const Card = styled(Link)`
   }
 `;
 
+const WrapperTitle = styled.div``;
+
 const Title = styled.h4`
   color: ${({ titleColor }) => (titleColor ? titleColor : "#000")};
   font-size: 1.1rem;
-  word-wrap: break-word;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 `;
+
+const WrapperContent = styled.div``;
 
 const Content = styled.p`
   color: ${({ contentColor }) => (contentColor ? contentColor : "#000")};
@@ -33,6 +41,9 @@ const Content = styled.p`
   line-height: 18px;
   overflow: hidden;
   height: 80%;
+  display: -webkit-box;
+  -webkit-line-clamp: 8;
+  -webkit-box-orient: vertical;
 `;
 
-export default { Card, Title, Content };
+export default { Card, Title, Content, WrapperTitle, WrapperContent };

@@ -1,15 +1,22 @@
 import React, { useState, useEffect } from "react";
 import S from "./notes.style";
 import ButtonWithIcon from "../../../components/ButtonWithIcon";
-import notesData from "./notesdata";
 import { BsGrid1X2Fill } from "react-icons/bs";
 import { FaList, FaPlus } from "react-icons/fa";
 import { IoSearch } from "react-icons/io5";
 import NotesCard from "../../../components/NotesCard";
 import { useNavigate } from "react-router-dom";
+import api from "../../../api";
+import useAuth from "../../../hooks/useAuth";
+import { useQuery } from "react-query";
+import Loading from "../../../components/Loading";
 
 const Notes = () => {
   const [currentMode, setCurrentMode] = useState("");
+  const [authUser] = useAuth();
+  const { user, token } = authUser;
+
+  //route
   const navigate = useNavigate();
 
   const handleOnClick = () => {
@@ -21,12 +28,29 @@ const Notes = () => {
     return setCurrentMode(mode);
   };
 
+  const getAllNotes = async () => {
+    const response = await api.get(`/notes/allnotes/${user.id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    if (!response.status == 200) {
+      throw new Error("Ocorreu um erro");
+    }
+    console.log(response.data);
+    return response.data;
+  };
+
+  const { data, isError, isLoading } = useQuery(["notes"], getAllNotes, {
+    refetchOnWindowFocus: false,
+  });
+
   useEffect(() => {
     const salvedMode = window.localStorage.getItem("layout");
     if (salvedMode) {
       setCurrentMode(salvedMode);
     }
   }, []);
+
+  if (isLoading) return <Loading />;
 
   return (
     <S.Container>
@@ -76,11 +100,18 @@ const Notes = () => {
       <S.SectionNotes
         className={currentMode == "grid" ? "gridActive" : "listActive"}
       >
-        {notesData.map(
-          ({ id, title, content, title_color, content_color, box_color }) => (
+        {data.map(
+          ({
+            note_id,
+            title,
+            content,
+            title_color,
+            content_color,
+            box_color,
+          }) => (
             <NotesCard
-              key={id}
-              id={id}
+              key={note_id}
+              id={note_id}
               title={title}
               content={content}
               titleColor={title_color}

@@ -49,7 +49,6 @@ const NewNote = () => {
       }
       return setIsLoading(false);
     }
-    console.log("caiu aqui");
   };
 
   if (isLoading) return <Loading />;

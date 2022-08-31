@@ -1,7 +1,7 @@
-import React from "react";
+import React, { memo } from "react";
 import S from "./notesCard.style";
 
-const NotesCard = ({
+const NotesCardComponent = ({
   id,
   title,
   content,
@@ -12,14 +12,21 @@ const NotesCard = ({
 }) => {
   return (
     <S.Card boxcolor={boxColor} to={`/notes/${id}`}>
-      <S.Title titleColor={titleColor}>
-        {currentMode == "list" ? title : title.substr(0, 50)}
-      </S.Title>
+      <S.WrapperTitle>
+        <S.Title titleColor={titleColor} title={title}>
+          {currentMode == "list" ? title : title}
+        </S.Title>
+      </S.WrapperTitle>
+
       {currentMode == "grid" && (
-        <S.Content contentColor={contentColor}>{content}</S.Content>
+        <S.WrapperContent>
+          <S.Content contentColor={contentColor}>{content}</S.Content>
+        </S.WrapperContent>
       )}
     </S.Card>
   );
 };
+
+const NotesCard = memo(NotesCardComponent);
 
 export default NotesCard;
