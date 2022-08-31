@@ -42,6 +42,12 @@ class NotesService {
 
     return rows;
   }
+
+  public async deleteNoteById(id: number) {
+    const { rows } = await NotesRepositorie.deleteNoteById(id);
+
+    return rows;
+  }
 }
 
 export default new NotesService();

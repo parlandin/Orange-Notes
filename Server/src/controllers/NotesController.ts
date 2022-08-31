@@ -47,6 +47,19 @@ class UserController {
       return res.status(500).json({ error: err });
     }
   }
+
+  public async delteNoteById(req: Request, res: Response): Promise<Response> {
+    const { id } = req.params;
+
+    try {
+      const data = await NotesService.deleteNoteById(parseInt(id));
+
+      return res.status(200).json({ message: "sucesso ao excluir nota" });
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({ error: err });
+    }
+  }
 }
 
 export default new UserController();

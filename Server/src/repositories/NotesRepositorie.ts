@@ -35,6 +35,12 @@ class NotesRepositorie {
 
     return db.query(query, [user_id]);
   }
+
+  public async deleteNoteById(id: number) {
+    const query = "DELETE  FROM notes WHERE note_id = $1";
+
+    return db.query(query, [id]);
+  }
 }
 
 export default new NotesRepositorie();
