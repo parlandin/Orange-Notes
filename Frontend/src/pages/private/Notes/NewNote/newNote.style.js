@@ -90,6 +90,10 @@ const TitleInput = styled.input`
   width: 100%;
   color: ${({ titleColor }) => (titleColor ? titleColor : "#000")};
   font-weight: 600;
+
+  &::placeholder {
+    color: ${({ titleColor }) => (titleColor ? `${titleColor}cc` : "#757575")};
+  }
 `;
 
 const ContentInput = styled.textarea`
@@ -112,6 +116,11 @@ const ContentInput = styled.textarea`
   color: ${({ contentColor }) => (contentColor ? contentColor : "#000")};
   background-color: ${({ boxColor }) => (boxColor ? `${boxColor}cc` : "#fff")};
   //7a
+
+  &::placeholder {
+    color: ${({ contentColor }) =>
+      contentColor ? `${contentColor}cc` : "#757575"};
+  }
 `;
 
 export default {

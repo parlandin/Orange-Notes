@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import S from "./notes.style";
 import ButtonWithIcon from "../../../components/ButtonWithIcon";
 import notesData from "./notesdata";
@@ -9,12 +9,24 @@ import NotesCard from "../../../components/NotesCard";
 import { useNavigate } from "react-router-dom";
 
 const Notes = () => {
-  const [currentMode, setCurrentMode] = useState("grid");
+  const [currentMode, setCurrentMode] = useState("");
   const navigate = useNavigate();
 
   const handleOnClick = () => {
     navigate("/notes/newnote", { replace: true });
   };
+
+  const switchMode = (mode) => {
+    window.localStorage.setItem("layout", mode);
+    return setCurrentMode(mode);
+  };
+
+  useEffect(() => {
+    const salvedMode = window.localStorage.getItem("layout");
+    if (salvedMode) {
+      setCurrentMode(salvedMode);
+    }
+  }, []);
 
   return (
     <S.Container>
@@ -44,7 +56,7 @@ const Notes = () => {
               <S.Button
                 aria-label="botão: mudar para modo lista"
                 className={currentMode == "list" ? "active" : "disable"}
-                onClick={() => setCurrentMode("list")}
+                onClick={() => switchMode("list")}
               >
                 <FaList className="list" size="100%" />
               </S.Button>
@@ -52,7 +64,7 @@ const Notes = () => {
               <S.Button
                 aria-label="botão: mudar para modo grid"
                 className={currentMode == "grid" ? "active" : "disable"}
-                onClick={() => setCurrentMode("grid")}
+                onClick={() => switchMode("grid")}
               >
                 <BsGrid1X2Fill size="100%" />
               </S.Button>
