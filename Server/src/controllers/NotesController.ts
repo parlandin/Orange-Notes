@@ -37,7 +37,6 @@ class UserController {
 
   public async getAllNotes(req: Request, res: Response): Promise<Response> {
     const { userid } = req.params;
-    console.log(userid);
 
     try {
       const data = await NotesService.getAllNotes(parseInt(userid));

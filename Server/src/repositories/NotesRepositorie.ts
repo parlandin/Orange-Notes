@@ -30,7 +30,8 @@ class NotesRepositorie {
   }
 
   public async getAllNotesByUserId(user_id: number) {
-    const query = "SELECT * FROM notes WHERE user_id = $1";
+    const query =
+      "SELECT * FROM notes WHERE user_id = $1 ORDER BY note_id DESC";
 
     return db.query(query, [user_id]);
   }
