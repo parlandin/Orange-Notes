@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import S from "./newNote.style";
 import ButtonWithIcon from "../../../../components/ButtonWithIcon";
 import { TiArrowBack } from "react-icons/ti";
+import { IoIosSave } from "react-icons/io";
 import Loading from "../../../../components/Loading";
 import api from "../../../../api";
 import useAuth from "../../../../hooks/useAuth";
@@ -145,7 +146,16 @@ const NewNote = () => {
         ></S.ContentInput>
         <S.WarningErr>{errors.content?.message}</S.WarningErr>
 
-        <button>Salvar na nuvem do mundo invertido</button>
+        <div>
+          <ButtonWithIcon
+            icon={<IoIosSave size="100%" />}
+            padding="2px 4px"
+            label="Salvar"
+            backgroudFill={true}
+            reverse={false}
+            margin="10px 0px"
+          />
+        </div>
       </S.Form>
     </S.Container>
   );
