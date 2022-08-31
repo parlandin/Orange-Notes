@@ -131,9 +131,10 @@ const NewNote = () => {
           titleColor={inputForm.titleColor}
           type="text"
           name="title"
-          {...register("title")}
+          {...register("title", { required: true })}
           placeholder="Digite o titulo aqui"
         />
+        <S.WarningErr>{errors.title?.message}</S.WarningErr>
 
         <S.ContentInput
           contentColor={inputForm.contentColor}
@@ -142,6 +143,7 @@ const NewNote = () => {
           name="content"
           {...register("content")}
         ></S.ContentInput>
+        <S.WarningErr>{errors.content?.message}</S.WarningErr>
 
         <button>Salvar na nuvem do mundo invertido</button>
       </S.Form>

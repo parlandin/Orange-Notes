@@ -32,6 +32,11 @@ const Title = styled.h1`
   color: #1e1e1e;
 `;
 
+const WarningErr = styled.span`
+  color: #ba1a1a;
+  font-size: 0.7rem;
+`;
+
 const Form = styled.form`
   width: 100%;
   padding: 20px 10px;
@@ -135,4 +140,5 @@ export default {
   ButtonsColorContainer,
   SectionColor,
   Warning,
+  WarningErr,
 };
