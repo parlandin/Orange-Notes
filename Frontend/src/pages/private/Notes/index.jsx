@@ -12,6 +12,7 @@ import { useQuery } from "react-query";
 import Loading from "../../../components/Loading";
 
 const Notes = () => {
+  //TODO: refazer essa tela separando responsabilidades
   const [currentMode, setCurrentMode] = useState("");
   const [authUser] = useAuth();
   const { user, token } = authUser;

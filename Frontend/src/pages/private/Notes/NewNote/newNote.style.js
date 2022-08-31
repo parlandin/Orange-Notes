@@ -32,7 +32,7 @@ const Title = styled.h1`
   color: #1e1e1e;
 `;
 
-const Form = styled.div`
+const Form = styled.form`
   width: 100%;
   padding: 20px 10px;
 `;

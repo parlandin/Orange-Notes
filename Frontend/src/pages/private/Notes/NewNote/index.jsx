@@ -6,12 +6,14 @@ import { TiArrowBack } from "react-icons/ti";
 import Loading from "../../../../components/Loading";
 import api from "../../../../api";
 import useAuth from "../../../../hooks/useAuth";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+import schema from "./validation";
 
 const NewNote = () => {
+  //TODO: refazer essa tela separando responsabilidades
   const navigate = useNavigate();
   const [inputForm, setInputForm] = useState({
-    title: "",
-    content: "",
     titleColor: "#1e1e1e",
     contentColor: "#1e1e1e",
     boxColor: "#fff",
@@ -25,11 +27,17 @@ const NewNote = () => {
     navigate("/notes", { replace: true });
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  const onSubmit = async (input) => {
     const data = {
-      title: inputForm.title,
-      content: inputForm.content,
+      ...input,
       title_color: inputForm.titleColor,
       content_color: inputForm.contentColor,
       box_color: inputForm.boxColor,
@@ -38,17 +46,15 @@ const NewNote = () => {
 
     setIsLoading(true);
 
-    if (user && token) {
-      try {
-        const res = await api.post("/notes/newnote", data, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        console.log(res.data);
-      } catch (err) {
-        console.log(err);
-      }
-      return setIsLoading(false);
+    try {
+      const res = await api.post("/notes/newnote", data, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      console.log(res.data);
+    } catch (err) {
+      console.log(err);
     }
+    return setIsLoading(false);
   };
 
   if (isLoading) return <Loading />;
@@ -58,6 +64,7 @@ const NewNote = () => {
       <S.ContainerFixed>
         <S.Header>
           <S.Title>Nova anotação</S.Title>
+
           <ButtonWithIcon
             icon={<TiArrowBack size="100%" />}
             padding="2px 4px"
@@ -70,7 +77,7 @@ const NewNote = () => {
         </S.Header>
       </S.ContainerFixed>
 
-      <S.Form>
+      <S.Form onSubmit={handleSubmit(onSubmit)}>
         <S.SectionColor>
           <S.ButtonsColorContainer>
             <S.ColorInput preview={inputForm.titleColor}>
@@ -115,6 +122,7 @@ const NewNote = () => {
               <div></div>
             </S.ColorInput>
           </S.ButtonsColorContainer>
+
           <S.Warning>Obs: Essas cores ficam apenas nos cards</S.Warning>
         </S.SectionColor>
 
@@ -122,28 +130,20 @@ const NewNote = () => {
           boxColor={inputForm.boxColor}
           titleColor={inputForm.titleColor}
           type="text"
+          name="title"
+          {...register("title")}
           placeholder="Digite o titulo aqui"
-          value={inputForm.title}
-          onChange={(e) =>
-            setInputForm((prev) => {
-              return { ...prev, title: e.target.value };
-            })
-          }
         />
+
         <S.ContentInput
           contentColor={inputForm.contentColor}
           boxColor={inputForm.boxColor}
           placeholder="Digite o conteudo"
-          value={inputForm.content}
-          onChange={(e) =>
-            setInputForm((prev) => {
-              return { ...prev, content: e.target.value };
-            })
-          }
+          name="content"
+          {...register("content")}
         ></S.ContentInput>
-        <button type="submit" onClick={(e) => handleSubmit(e)}>
-          Salvar na nuvem do mundo invertido
-        </button>
+
+        <button>Salvar na nuvem do mundo invertido</button>
       </S.Form>
     </S.Container>
   );
