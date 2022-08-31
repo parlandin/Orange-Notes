@@ -44,6 +44,7 @@ const SectionColor = styled.div`
 const ButtonsColorContainer = styled.div`
   display: flex;
   margin: 5px 0;
+  flex-wrap: wrap;
 `;
 
 const Warning = styled.p`

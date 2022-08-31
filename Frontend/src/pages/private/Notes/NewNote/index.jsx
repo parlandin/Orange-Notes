@@ -14,8 +14,6 @@ const NewNote = () => {
     boxColor: "#fff",
   });
 
-  console.log(inputForm);
-
   const handleOnClickBack = () => {
     navigate("/notes", { replace: true });
   };
