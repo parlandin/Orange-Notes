@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import S from "./newNote.style";
 import ButtonWithIcon from "../../../../components/ButtonWithIcon";
 import { TiArrowBack } from "react-icons/ti";
+import Loading from "../../../../components/Loading";
+import api from "../../../../api";
+import useAuth from "../../../../hooks/useAuth";
 
 const NewNote = () => {
   const navigate = useNavigate();
@@ -13,10 +16,44 @@ const NewNote = () => {
     contentColor: "#1e1e1e",
     boxColor: "#fff",
   });
+  const [isLoading, setIsLoading] = useState(false);
+  const [authUser] = useAuth();
+
+  const { user, token } = authUser;
 
   const handleOnClickBack = () => {
     navigate("/notes", { replace: true });
   };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const data = {
+      title: inputForm.title,
+      content: inputForm.content,
+      title_color: inputForm.titleColor,
+      content_color: inputForm.contentColor,
+      box_color: inputForm.boxColor,
+      user_id: user.id,
+    };
+
+    setIsLoading(true);
+
+    if (user && token) {
+      try {
+        const res = await api.post("/notes/newnote", data, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        console.log(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+      return setIsLoading(false);
+    }
+    console.log("caiu aqui");
+  };
+
+  if (isLoading) return <Loading />;
+
   return (
     <S.Container>
       <S.ContainerFixed>
@@ -105,6 +142,9 @@ const NewNote = () => {
             })
           }
         ></S.ContentInput>
+        <button type="submit" onClick={(e) => handleSubmit(e)}>
+          Salvar na nuvem do mundo invertido
+        </button>
       </S.Form>
     </S.Container>
   );
