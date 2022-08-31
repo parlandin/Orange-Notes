@@ -64,23 +64,18 @@ class UserService {
       return consecutive_days;
     }
 
-    if (totalDays <= 1 && totalHours <= 24) {
-      if (totalDays === 1) {
+    if (latestDay < today) {
+      if (totalDays <= 1 && totalHours <= 24) {
         const totalIncrement = consecutive_days + 1;
         await userRepositorie.updateLastLogin(now, now, totalIncrement, id);
         return totalIncrement;
       } else {
-        await userRepositorie.updateLastLogin(
-          now,
-          latest_day,
-          consecutive_days,
-          id
-        );
-        return consecutive_days;
+        await userRepositorie.updateLastLogin(now, now, 1, id);
+        return 1;
       }
     }
     //
-    await userRepositorie.updateLastLogin(now, latest_day, 1, id);
+    await userRepositorie.updateLastLogin(now, now, 1, id);
     return 1;
   }
 }
