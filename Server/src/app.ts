@@ -3,6 +3,7 @@ import cors from "cors";
 import config from "./config";
 import userRoute from "./routes/userRoute";
 import authRoute from "./routes/authRoute";
+import notesRoute from "./routes/notesRoute";
 import verifyToken from "./middlewares/verifyToken.middle";
 
 const app = express();
@@ -21,6 +22,7 @@ app.use(authRoute);
 // prividas
 app.use(verifyToken);
 app.use(userRoute);
+app.use(notesRoute);
 
 app.get("/", async (req, res) => {
   res.status(200).json({ status: "ok" });
