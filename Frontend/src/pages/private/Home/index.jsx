@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import S from "./home.style";
 import quotes from "./quotes";
-import { FaTasks, FaFileAlt, FaClock } from "react-icons/fa";
+import { FaBookOpen, FaFileAlt, FaClock } from "react-icons/fa";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { RiMindMap } from "react-icons/ri";
 import MenuCard from "../../../components/MenuCard";
@@ -23,8 +23,8 @@ const Home = () => {
       path: "/notes",
     },
     {
-      icon: <FaTasks size="100%" />,
-      title: "Tarefas",
+      icon: <FaBookOpen size="100%" />,
+      title: "Lista de cursos",
       description: "Organize suas tarefas",
       path: "/notes",
     },

@@ -25,7 +25,7 @@ const HomeInfos = ({ modalIsOpen, setModalIsOpen }) => {
 
       <S.ContainerInfos>
         <S.Text>Faça todas as suas anotações em um unico lugar</S.Text>
-        <S.Text>Crie listas de tarefas (kanban, todo)</S.Text>
+        <S.Text>Listagem para organizar seus cursos</S.Text>
         <S.Text>Organize suas ideias com mapas mentais</S.Text>
         <S.Text>Pomodoro Time para focar nos estudos </S.Text>
         <S.Text>Salvamento na nuvem</S.Text>

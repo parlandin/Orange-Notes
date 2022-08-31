@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import S from "./sidebar.style";
 import { NavLink } from "react-router-dom";
-import { FaCog, FaHome, FaTasks, FaFileAlt, FaClock } from "react-icons/fa";
+import { FaCog, FaHome, FaFileAlt, FaClock, FaBookOpen } from "react-icons/fa";
 import { RiMindMap } from "react-icons/ri";
 
 const menuLlist = [
@@ -16,9 +16,9 @@ const menuLlist = [
     icon: <FaFileAlt size="100%" />,
   },
   {
-    path: "/tasks",
-    name: "Tarefas",
-    icon: <FaTasks size="100%" />,
+    path: "/courses",
+    name: "Lista de cursos",
+    icon: <FaBookOpen size="100%" />,
   },
   {
     path: "/mindmap",
