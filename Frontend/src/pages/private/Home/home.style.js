@@ -116,6 +116,11 @@ const NotesCard = styled(Link)`
 
   & p {
     font-size: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    max-width: 210px;
   }
 
   &:hover {
