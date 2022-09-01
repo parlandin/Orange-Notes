@@ -48,6 +48,12 @@ class NotesService {
 
     return rows;
   }
+
+  public async getLatestNotes(user_id: number) {
+    const { rows } = await NotesRepositorie.getLatestNotes(user_id);
+
+    return rows;
+  }
 }
 
 export default new NotesService();

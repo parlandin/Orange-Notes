@@ -48,13 +48,26 @@ class UserController {
     }
   }
 
-  public async delteNoteById(req: Request, res: Response): Promise<Response> {
+  public async deleteNoteById(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
 
     try {
       const data = await NotesService.deleteNoteById(parseInt(id));
 
       return res.status(200).json({ message: "sucesso ao excluir nota" });
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({ error: err });
+    }
+  }
+
+  public async getLatestNotes(req: Request, res: Response): Promise<Response> {
+    const { userid } = req.params;
+
+    try {
+      const data = await NotesService.getLatestNotes(parseInt(userid));
+
+      return res.status(200).json(data);
     } catch (err) {
       console.log(err);
       return res.status(500).json({ error: err });

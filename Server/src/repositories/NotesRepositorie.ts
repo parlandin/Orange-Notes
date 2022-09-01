@@ -41,6 +41,15 @@ class NotesRepositorie {
 
     return db.query(query, [id]);
   }
+
+  public async getLatestNotes(user_id: number) {
+    const query = `SELECT * 
+    FROM notes WHERE user_id = $1
+    ORDER BY note_id DESC
+    LIMIT 4`;
+
+    return db.query(query, [user_id]);
+  }
 }
 
 export default new NotesRepositorie();
