@@ -54,6 +54,26 @@ class NotesService {
 
     return rows;
   }
+
+  public async updateById(
+    title: string,
+    content: string,
+    title_color: string,
+    content_color: string,
+    box_color: string,
+    id: number
+  ) {
+    const { rows } = await NotesRepositorie.updateById(
+      title,
+      content,
+      title_color,
+      content_color,
+      box_color,
+      id
+    );
+
+    return rows;
+  }
 }
 
 export default new NotesService();

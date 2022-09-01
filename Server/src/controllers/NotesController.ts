@@ -23,7 +23,7 @@ class UserController {
         box_color,
         parseInt(user_id)
       );
-      return res.json(data);
+      return res.status(201).json(data);
     } catch (err) {
       console.log(err);
       return res.status(500).json({ error: "Ocorreu um erro ao criar nota" });
@@ -109,6 +109,37 @@ class UserController {
     } catch (err) {
       console.log(err);
       return res.status(500).json({ error: err });
+    }
+  }
+
+  public async updateNoteById(
+    req: AuthenticationRequest,
+    res: Response
+  ): Promise<Response> {
+    const { title, content, title_color, content_color, box_color } = req.body;
+
+    const { id } = req.params;
+    const { userid } = req.params;
+
+    if (!req.userId || req.userId != parseInt(userid)) {
+      return res.status(401).json({ message: "Você não tem permissão" });
+    }
+
+    try {
+      const data = await NotesService.updateById(
+        title,
+        content,
+        title_color,
+        content_color,
+        box_color,
+        parseInt(id)
+      );
+      return res.status(200).json({ message: "Atualizado com sucesso" });
+    } catch (err) {
+      console.log(err);
+      return res
+        .status(500)
+        .json({ error: "Ocorreu um erro ao atualizar a  nota" });
     }
   }
 }

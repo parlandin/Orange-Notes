@@ -36,12 +36,6 @@ class NotesRepositorie {
     return db.query(query, [user_id]);
   }
 
-  public async deleteNoteById(id: number) {
-    const query = "DELETE  FROM notes WHERE note_id = $1";
-
-    return db.query(query, [id]);
-  }
-
   public async getLatestNotes(user_id: number) {
     const query = `SELECT * 
     FROM notes WHERE user_id = $1
@@ -49,6 +43,36 @@ class NotesRepositorie {
     LIMIT 4`;
 
     return db.query(query, [user_id]);
+  }
+
+  public async updateById(
+    title: string,
+    content: string,
+    title_color: string,
+    content_color: string,
+    box_color: string,
+    id: number
+  ) {
+    const query = `UPDATE notes set title = $1, 
+                   content = $2, 	
+                   title_color = $3, 
+                   content_color = $4, 
+                   box_color = $5 
+                   WHERE note_id = $6;`;
+    return db.query(query, [
+      title,
+      content,
+      title_color,
+      content_color,
+      box_color,
+      id,
+    ]);
+  }
+
+  public async deleteNoteById(id: number) {
+    const query = "DELETE  FROM notes WHERE note_id = $1";
+
+    return db.query(query, [id]);
   }
 }
 
