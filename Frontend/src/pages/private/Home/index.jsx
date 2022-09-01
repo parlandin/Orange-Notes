@@ -42,6 +42,7 @@ const Home = () => {
     }
   );
 
+  console.log(data);
   const Menu = [
     {
       icon: <FaFileAlt size="100%" />,
@@ -127,7 +128,7 @@ const Home = () => {
               {<IoIosArrowForward size="100%" />}
             </S.SlideButton>
 
-            {data ? (
+            {!data.length == 0 ? (
               data.map((note) => (
                 <S.NotesCard
                   key={note.note_id}
@@ -138,7 +139,7 @@ const Home = () => {
                 </S.NotesCard>
               ))
             ) : (
-              <S.NotesCard to="/notes">
+              <S.NotesCard to="/notes/newnote">
                 <p>Criar nova anotação agora</p>
               </S.NotesCard>
             )}
