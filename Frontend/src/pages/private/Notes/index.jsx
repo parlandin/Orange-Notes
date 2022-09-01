@@ -4,23 +4,24 @@ import ButtonWithIcon from "../../../components/ButtonWithIcon";
 import { BsGrid1X2Fill } from "react-icons/bs";
 import { FaList, FaPlus } from "react-icons/fa";
 import { IoSearch } from "react-icons/io5";
-import NotesCard from "../../../components/NotesCard";
+//import NotesCard from "../../../components/NotesCard";
 import { useNavigate } from "react-router-dom";
 import api from "../../../api";
 import useAuth from "../../../hooks/useAuth";
 import { useQuery } from "react-query";
 import Loading from "../../../components/Loading";
+import SectionNotes from "../../../components/SectionNotes";
 
 const Notes = () => {
   //TODO: refazer essa tela separando responsabilidades
   const [currentMode, setCurrentMode] = useState("");
+  const [searchData, setSearchData] = useState([]);
+  const [inputSearch, setInputSearch] = useState("");
   const [authUser] = useAuth();
   const { user, token } = authUser;
 
   //route
   const navigate = useNavigate();
-
-  //search
 
   const handleOnClick = () => {
     navigate("/notes/newnote", { replace: true });
@@ -45,6 +46,31 @@ const Notes = () => {
   const { data, isError, isLoading } = useQuery(["notes"], getAllNotes, {
     refetchOnWindowFocus: false,
   });
+
+  const parserToLowerCase = (string) => {
+    return string.toLowerCase();
+  };
+
+  //search
+  const searchFunction = (e) => {
+    if (e.key === "Enter" || e.type == "click") {
+      const lowerCaseInput = parserToLowerCase(inputSearch);
+      const filterData = data.filter((note) => {
+        const { title, content } = note;
+
+        const lowerCaseTile = parserToLowerCase(title);
+        const lowerCaseContent = parserToLowerCase(content);
+
+        return (
+          lowerCaseTile.includes(lowerCaseInput) ||
+          lowerCaseContent.includes(lowerCaseInput)
+        );
+      });
+
+      return setSearchData(filterData);
+    }
+    return;
+  };
 
   useEffect(() => {
     const salvedMode = window.localStorage.getItem("layout");
@@ -75,8 +101,16 @@ const Notes = () => {
 
           <S.GenericSection>
             <S.InputLabel>
-              <S.Input type="text" placeholder="Pesquisar anotação" />
-              <IoSearch size="100%" />
+              <S.Input
+                type="text"
+                placeholder="Pesquisar anotação"
+                value={inputSearch}
+                onKeyUp={(e) => searchFunction(e)}
+                onChange={(e) => setInputSearch(e.target.value)}
+              />
+              <button onClick={(e) => searchFunction(e)}>
+                <IoSearch size="100%" />
+              </button>
             </S.InputLabel>
 
             <S.SectionButtons>
@@ -100,31 +134,16 @@ const Notes = () => {
         </S.FixedContainer>
       </S.TopFixedContainer>
 
-      <S.SectionNotes
-        className={currentMode == "grid" ? "gridActive" : "listActive"}
-      >
-        {data.map(
-          ({
-            note_id,
-            title,
-            content,
-            title_color,
-            content_color,
-            box_color,
-          }) => (
-            <NotesCard
-              key={note_id}
-              id={note_id}
-              title={title}
-              content={content}
-              titleColor={title_color}
-              contentColor={content_color}
-              boxColor={box_color}
-              currentMode={currentMode}
-            />
-          )
-        )}
-      </S.SectionNotes>
+      {inputSearch.length > 0 && (
+        <SectionNotes
+          currentMode={currentMode}
+          data={searchData}
+          type="search"
+        />
+      )}
+      {inputSearch.length <= 0 && (
+        <SectionNotes currentMode={currentMode} data={data} type="fetchData" />
+      )}
     </S.Container>
   );
 };

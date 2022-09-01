@@ -59,6 +59,16 @@ const InputLabel = styled.label`
     height: 30px;
     color: #ff5f19;
   }
+
+  & button {
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #c0bdbd5c;
+    }
+  }
 `;
 
 const Input = styled.input`
@@ -104,35 +114,6 @@ const Button = styled.button`
   }
 `;
 
-const SectionNotes = styled.div`
-  display: grid;
-
-  &.gridActive {
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: minmax(150px, 286px);
-
-    @media (min-width: 200px) {
-      grid-template-columns: repeat(5, 1fr);
-    }
-
-    @media (max-width: 1550px) {
-      grid-template-columns: repeat(4, 1fr);
-    }
-
-    @media (max-width: 960px) {
-      grid-template-columns: repeat(3, 1fr);
-    }
-
-    @media (max-width: 760px) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    @media (max-width: 465px) {
-      grid-template-columns: repeat(1, 1fr);
-    }
-  }
-`;
-
 export default {
   Container,
   Header,
@@ -140,7 +121,6 @@ export default {
   GenericSection,
   InputLabel,
   Input,
-  SectionNotes,
   SectionButtons,
   Button,
   TopFixedContainer,
