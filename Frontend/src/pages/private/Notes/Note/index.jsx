@@ -33,6 +33,10 @@ const Note = () => {
     return response.data;
   };
 
+  const handleEditNote = () => {
+    navigate(`/notes/edit/${id}`, { replace: false });
+  };
+
   const deleteNote = async () => {
     setDeleteIsLoading(true);
     try {
@@ -75,7 +79,7 @@ const Note = () => {
             label="Editar"
             backgroudFill={true}
             reverse={false}
-            onClick={handleOnClickBack}
+            onClick={handleEditNote}
             margin="0 15px 0px 0px"
           />
 
