@@ -38,7 +38,7 @@ const Notes = () => {
     if (!response.status == 200) {
       throw new Error("Ocorreu um erro");
     }
-    console.log(response.data);
+    //console.log(response.data);
     return response.data;
   };
 

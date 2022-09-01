@@ -27,7 +27,7 @@ const Home = () => {
       const response = await api.get(`/notes/latest/${user.id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      console.log(response.data);
+      //console.log(response.data);
       return response.data;
     } catch (err) {
       console.log(err);

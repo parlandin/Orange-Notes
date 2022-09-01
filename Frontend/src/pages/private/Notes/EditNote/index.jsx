@@ -32,7 +32,7 @@ const EditNote = () => {
   const queryClient = useQueryClient();
   const cache = queryClient.getQueryData("note");
 
-  console.log(cache);
+  //console.log(cache);
 
   const getNote = async () => {
     const response = await api.get(`/notes/${user.id}/${id}`, {
@@ -92,7 +92,7 @@ const EditNote = () => {
     setIsLoading(true);
 
     try {
-      const res = await api.post("/notes/newnote", data, {
+      const res = await api.put(`/notes/edit/${user.id}/${id}`, data, {
         headers: { Authorization: `Bearer ${token}` },
       });
       console.log(res.data);
