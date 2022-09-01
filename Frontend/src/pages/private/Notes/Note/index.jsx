@@ -20,10 +20,10 @@ const Note = () => {
   };
 
   const [authUser] = useAuth();
-  const { token } = authUser;
+  const { user, token } = authUser;
 
   const getNote = async () => {
-    const response = await api.get(`/notes/${id}`, {
+    const response = await api.get(`/notes/${user.id}/${id}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     if (!response.status == 200) {
@@ -36,7 +36,7 @@ const Note = () => {
   const deleteNote = async () => {
     setDeleteIsLoading(true);
     try {
-      const response = await api.delete(`/notes/${id}`, {
+      const response = await api.delete(`/notes/${user.id}/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 

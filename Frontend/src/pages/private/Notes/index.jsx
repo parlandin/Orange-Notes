@@ -20,6 +20,8 @@ const Notes = () => {
   //route
   const navigate = useNavigate();
 
+  //search
+
   const handleOnClick = () => {
     navigate("/notes/newnote", { replace: true });
   };
