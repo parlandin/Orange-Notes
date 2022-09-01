@@ -9,7 +9,7 @@ import verifyToken from "./middlewares/verifyToken.middle";
 const app = express();
 
 //configs
-const PORT = config.PORT || 3000;
+const PORT = config.PORT || 3001;
 app.use(cors());
 app.use(json());
 app.use(express.json());

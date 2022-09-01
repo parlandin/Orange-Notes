@@ -1,7 +1,7 @@
 import userRepositorie from "../repositories/UserRepositorie";
 import { compare } from "bcrypt";
 import Config from "../config/index";
-import { sign, verify } from "jsonwebtoken";
+import { sign, verify, decode } from "jsonwebtoken";
 import UserService from "./UserService";
 
 class AuthService {
@@ -42,7 +42,10 @@ class AuthService {
   public checkTokenIsValid(token: string) {
     //@ts-ignore
     const isValid = verify(token, Config.SECRET_JWT);
-    return isValid;
+    //@ts-ignore
+    const { id } = decode(token, Config.SECRET_JWT);
+
+    return [id, isValid];
   }
 }
 

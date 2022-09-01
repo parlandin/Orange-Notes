@@ -1,7 +1,9 @@
 import { Request, Response, NextFunction } from "express";
 import AuthService from "../services/AuthService";
+import AuthenticationRequest from "../types/express";
+
 export default function verifyToken(
-  req: Request,
+  req: AuthenticationRequest,
   res: Response,
   next: NextFunction
 ) {
@@ -13,8 +15,8 @@ export default function verifyToken(
     if (type !== "Bearer" || !token)
       return res.status(401).json({ message: "Autorização invalida" });
 
-    AuthService.checkTokenIsValid(token);
-
+    const [id] = AuthService.checkTokenIsValid(token);
+    req.userId = id;
     return next();
   } catch (err) {
     console.log(err);

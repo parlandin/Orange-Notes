@@ -1,9 +1,7 @@
-export {};
+import { Request } from "express";
 
-declare global {
-  namespace Express {
-    export interface Request {
-      userId?: number;
-    }
-  }
+interface AuthenticationRequest extends Request {
+  userId?: number;
 }
+
+export default AuthenticationRequest;

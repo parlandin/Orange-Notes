@@ -63,8 +63,9 @@ class UserService {
       );
       return consecutive_days;
     }
+    const todayInMilliseconds = new Date(latest_day).getTime();
 
-    if (latestDay < today) {
+    if (todayInMilliseconds < now.getTime()) {
       if (totalDays <= 1 && totalHours <= 24) {
         const totalIncrement = consecutive_days + 1;
         await userRepositorie.updateLastLogin(now, now, totalIncrement, id);

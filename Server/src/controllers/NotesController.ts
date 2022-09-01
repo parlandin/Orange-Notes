@@ -1,10 +1,18 @@
 import { Request, Response } from "express";
 import NotesService from "../services/NotesService";
+import AuthenticationRequest from "../types/express";
 
 class UserController {
-  public async createNote(req: Request, res: Response): Promise<Response> {
+  public async createNote(
+    req: AuthenticationRequest,
+    res: Response
+  ): Promise<Response> {
     const { title, content, title_color, content_color, box_color, user_id } =
       req.body;
+
+    if (!req.userId || req.userId != parseInt(user_id)) {
+      return res.status(401).json({ message: "Você não tem permissão" });
+    }
 
     try {
       const data = await NotesService.createNote(
@@ -22,8 +30,16 @@ class UserController {
     }
   }
 
-  public async getNoteById(req: Request, res: Response): Promise<Response> {
+  public async getNoteById(
+    req: AuthenticationRequest,
+    res: Response
+  ): Promise<Response> {
     const { id } = req.params;
+    const { userid } = req.params;
+
+    if (!req.userId || req.userId != parseInt(userid)) {
+      return res.status(401).json({ message: "Você não tem permissão" });
+    }
 
     try {
       const data = await NotesService.getNotesById(parseInt(id));
@@ -35,8 +51,15 @@ class UserController {
     }
   }
 
-  public async getAllNotes(req: Request, res: Response): Promise<Response> {
+  public async getAllNotes(
+    req: AuthenticationRequest,
+    res: Response
+  ): Promise<Response> {
     const { userid } = req.params;
+
+    if (!req.userId || req.userId != parseInt(userid)) {
+      return res.status(401).json({ message: "Você não tem permissão" });
+    }
 
     try {
       const data = await NotesService.getAllNotes(parseInt(userid));
@@ -48,26 +71,41 @@ class UserController {
     }
   }
 
-  public async deleteNoteById(req: Request, res: Response): Promise<Response> {
-    const { id } = req.params;
+  public async getLatestNotes(
+    req: AuthenticationRequest,
+    res: Response
+  ): Promise<Response> {
+    const { userid } = req.params;
+
+    if (!req.userId || req.userId != parseInt(userid)) {
+      return res.status(401).json({ message: "Você não tem permissão" });
+    }
 
     try {
-      const data = await NotesService.deleteNoteById(parseInt(id));
+      const data = await NotesService.getLatestNotes(parseInt(userid));
 
-      return res.status(200).json({ message: "sucesso ao excluir nota" });
+      return res.status(200).json(data);
     } catch (err) {
       console.log(err);
       return res.status(500).json({ error: err });
     }
   }
 
-  public async getLatestNotes(req: Request, res: Response): Promise<Response> {
+  public async deleteNoteById(
+    req: AuthenticationRequest,
+    res: Response
+  ): Promise<Response> {
+    const { id } = req.params;
     const { userid } = req.params;
 
-    try {
-      const data = await NotesService.getLatestNotes(parseInt(userid));
+    if (!req.userId || req.userId != parseInt(userid)) {
+      return res.status(401).json({ message: "Você não tem permissão" });
+    }
 
-      return res.status(200).json(data);
+    try {
+      const data = await NotesService.deleteNoteById(parseInt(id));
+
+      return res.status(200).json({ message: "sucesso ao excluir nota" });
     } catch (err) {
       console.log(err);
       return res.status(500).json({ error: err });

@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import UserService from "../services/UserService";
+import AuthenticationRequest from "../types/express";
 
 class UserController {
   public async createUser(req: Request, res: Response): Promise<Response> {
@@ -18,8 +19,16 @@ class UserController {
     }
   }
 
-  public async getUserByID(req: Request, res: Response): Promise<Response> {
+  public async getUserByID(
+    req: AuthenticationRequest,
+    res: Response
+  ): Promise<Response> {
     const { id } = req.params;
+
+    if (!req.userId || req.userId != parseInt(id)) {
+      return res.status(401).json({ message: "Você não tem permissão" });
+    }
+
     try {
       const data = await UserService.getUserById(parseInt(id));
       return res.status(200).json(data);
@@ -31,10 +40,15 @@ class UserController {
   }
 
   public async getBasicUserInfo(
-    req: Request,
+    req: AuthenticationRequest,
     res: Response
   ): Promise<Response> {
     const { id } = req.params;
+
+    if (!req.userId || req.userId != parseInt(id)) {
+      return res.status(401).json({ message: "Você não tem permissão" });
+    }
+
     try {
       const data = await UserService.getUserById(parseInt(id));
       const {
