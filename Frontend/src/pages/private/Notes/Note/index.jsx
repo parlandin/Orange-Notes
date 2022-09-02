@@ -64,6 +64,7 @@ const Note = () => {
     isLoading,
   } = useQuery(["note"], getNote, {
     refetchOnWindowFocus: false,
+    retry: false,
   });
 
   if (isSucess)

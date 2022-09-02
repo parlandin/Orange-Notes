@@ -44,6 +44,7 @@ const Notes = () => {
 
   const { data, isError, isLoading } = useQuery(["notes"], getAllNotes, {
     refetchOnWindowFocus: false,
+    retry: false,
   });
 
   const parserToLowerCase = (string) => {

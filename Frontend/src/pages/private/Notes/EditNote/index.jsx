@@ -55,6 +55,7 @@ const EditNote = () => {
   } = useQuery([`note-${id}`], getNote, {
     initialData: cache,
     refetchOnWindowFocus: false,
+    retry: false,
   });
 
   const {
