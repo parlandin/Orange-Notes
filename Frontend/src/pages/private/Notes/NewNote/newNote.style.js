@@ -84,12 +84,20 @@ const ColorInput = styled.label`
   }
 `;
 
-const TitleInput = styled.input`
-  font-size: 1.5rem;
+const WrapperInput = styled.div`
   padding: 15px 10px;
-  background-color: ${({ boxColor }) => (boxColor ? `${boxColor}cc` : "#fff")};
   border-radius: 6px;
   box-shadow: 1px 1px 3px #d9d9d9ad, -1px -1px 3px #d9d9d9ad;
+  background-color: ${({ boxColor }) => (boxColor ? `${boxColor}cc` : "#fff")};
+
+  & + div {
+    margin-top: 20px;
+  }
+`;
+
+const TitleInput = styled.input`
+  font-size: 1.5rem;
+  background-color: transparent;
   outline: none;
   border: none;
   width: 100%;
@@ -102,24 +110,18 @@ const TitleInput = styled.input`
 `;
 
 const ContentInput = styled.textarea`
-  margin: 0 auto;
-  margin-top: 20px;
-  background-color: #fff;
-  padding: 15px 10px;
-  border-radius: 6px;
+  background-color: transparent;
   line-height: 25px;
   font-size: 1.2rem;
   font-weight: 500;
   word-wrap: break-word;
   font-family: "Roboto", sans-serif;
   text-indent: 15px;
-  box-shadow: 1px 1px 3px #d9d9d9ad, -1px -1px 3px #d9d9d9ad;
   width: 100%;
   height: 300px;
   outline: none;
   border: none;
   color: ${({ contentColor }) => (contentColor ? contentColor : "#000")};
-  background-color: ${({ boxColor }) => (boxColor ? `${boxColor}cc` : "#fff")};
   //7a
 
   &::placeholder {
@@ -141,4 +143,5 @@ export default {
   SectionColor,
   Warning,
   WarningErr,
+  WrapperInput,
 };

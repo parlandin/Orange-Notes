@@ -202,24 +202,26 @@ const EditNote = () => {
           <S.Warning>Obs: Essas cores ficam apenas nos cards</S.Warning>
         </S.SectionColor>
 
-        <S.TitleInput
-          boxColor={inputForm.boxColor}
-          titleColor={inputForm.titleColor}
-          type="text"
-          name="title"
-          {...register("title", { required: true })}
-          placeholder="Digite o titulo aqui"
-        />
-        <S.WarningErr>{errors.title?.message}</S.WarningErr>
+        <S.WrapperInput boxColor={inputForm.boxColor}>
+          <S.TitleInput
+            titleColor={inputForm.titleColor}
+            type="text"
+            name="title"
+            {...register("title", { required: true })}
+            placeholder="Digite o titulo aqui"
+          />
+          <S.WarningErr>{errors.title?.message}</S.WarningErr>
+        </S.WrapperInput>
 
-        <S.ContentInput
-          contentColor={inputForm.contentColor}
-          boxColor={inputForm.boxColor}
-          placeholder="Digite o conteudo"
-          name="content"
-          {...register("content")}
-        ></S.ContentInput>
-        <S.WarningErr>{errors.content?.message}</S.WarningErr>
+        <S.WrapperInput boxColor={inputForm.boxColor}>
+          <S.ContentInput
+            contentColor={inputForm.contentColor}
+            placeholder="Digite o conteudo"
+            name="content"
+            {...register("content")}
+          ></S.ContentInput>
+          <S.WarningErr>{errors.content?.message}</S.WarningErr>
+        </S.WrapperInput>
 
         <div>
           <ButtonWithIcon

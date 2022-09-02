@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 import S from "./home.style";
 import quotes from "./quotes";
 import { FaBookOpen, FaFileAlt, FaClock } from "react-icons/fa";
