@@ -63,6 +63,8 @@ class UserController {
     try {
       const data = await NotesService.getAllNotes(parseInt(userid));
 
+      if (data.length <= 0) return res.status(200).json([]);
+
       if (data) {
         const { user_id } = data[0];
         if (!req.userId || req.userId != parseInt(user_id)) {
@@ -87,6 +89,8 @@ class UserController {
 
     try {
       const data = await NotesService.getLatestNotes(parseInt(userid));
+
+      if (data.length <= 0) return res.status(200).json([]);
 
       if (data) {
         const { user_id } = data[0];
