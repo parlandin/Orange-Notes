@@ -10,6 +10,7 @@ import useAuth from "../../../../hooks/useAuth";
 import api from "../../../../api";
 import Loading from "../../../../components/Loading";
 import MessageModal from "../../../../components/MessageModal";
+import useDocumentTitle from "../../../../hooks/useDocumentTitle";
 
 const Note = () => {
   const { id } = useParams();
@@ -66,6 +67,10 @@ const Note = () => {
     refetchOnWindowFocus: false,
     retry: false,
   });
+
+  useDocumentTitle(
+    data ? `${data.title} | Orange-notes` : "Anotação | Orange-notes"
+  );
 
   if (isSucess)
     return (

@@ -1,7 +1,9 @@
 import React from "react";
 import S from "./notFound.style";
+import useDocumentTitle from "../../../hooks/useDocumentTitle";
 
 const NotFound = () => {
+  useDocumentTitle("Não encontrado | Orange-notes");
   return (
     <S.Container>
       <S.WrapperNotFound>

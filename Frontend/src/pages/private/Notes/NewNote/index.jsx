@@ -11,6 +11,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import schema from "./validation";
 import MessageModal from "../../../../components/MessageModal";
+import useDocumentTitle from "../../../../hooks/useDocumentTitle";
 
 const NewNote = () => {
   //TODO: refazer essa tela separando responsabilidades
@@ -24,6 +25,8 @@ const NewNote = () => {
   const [isSucess, setIsSucess] = useState(false);
   const [isError, setIsError] = useState(false);
   const [authUser] = useAuth();
+
+  useDocumentTitle("Nova anotação | Orange-notes");
 
   const { user, token } = authUser;
 

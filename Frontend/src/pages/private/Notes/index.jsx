@@ -11,6 +11,7 @@ import { useQuery } from "react-query";
 import Loading from "../../../components/Loading";
 import SectionNotes from "../../../components/SectionNotes";
 import MessageModal from "../../../components/MessageModal";
+import useDocumentTitle from "../../../hooks/useDocumentTitle";
 
 const Notes = () => {
   //TODO: refazer essa tela separando responsabilidades
@@ -19,6 +20,8 @@ const Notes = () => {
   const [inputSearch, setInputSearch] = useState("");
   const [authUser] = useAuth();
   const { user, token } = authUser;
+
+  useDocumentTitle("Anotações | Orange-notes");
 
   //route
   const navigate = useNavigate();

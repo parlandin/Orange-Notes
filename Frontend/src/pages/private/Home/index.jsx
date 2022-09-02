@@ -12,9 +12,11 @@ import api from "../../../api";
 import Loading from "../../../components/Loading";
 import MessageModal from "../../../components/MessageModal";
 import { useNavigate } from "react-router-dom";
+import useDocumentTitle from "../../../hooks/useDocumentTitle";
 
 const Home = () => {
   const navigate = useNavigate();
+  useDocumentTitle("Inicio | Orange-notes");
 
   const menuRef = useRef(null);
   const Notesref = useRef(null);

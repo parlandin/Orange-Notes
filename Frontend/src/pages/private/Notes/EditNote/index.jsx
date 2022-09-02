@@ -12,6 +12,7 @@ import { useForm } from "react-hook-form";
 import schema from "../NewNote/validation";
 import { useQueryClient, useQuery } from "react-query";
 import MessageModal from "../../../../components/MessageModal";
+import useDocumentTitle from "../../../../hooks/useDocumentTitle";
 
 const EditNote = () => {
   //TODO: refazer essa tela separando responsabilidades
@@ -57,6 +58,10 @@ const EditNote = () => {
     refetchOnWindowFocus: false,
     retry: false,
   });
+
+  useDocumentTitle(
+    data ? `${data.title} | Orange-notes` : "Editar anotação | Orange-notes"
+  );
 
   const {
     register,

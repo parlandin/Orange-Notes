@@ -6,9 +6,12 @@ import LoginForm from "../../../components/LoginForm";
 import useAuth from "../../../hooks/useAuth";
 import Loading from "../../../components/Loading";
 import { Navigate } from "react-router-dom";
+import useDocumentTitle from "../../../hooks/useDocumentTitle";
 
 const Login = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  useDocumentTitle("Login | Orange-notes");
 
   const [userAuth] = useAuth();
   const { isLoading, isUser } = userAuth;
