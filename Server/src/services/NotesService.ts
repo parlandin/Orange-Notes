@@ -37,19 +37,19 @@ class NotesService {
     return rows[0];
   }
 
-  public async getAllNotes(user_id: number) {
+  public async getAllNotes(user_id: number): Promise<Note[] | any[]> {
     const { rows } = await NotesRepositorie.getAllNotesByUserId(user_id);
 
     return rows;
   }
 
-  public async deleteNoteById(id: number) {
-    const { rows } = await NotesRepositorie.deleteNoteById(id);
+  public async deleteNoteById(id: number, userId: number) {
+    const { rows } = await NotesRepositorie.deleteNoteById(id, userId);
 
     return rows;
   }
 
-  public async getLatestNotes(user_id: number) {
+  public async getLatestNotes(user_id: number): Promise<Note[] | any[]> {
     const { rows } = await NotesRepositorie.getLatestNotes(user_id);
 
     return rows;
@@ -61,7 +61,8 @@ class NotesService {
     title_color: string,
     content_color: string,
     box_color: string,
-    id: number
+    id: number,
+    user_id: number
   ) {
     const { rows } = await NotesRepositorie.updateById(
       title,
@@ -69,7 +70,8 @@ class NotesService {
       title_color,
       content_color,
       box_color,
-      id
+      id,
+      user_id
     );
 
     return rows;

@@ -4,3 +4,4 @@ build/
 
 database/date.sql
 database/querys.sql
+database/heroku.sql
