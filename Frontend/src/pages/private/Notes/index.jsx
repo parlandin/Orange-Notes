@@ -4,7 +4,6 @@ import ButtonWithIcon from "../../../components/ButtonWithIcon";
 import { BsGrid1X2Fill } from "react-icons/bs";
 import { FaList, FaPlus } from "react-icons/fa";
 import { IoSearch } from "react-icons/io5";
-//import NotesCard from "../../../components/NotesCard";
 import { useNavigate } from "react-router-dom";
 import api from "../../../api";
 import useAuth from "../../../hooks/useAuth";

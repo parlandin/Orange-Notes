@@ -9,10 +9,13 @@ import { useQuery } from "react-query";
 import useAuth from "../../../../hooks/useAuth";
 import api from "../../../../api";
 import Loading from "../../../../components/Loading";
+import MessageModal from "../../../../components/MessageModal";
 
 const Note = () => {
   const { id } = useParams();
   const [deleteIsLoading, setDeleteIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [isSucess, setIsSucess] = useState(false);
   const navigate = useNavigate();
 
   const handleOnClickBack = () => {
@@ -45,17 +48,47 @@ const Note = () => {
       });
 
       if (response.status == 200) {
-        return navigate("/notes", { replace: true });
+        setIsSucess(true);
       }
     } catch (err) {
       console.log(err);
-      setDeleteIsLoading(false);
+      setIsError(true);
     }
+    setDeleteIsLoading(false);
   };
 
-  const { data, isError, isLoading } = useQuery(["note"], getNote, {
+  const {
+    data,
+    isError: queryIsError,
+    isLoading,
+  } = useQuery(["note"], getNote, {
     refetchOnWindowFocus: false,
   });
+
+  if (isSucess)
+    return (
+      <MessageModal
+        type="sucess"
+        message="Anotação excluida com sucesso"
+        onClick={() => navigate("/notes", { replace: true })}
+      />
+    );
+
+  if (isError)
+    return (
+      <MessageModal
+        type="error"
+        message="Ocorreu um erro ao deletar anotação, tente novamente"
+        onClick={() => setIsError(false)}
+      />
+    );
+
+  if (queryIsError)
+    <MessageModal
+      type="error"
+      message="Ocorreu um erro ao carregar anotação"
+      onClick={() => navigate("/notes", { replace: true })}
+    />;
 
   if (isLoading || deleteIsLoading) return <Loading />;
 

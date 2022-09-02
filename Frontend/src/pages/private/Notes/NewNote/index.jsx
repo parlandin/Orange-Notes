@@ -10,6 +10,7 @@ import useAuth from "../../../../hooks/useAuth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import schema from "./validation";
+import MessageModal from "../../../../components/MessageModal";
 
 const NewNote = () => {
   //TODO: refazer essa tela separando responsabilidades
@@ -20,6 +21,8 @@ const NewNote = () => {
     boxColor: "#fff",
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [isSucess, setIsSucess] = useState(false);
+  const [isError, setIsError] = useState(false);
   const [authUser] = useAuth();
 
   const { user, token } = authUser;
@@ -51,12 +54,31 @@ const NewNote = () => {
       const res = await api.post("/notes/newnote", data, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      console.log(res.data);
+      setIsSucess(true);
     } catch (err) {
       console.log(err);
+      setIsError(true);
     }
     return setIsLoading(false);
   };
+
+  if (isSucess)
+    return (
+      <MessageModal
+        type="sucess"
+        message="Anotação criada com sucesso"
+        onClick={() => navigate("/notes", { replace: true })}
+      />
+    );
+
+  if (isError)
+    return (
+      <MessageModal
+        type="error"
+        message="Ocorreu um erro ao criar anotação, tente novamente"
+        onClick={() => setIsError(false)}
+      />
+    );
 
   if (isLoading) return <Loading />;
 
