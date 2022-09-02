@@ -111,7 +111,7 @@ const EditNote = () => {
     return (
       <MessageModal
         type="sucess"
-        message="Anotação atualizada com sucesso"
+        message="Anotação editada com sucesso"
         onClick={() => navigate("/notes", { replace: true })}
       />
     );

@@ -115,6 +115,7 @@ const Notes = () => {
             <S.SectionButtons>
               <S.Button
                 aria-label="botão: mudar para modo lista"
+                title="mudar para modo lista"
                 className={currentMode == "list" ? "active" : "disable"}
                 onClick={() => switchMode("list")}
               >
@@ -123,6 +124,7 @@ const Notes = () => {
 
               <S.Button
                 aria-label="botão: mudar para modo grid"
+                title="mudar para modo grid"
                 className={currentMode == "grid" ? "active" : "disable"}
                 onClick={() => switchMode("grid")}
               >
