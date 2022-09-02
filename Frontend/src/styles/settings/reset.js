@@ -22,10 +22,9 @@ time, mark, audio, video {
 	margin: 0;
 	padding: 0;
 	border: 0;
-	font-size: 10px;
-	font: inherit;
-    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
 	vertical-align: baseline;
+    box-sizing: border-box;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 

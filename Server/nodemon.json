@@ -1,0 +1,8 @@
+{
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "ext": "ts",
+  "exec": "ts-node -- src/app.ts",
+  "ignore": "/node_modules"
+}
