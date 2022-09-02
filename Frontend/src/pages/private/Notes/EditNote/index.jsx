@@ -38,7 +38,7 @@ const EditNote = () => {
   //console.log(cache);
 
   const getNote = async () => {
-    const response = await api.get(`/notes/${user.id}/${id}`, {
+    const response = await api.get(`/notes/${id}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     if (!response.status == 200) {
@@ -95,7 +95,7 @@ const EditNote = () => {
     setIsLoading(true);
 
     try {
-      const res = await api.put(`/notes/edit/${user.id}/${id}`, data, {
+      const res = await api.put(`/notes/edit/${id}`, data, {
         headers: { Authorization: `Bearer ${token}` },
       });
 

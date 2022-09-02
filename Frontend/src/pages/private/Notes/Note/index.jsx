@@ -26,9 +26,10 @@ const Note = () => {
   const { user, token } = authUser;
 
   const getNote = async () => {
-    const response = await api.get(`/notes/${user.id}/${id}`, {
+    const response = await api.get(`/notes/${id}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
+
     if (!response.status == 200) {
       throw new Error("Ocorreu um erro");
     }
@@ -43,7 +44,7 @@ const Note = () => {
   const deleteNote = async () => {
     setDeleteIsLoading(true);
     try {
-      const response = await api.delete(`/notes/${user.id}/${id}`, {
+      const response = await api.delete(`/notes/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -83,12 +84,15 @@ const Note = () => {
       />
     );
 
-  if (queryIsError)
-    <MessageModal
-      type="error"
-      message="Ocorreu um erro ao carregar anotação"
-      onClick={() => navigate("/notes", { replace: true })}
-    />;
+  if (queryIsError) {
+    return (
+      <MessageModal
+        type="error"
+        message="Ocorreu um erro ao carregar anotação"
+        onClick={() => navigate("/notes", { replace: true })}
+      />
+    );
+  }
 
   if (isLoading || deleteIsLoading) return <Loading />;
 
