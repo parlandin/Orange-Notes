@@ -42,7 +42,7 @@ const Home = () => {
     }
   );
 
-  console.log(data);
+  //console.log(data);
   const Menu = [
     {
       icon: <FaFileAlt size="100%" />,
