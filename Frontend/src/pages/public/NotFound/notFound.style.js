@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Img from "../../../assets/images/wave.png";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   position: relative;
@@ -22,6 +23,20 @@ const WrapperNotFound = styled.main`
   }
 
   & p {
+    margin-bottom: 10px;
+  }
+`;
+
+const Button = styled(Link)`
+  text-decoration: none;
+  color: #1f1f1f;
+  padding: 5px 9px;
+  border: 1px solid #ff5f19;
+  border-radius: 6px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #ff5f19;
   }
 `;
 
@@ -44,4 +59,4 @@ const WrapperWave = styled.div`
   }
 `;
 
-export default { Container, WrapperWave, WrapperNotFound };
+export default { Container, WrapperWave, WrapperNotFound, Button };

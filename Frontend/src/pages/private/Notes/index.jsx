@@ -10,6 +10,7 @@ import useAuth from "../../../hooks/useAuth";
 import { useQuery } from "react-query";
 import Loading from "../../../components/Loading";
 import SectionNotes from "../../../components/SectionNotes";
+import MessageModal from "../../../components/MessageModal";
 
 const Notes = () => {
   //TODO: refazer essa tela separando responsabilidades
@@ -78,6 +79,15 @@ const Notes = () => {
       setCurrentMode(salvedMode);
     }
   }, []);
+
+  if (isError)
+    return (
+      <MessageModal
+        type="error"
+        message="Ocorreu um erro ao carregar anotações"
+        onClick={() => navigate("/", { replace: true })}
+      />
+    );
 
   if (isLoading) return <Loading />;
 
