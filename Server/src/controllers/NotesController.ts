@@ -35,14 +35,17 @@ class UserController {
     res: Response
   ): Promise<Response> {
     const { id } = req.params;
-    const { userid } = req.params;
-
-    if (!req.userId || req.userId != parseInt(userid)) {
-      return res.status(401).json({ message: "Você não tem permissão" });
-    }
 
     try {
       const data = await NotesService.getNotesById(parseInt(id));
+
+      if (!data)
+        return res.status(404).json({ erro: true, message: "não encontrado" });
+
+      const { user_id } = data;
+      if (!req.userId || req.userId != user_id) {
+        return res.status(404).json({ erro: true, message: "não encontrado" });
+      }
 
       return res.status(200).json(data);
     } catch (err) {
@@ -57,12 +60,19 @@ class UserController {
   ): Promise<Response> {
     const { userid } = req.params;
 
-    if (!req.userId || req.userId != parseInt(userid)) {
-      return res.status(401).json({ message: "Você não tem permissão" });
-    }
-
     try {
       const data = await NotesService.getAllNotes(parseInt(userid));
+
+      if (data.length <= 0) return res.status(200).json([]);
+
+      if (data) {
+        const { user_id } = data[0];
+        if (!req.userId || req.userId != parseInt(user_id)) {
+          return res
+            .status(404)
+            .json({ erro: true, message: "não encontrado" });
+        }
+      }
 
       return res.status(200).json(data);
     } catch (err) {
@@ -77,12 +87,17 @@ class UserController {
   ): Promise<Response> {
     const { userid } = req.params;
 
-    if (!req.userId || req.userId != parseInt(userid)) {
-      return res.status(401).json({ message: "Você não tem permissão" });
-    }
-
     try {
       const data = await NotesService.getLatestNotes(parseInt(userid));
+
+      if (data.length <= 0) return res.status(200).json([]);
+
+      if (data) {
+        const { user_id } = data[0];
+        if (!req.userId || req.userId != parseInt(user_id)) {
+          return res.status(401).json({ message: "Você não tem permissão" });
+        }
+      }
 
       return res.status(200).json(data);
     } catch (err) {
@@ -96,16 +111,20 @@ class UserController {
     res: Response
   ): Promise<Response> {
     const { id } = req.params;
-    const { userid } = req.params;
-
-    if (!req.userId || req.userId != parseInt(userid)) {
-      return res.status(401).json({ message: "Você não tem permissão" });
-    }
 
     try {
-      const data = await NotesService.deleteNoteById(parseInt(id));
+      if (req.userId) {
+        const data = await NotesService.deleteNoteById(
+          parseInt(id),
+          req.userId
+        );
 
-      return res.status(200).json({ message: "sucesso ao excluir nota" });
+        if (data.length > 0) {
+          return res.status(200).json({ message: "sucesso ao excluir nota" });
+        }
+      }
+
+      return res.status(401).json({ message: "Você não tem permissão" });
     } catch (err) {
       console.log(err);
       return res.status(500).json({ error: err });
@@ -119,22 +138,25 @@ class UserController {
     const { title, content, title_color, content_color, box_color } = req.body;
 
     const { id } = req.params;
-    const { userid } = req.params;
-
-    if (!req.userId || req.userId != parseInt(userid)) {
-      return res.status(401).json({ message: "Você não tem permissão" });
-    }
 
     try {
-      const data = await NotesService.updateById(
-        title,
-        content,
-        title_color,
-        content_color,
-        box_color,
-        parseInt(id)
-      );
-      return res.status(200).json({ message: "Atualizado com sucesso" });
+      if (req.userId) {
+        const data = await NotesService.updateById(
+          title,
+          content,
+          title_color,
+          content_color,
+          box_color,
+          parseInt(id),
+          req.userId
+        );
+
+        if (data.length > 0) {
+          return res.status(200).json({ message: "Atualizado com sucesso" });
+        }
+      }
+
+      return res.status(401).json({ message: "Você não tem permissão" });
     } catch (err) {
       console.log(err);
       return res

@@ -10,6 +10,8 @@ import useAuth from "../../../hooks/useAuth";
 import { useQuery } from "react-query";
 import Loading from "../../../components/Loading";
 import SectionNotes from "../../../components/SectionNotes";
+import MessageModal from "../../../components/MessageModal";
+import useDocumentTitle from "../../../hooks/useDocumentTitle";
 
 const Notes = () => {
   //TODO: refazer essa tela separando responsabilidades
@@ -18,6 +20,8 @@ const Notes = () => {
   const [inputSearch, setInputSearch] = useState("");
   const [authUser] = useAuth();
   const { user, token } = authUser;
+
+  useDocumentTitle("Anotações | Orange-notes");
 
   //route
   const navigate = useNavigate();
@@ -44,6 +48,7 @@ const Notes = () => {
 
   const { data, isError, isLoading } = useQuery(["notes"], getAllNotes, {
     refetchOnWindowFocus: false,
+    retry: false,
   });
 
   const parserToLowerCase = (string) => {
@@ -77,6 +82,15 @@ const Notes = () => {
       setCurrentMode(salvedMode);
     }
   }, []);
+
+  if (isError)
+    return (
+      <MessageModal
+        type="error"
+        message="Ocorreu um erro ao carregar anotações"
+        onClick={() => navigate("/", { replace: true })}
+      />
+    );
 
   if (isLoading) return <Loading />;
 

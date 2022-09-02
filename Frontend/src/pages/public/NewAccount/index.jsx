@@ -3,9 +3,12 @@ import HomeInfos from "../../../components/HomeInfos";
 import S from "./newAccount.style";
 import { BiInfoCircle } from "react-icons/bi";
 import AccountForm from "../../../components/AccountForm";
+import useDocumentTitle from "../../../hooks/useDocumentTitle";
 
 const NewAccount = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  useDocumentTitle("Criar nova conta | Orange-notes");
   return (
     <S.Container>
       <S.Wrapper>

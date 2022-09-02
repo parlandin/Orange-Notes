@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 import S from "./home.style";
 import quotes from "./quotes";
 import { FaBookOpen, FaFileAlt, FaClock } from "react-icons/fa";
@@ -10,8 +10,14 @@ import { useQuery } from "react-query";
 import useAuth from "../../../hooks/useAuth";
 import api from "../../../api";
 import Loading from "../../../components/Loading";
+import MessageModal from "../../../components/MessageModal";
+import { useNavigate } from "react-router-dom";
+import useDocumentTitle from "../../../hooks/useDocumentTitle";
 
 const Home = () => {
+  const navigate = useNavigate();
+  useDocumentTitle("Inicio | Orange-notes");
+
   const menuRef = useRef(null);
   const Notesref = useRef(null);
 
@@ -23,15 +29,15 @@ const Home = () => {
   const { user, token } = authUser;
 
   const getLatestNotes = async () => {
-    try {
-      const response = await api.get(`/notes/latest/${user.id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      //console.log(response.data);
-      return response.data;
-    } catch (err) {
-      console.log(err);
+    const response = await api.get(`/notes/latest/${user.id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    if (!response.status == 200) {
+      throw new Error("Ocorreu um erro");
     }
+
+    return response.data;
   };
 
   const { data, isError, isLoading } = useQuery(
@@ -42,7 +48,6 @@ const Home = () => {
     }
   );
 
-  //console.log(data);
   const Menu = [
     {
       icon: <FaFileAlt size="100%" />,
@@ -71,6 +76,16 @@ const Home = () => {
   ];
 
   const quote = getRandomQuote(quotes);
+
+  if (isError) {
+    return (
+      <MessageModal
+        type="error"
+        message="Ocorreu um erro ao carregar a pagina, tente novamente"
+        onClick={() => navigate(0)}
+      />
+    );
+  }
 
   if (isLoading) return <Loading />;
 

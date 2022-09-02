@@ -12,6 +12,7 @@ import { useForm } from "react-hook-form";
 import schema from "../NewNote/validation";
 import { useQueryClient, useQuery } from "react-query";
 import MessageModal from "../../../../components/MessageModal";
+import useDocumentTitle from "../../../../hooks/useDocumentTitle";
 
 const EditNote = () => {
   //TODO: refazer essa tela separando responsabilidades
@@ -38,7 +39,7 @@ const EditNote = () => {
   //console.log(cache);
 
   const getNote = async () => {
-    const response = await api.get(`/notes/${user.id}/${id}`, {
+    const response = await api.get(`/notes/${id}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     if (!response.status == 200) {
@@ -55,7 +56,12 @@ const EditNote = () => {
   } = useQuery([`note-${id}`], getNote, {
     initialData: cache,
     refetchOnWindowFocus: false,
+    retry: false,
   });
+
+  useDocumentTitle(
+    data ? `${data.title} | Orange-notes` : "Editar anotação | Orange-notes"
+  );
 
   const {
     register,
@@ -95,7 +101,7 @@ const EditNote = () => {
     setIsLoading(true);
 
     try {
-      const res = await api.put(`/notes/edit/${user.id}/${id}`, data, {
+      const res = await api.put(`/notes/edit/${id}`, data, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -202,24 +208,26 @@ const EditNote = () => {
           <S.Warning>Obs: Essas cores ficam apenas nos cards</S.Warning>
         </S.SectionColor>
 
-        <S.TitleInput
-          boxColor={inputForm.boxColor}
-          titleColor={inputForm.titleColor}
-          type="text"
-          name="title"
-          {...register("title", { required: true })}
-          placeholder="Digite o titulo aqui"
-        />
-        <S.WarningErr>{errors.title?.message}</S.WarningErr>
+        <S.WrapperInput boxColor={inputForm.boxColor}>
+          <S.TitleInput
+            titleColor={inputForm.titleColor}
+            type="text"
+            name="title"
+            {...register("title", { required: true })}
+            placeholder="Digite o titulo aqui"
+          />
+          <S.WarningErr>{errors.title?.message}</S.WarningErr>
+        </S.WrapperInput>
 
-        <S.ContentInput
-          contentColor={inputForm.contentColor}
-          boxColor={inputForm.boxColor}
-          placeholder="Digite o conteudo"
-          name="content"
-          {...register("content")}
-        ></S.ContentInput>
-        <S.WarningErr>{errors.content?.message}</S.WarningErr>
+        <S.WrapperInput boxColor={inputForm.boxColor}>
+          <S.ContentInput
+            contentColor={inputForm.contentColor}
+            placeholder="Digite o conteudo"
+            name="content"
+            {...register("content")}
+          ></S.ContentInput>
+          <S.WarningErr>{errors.content?.message}</S.WarningErr>
+        </S.WrapperInput>
 
         <div>
           <ButtonWithIcon

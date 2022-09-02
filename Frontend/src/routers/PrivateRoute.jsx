@@ -1,5 +1,4 @@
 import { Outlet, Navigate } from "react-router-dom";
-import { useState, useEffect } from "react";
 import Loading from "../components/Loading";
 import useAuth from "../hooks/useAuth";
 

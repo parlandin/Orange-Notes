@@ -51,14 +51,15 @@ class NotesRepositorie {
     title_color: string,
     content_color: string,
     box_color: string,
-    id: number
+    id: number,
+    user_id: number
   ) {
     const query = `UPDATE notes set title = $1, 
                    content = $2, 	
                    title_color = $3, 
                    content_color = $4, 
                    box_color = $5 
-                   WHERE note_id = $6;`;
+                   WHERE note_id = $6 AND user_id = $7 RETURNING *;`;
     return db.query(query, [
       title,
       content,
@@ -66,13 +67,15 @@ class NotesRepositorie {
       content_color,
       box_color,
       id,
+      user_id,
     ]);
   }
 
-  public async deleteNoteById(id: number) {
-    const query = "DELETE  FROM notes WHERE note_id = $1";
+  public async deleteNoteById(id: number, user_id: number) {
+    const query =
+      "DELETE  FROM notes WHERE note_id = $1 AND user_id = $2 RETURNING *";
 
-    return db.query(query, [id]);
+    return db.query(query, [id, user_id]);
   }
 }
 

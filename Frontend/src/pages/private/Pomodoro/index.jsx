@@ -5,6 +5,7 @@ import ButtonWithIcon from "../../../components/ButtonWithIcon";
 import { FaPlayCircle, FaRedoAlt, FaCog, FaPauseCircle } from "react-icons/fa";
 import PomodoroModal from "../../../components/PomodoroModal";
 import Sound from "../../../assets/sound/notification.mp3";
+import useDocumentTitle from "../../../hooks/useDocumentTitle";
 
 //TODO: refazer todo esse component
 const Pomodoro = () => {
@@ -14,6 +15,8 @@ const Pomodoro = () => {
   const [breakMinutes, setBreakMinutes] = useState(1);
   const [currentState, setCurrentState] = useState("focus");
   const [isOpenModal, setIsOpenModal] = useState(false);
+
+  useDocumentTitle("Pomodoro Time | Orange-notes");
 
   const secondsLeftRef = useRef(secondsLeft);
   const isPausedRef = useRef(isPaused);
