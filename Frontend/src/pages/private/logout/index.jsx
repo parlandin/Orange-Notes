@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import useAuth from "../../../hooks/useAuth";
 import { removeToken } from "../../../services/authToken";
 import { Navigate } from "react-router-dom";
+import S from "./logout.style";
 
 const Logout = () => {
   const [, setAuthUser] = useAuth();
@@ -23,7 +24,11 @@ const Logout = () => {
       return { ...prev, ...date };
     });
   }, []);
-  return <Navigate to="/login" replace={true} />;
+  return (
+    <S.Container>
+      <Navigate to="/login" replace={true} />;
+    </S.Container>
+  );
 };
 
 export default Logout;
