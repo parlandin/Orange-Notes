@@ -11,6 +11,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import schema from "../NewNote/validation";
 import { useQueryClient, useQuery } from "react-query";
+import MessageModal from "../../../../components/MessageModal";
 
 const EditNote = () => {
   //TODO: refazer essa tela separando responsabilidades
@@ -24,6 +25,8 @@ const EditNote = () => {
   });
 
   const [isLoading, setIsLoading] = useState(false);
+  const [isSucess, setIsSucess] = useState(false);
+  const [isError, setIsError] = useState(false);
   const [authUser] = useAuth();
 
   const { user, token } = authUser;
@@ -47,7 +50,7 @@ const EditNote = () => {
 
   const {
     data,
-    isError,
+    isError: QueryIsError,
     isLoading: QueryIsLoading,
   } = useQuery([`note-${id}`], getNote, {
     initialData: cache,
@@ -95,14 +98,42 @@ const EditNote = () => {
       const res = await api.put(`/notes/edit/${user.id}/${id}`, data, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      console.log(res.data);
+
+      setIsSucess(true);
     } catch (err) {
+      setIsError(true);
       console.log(err);
     }
     return setIsLoading(false);
   };
 
+  if (isSucess)
+    return (
+      <MessageModal
+        type="sucess"
+        message="Anotação atualizada com sucesso"
+        onClick={() => navigate("/notes", { replace: true })}
+      />
+    );
+
   if (isLoading || QueryIsLoading) return <Loading />;
+
+  if (isError)
+    return (
+      <MessageModal
+        type="error"
+        message="Ocorreu um erro ao editar anotação"
+        onClick={() => setIsError(false)}
+      />
+    );
+  if (QueryIsError)
+    return (
+      <MessageModal
+        type="error"
+        message="Ocorreu um erro ao carregar anotação, verifique se essa anotação existe"
+        onClick={() => navigate("/notes", { replace: true })}
+      />
+    );
 
   return (
     <S.Container>

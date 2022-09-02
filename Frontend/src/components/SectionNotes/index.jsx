@@ -13,7 +13,7 @@ const SectionNotes = ({ currentMode, data, type }) => {
         <NotesCard
           key={1}
           id={"newnote"}
-          title="Ainda não há nenhuma nota cadastrada, veja detalhes no botão no canto superior direito"
+          title="Ainda não há nenhuma nota cadastrada, veja detalhes clicando no botão do canto superior direito 'grid'"
           content="Faça já sua primeira nota, clique no botão acima 'Nova anotação' ou click me"
           titleColor="#1e1e1e"
           contentColor="#1e1e1e"
