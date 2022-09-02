@@ -13,6 +13,7 @@ import Pomodoro from "../pages/private/Pomodoro";
 import Note from "../pages/private/Notes/Note";
 import NewNote from "../pages/private/Notes/NewNote";
 import EditNote from "../pages/private/Notes/EditNote";
+import ConfigPage from "../pages/private/configPage";
 
 const Routers = () => {
   return (
@@ -27,6 +28,7 @@ const Routers = () => {
             <Route path="/notes/edit/:id" element={<EditNote />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/pomodorotime" element={<Pomodoro />} />
+            <Route path="/configs" element={<ConfigPage />} />
           </Route>
         </Route>
 
