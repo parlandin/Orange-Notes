@@ -34,6 +34,12 @@ class UserRepositorie {
       "UPDATE users SET last_login = $1, latest_day = $2 , consecutive_days = $3 WHERE users.id = $4;";
     return db.query(query, [today, latest_day, consecutive_days, id]);
   }
+
+  public async deleteUserById(id: number) {
+    const query = "DELETE  FROM users WHERE id = $1  RETURNING *";
+
+    return db.query(query, [id]);
+  }
 }
 
 export default new UserRepositorie();

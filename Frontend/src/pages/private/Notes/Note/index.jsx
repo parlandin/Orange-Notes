@@ -11,12 +11,14 @@ import api from "../../../../api";
 import Loading from "../../../../components/Loading";
 import MessageModal from "../../../../components/MessageModal";
 import useDocumentTitle from "../../../../hooks/useDocumentTitle";
+import OptionModal from "../../../../components/OptionModal";
 
 const Note = () => {
   const { id } = useParams();
   const [deleteIsLoading, setDeleteIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [isSucess, setIsSucess] = useState(false);
+  const [isModal, setIsModal] = useState(false);
   const navigate = useNavigate();
 
   const handleOnClickBack = () => {
@@ -103,43 +105,52 @@ const Note = () => {
   if (isLoading || deleteIsLoading) return <Loading />;
 
   return (
-    <S.Container>
-      <S.ContainerFixed>
-        <S.Header>
-          <ButtonWithIcon
-            icon={<TiArrowBack size="100%" />}
-            padding="2px 4px"
-            label="Voltar"
-            backgroudFill={true}
-            reverse={true}
-            onClick={handleOnClickBack}
-            margin="0 15px 0px 0px"
-          />
+    <>
+      <OptionModal
+        isOpen={isModal}
+        message="Você tem certeza que quer excluir essa anotação?"
+        cancelOnClick={() => setIsModal(false)}
+        confirmOnClick={() => deleteNote()}
+      />
 
-          <ButtonWithIcon
-            icon={<BiCommentEdit size="100%" />}
-            padding="2px 6px"
-            label="Editar"
-            backgroudFill={true}
-            reverse={false}
-            onClick={handleEditNote}
-            margin="0 15px 0px 0px"
-          />
+      <S.Container>
+        <S.ContainerFixed>
+          <S.Header>
+            <ButtonWithIcon
+              icon={<TiArrowBack size="100%" />}
+              padding="2px 4px"
+              label="Voltar"
+              backgroudFill={true}
+              reverse={true}
+              onClick={handleOnClickBack}
+              margin="0 15px 0px 0px"
+            />
 
-          <ButtonWithIcon
-            icon={<BsTrash size="100%" />}
-            padding="2px 6px"
-            label="Excluir"
-            backgroudFill={true}
-            reverse={false}
-            onClick={deleteNote}
-          />
-        </S.Header>
-      </S.ContainerFixed>
+            <ButtonWithIcon
+              icon={<BiCommentEdit size="100%" />}
+              padding="2px 6px"
+              label="Editar"
+              backgroudFill={true}
+              reverse={false}
+              onClick={handleEditNote}
+              margin="0 15px 0px 0px"
+            />
 
-      <S.Title>{data.title}</S.Title>
-      <S.Content>{data.content}</S.Content>
-    </S.Container>
+            <ButtonWithIcon
+              icon={<BsTrash size="100%" />}
+              padding="2px 6px"
+              label="Excluir"
+              backgroudFill={true}
+              reverse={false}
+              onClick={() => setIsModal(true)}
+            />
+          </S.Header>
+        </S.ContainerFixed>
+
+        <S.Title>{data.title}</S.Title>
+        <S.Content>{data.content}</S.Content>
+      </S.Container>
+    </>
   );
 };
 

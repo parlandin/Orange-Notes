@@ -5,6 +5,10 @@ const Container = styled.header`
   width: 100%;
   border-radius: 0px 0px 6px 6px;
   height: 55px;
+
+  @media (max-width: 380px) {
+    height: 60px;
+  }
 `;
 
 const HeaderFix = styled.div`
@@ -17,6 +21,10 @@ const HeaderFix = styled.div`
   justify-content: space-between;
   background-color: #fff;
   z-index: 4;
+
+  @media (max-width: 380px) {
+    height: 60px;
+  }
 `;
 
 export default {

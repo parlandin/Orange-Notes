@@ -58,7 +58,7 @@ const Home = () => {
     {
       icon: <FaBookOpen size="100%" />,
       title: "Lista de cursos",
-      description: "Organize suas tarefas",
+      description: "Organize seus cursos",
       path: "/courses",
     },
     {

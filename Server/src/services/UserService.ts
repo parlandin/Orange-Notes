@@ -10,6 +10,8 @@ interface user {
   last_login: string;
   latest_day: string;
   consecutive_days: number;
+  email?: string;
+  created_at?: string;
 }
 
 class UserService {
@@ -40,6 +42,12 @@ class UserService {
     const { rows } = await userRepositorie.getUserByID(id);
 
     return rows[0];
+  }
+
+  public async deleteUserById(id: number) {
+    const { rows } = await userRepositorie.deleteUserById(id);
+
+    return rows;
   }
 
   public async updateConsecutiveDays(

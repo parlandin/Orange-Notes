@@ -31,7 +31,8 @@ class UserController {
 
     try {
       const data = await UserService.getUserById(parseInt(id));
-      return res.status(200).json(data);
+      const { name, email, picture, created_at } = data;
+      return res.status(200).json({ name, email, picture, created_at });
     } catch (err) {
       return res
         .status(404)
@@ -72,8 +73,33 @@ class UserController {
         .json({ user_id, picture, name, consecutive_days: days });
     } catch (err) {
       return res
-        .status(404)
+        .status(500)
         .json({ error: "Ocorreu um erro ao carregar usuario" });
+    }
+  }
+
+  public async DeleteUserById(req: AuthenticationRequest, res: Response) {
+    const { id } = req.params;
+
+    try {
+      if (!req.userId || req.userId != parseInt(id)) {
+        return res.status(401).json({ message: "Você não tem permissão" });
+      }
+
+      const data = await UserService.deleteUserById(parseInt(id));
+
+      if (data.length > 0) {
+        return res
+          .status(200)
+          .json({ error: false, message: "Conta excluida com sucesso" });
+      }
+
+      return res
+        .status(404)
+        .json({ error: true, message: "Usuario não encontrado" });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: "Ocorreu um erro ao carregar usuario" });
     }
   }
 }
