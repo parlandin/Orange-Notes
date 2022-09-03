@@ -10,6 +10,7 @@ import Loading from "../../../components/Loading";
 import { useNavigate } from "react-router-dom";
 import useDocumentTitle from "../../../hooks/useDocumentTitle";
 import MessageModal from "../../../components/MessageModal";
+import OptionModal from "../../../components/OptionModal";
 
 const ConfigPage = () => {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ const ConfigPage = () => {
   const [deleteIsLoading, setDeleteIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [isSucess, setIsSucess] = useState(false);
+  const [isModal, setIsModal] = useState(false);
 
   const handleOnClickBack = () => {
     navigate(-1, { replace: true });
@@ -63,10 +65,6 @@ const ConfigPage = () => {
     setDeleteIsLoading(false);
   };
 
-  /*  const handleDeleteOnClick = () => {
-    deleteNote()
-  } */
-
   if (isLoading) return <Loading />;
 
   if (isSucess) {
@@ -90,57 +88,65 @@ const ConfigPage = () => {
   }
 
   return (
-    <S.Container>
-      <S.Header>
-        <S.Title>Perfil</S.Title>
-        <ButtonWithIcon
-          icon={<TiArrowBack size="100%" />}
-          padding="2px 4px"
-          label="Voltar"
-          backgroudFill={true}
-          reverse={true}
-          onClick={handleOnClickBack}
-          margin="0 15px 0px 0px"
-        />
-      </S.Header>
+    <>
+      <OptionModal
+        isOpen={isModal}
+        message="Você tem certeza que quer excluir seu perfil?"
+        cancelOnClick={() => setIsModal(false)}
+        confirmOnClick={() => deleteNote()}
+      />
+      <S.Container>
+        <S.Header>
+          <S.Title>Perfil</S.Title>
+          <ButtonWithIcon
+            icon={<TiArrowBack size="100%" />}
+            padding="2px 4px"
+            label="Voltar"
+            backgroudFill={true}
+            reverse={true}
+            onClick={handleOnClickBack}
+            margin="0 15px 0px 0px"
+          />
+        </S.Header>
 
-      <S.WrapperInfo>
-        <S.WrapperPicture>
-          <img src={data.picture} alt="foto de perfil do usuario" />
-        </S.WrapperPicture>
-        <S.WrapperUser>
-          <S.field>
-            <S.Span>Nome: </S.Span>
-            {data.name}
-          </S.field>
+        <S.WrapperInfo>
+          <S.WrapperPicture>
+            <img src={data.picture} alt="foto de perfil do usuario" />
+          </S.WrapperPicture>
+          <S.WrapperUser>
+            <S.field>
+              <S.Span>Nome: </S.Span>
+              {data.name}
+            </S.field>
 
-          <S.field>
-            <S.Span>E-mail: </S.Span> {data.email}
-          </S.field>
+            <S.field>
+              <S.Span>E-mail: </S.Span> {data.email}
+            </S.field>
 
-          <S.field>
-            <S.Span>Criado em: </S.Span>
-            {new Date(data.created_at).toLocaleDateString()}
-          </S.field>
-        </S.WrapperUser>
-      </S.WrapperInfo>
+            <S.field>
+              <S.Span>Criado em: </S.Span>
+              {new Date(data.created_at).toLocaleDateString()}
+            </S.field>
+          </S.WrapperUser>
+        </S.WrapperInfo>
 
-      <S.WrapperButton>
-        <ButtonWithIcon
-          icon={<BsTrash size="100%" />}
-          padding="2px 4px"
-          label="Excluir conta"
-          backgroudFill={true}
-          reverse={false}
-          onClick={deleteNote}
-        />
-      </S.WrapperButton>
+        <S.WrapperButton>
+          <ButtonWithIcon
+            icon={<BsTrash size="100%" />}
+            padding="2px 4px"
+            label="Excluir conta"
+            backgroudFill={true}
+            reverse={false}
+            onClick={() => setIsModal(true)}
+          />
+        </S.WrapperButton>
 
-      <S.Warnig>
-        Essa página é destinada a edição do perfil, funcionalidade que chegará
-        em breve
-      </S.Warnig>
-    </S.Container>
+        <S.Warnig>
+          Essa página é destinada a edição do perfil, funcionalidade que chegará
+          em breve
+        </S.Warnig>
+      </S.Container>
+    </>
   );
 };
 
