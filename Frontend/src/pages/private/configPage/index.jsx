@@ -48,7 +48,7 @@ const ConfigPage = () => {
     retry: false,
   });
 
-  const deleteNote = async () => {
+  const deleteUser = async () => {
     setDeleteIsLoading(true);
     try {
       const response = await api.delete(`/user/${user.id}`, {
@@ -93,7 +93,7 @@ const ConfigPage = () => {
         isOpen={isModal}
         message="Você tem certeza que quer excluir seu perfil?"
         cancelOnClick={() => setIsModal(false)}
-        confirmOnClick={() => deleteNote()}
+        confirmOnClick={() => deleteUser()}
       />
       <S.Container>
         <S.Header>
