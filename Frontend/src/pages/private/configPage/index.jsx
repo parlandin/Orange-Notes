@@ -1,13 +1,93 @@
-import React from "react";
+import React, { useState } from "react";
 import S from "./configPage.style";
 import ButtonWithIcon from "../../../components/ButtonWithIcon";
 import { TiArrowBack } from "react-icons/ti";
 import { BsTrash } from "react-icons/bs";
+import useAuth from "../../../hooks/useAuth";
+import api from "../../../api";
+import { useQuery } from "react-query";
+import Loading from "../../../components/Loading";
+import { useNavigate } from "react-router-dom";
+import useDocumentTitle from "../../../hooks/useDocumentTitle";
+import MessageModal from "../../../components/MessageModal";
 
 const ConfigPage = () => {
+  const navigate = useNavigate();
+
+  const [deleteIsLoading, setDeleteIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [isSucess, setIsSucess] = useState(false);
+
   const handleOnClickBack = () => {
-    console.log(foi);
+    navigate(-1, { replace: true });
   };
+
+  const [authUser] = useAuth();
+  const { user, token } = authUser;
+
+  useDocumentTitle(
+    user ? `${user.name} | Orange-notes` : "Perfil | Orange-notes"
+  );
+
+  const requestUserInfo = async () => {
+    const response = await api.get(`/user/${user.id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    return response.data;
+  };
+
+  const {
+    data,
+    isError: queryIsError,
+    isLoading,
+  } = useQuery(["userInfo"], requestUserInfo, {
+    refetchOnWindowFocus: false,
+    retry: false,
+  });
+
+  const deleteNote = async () => {
+    setDeleteIsLoading(true);
+    try {
+      const response = await api.delete(`/user/${user.id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (response.status == 200) {
+        setIsSucess(true);
+      }
+    } catch (err) {
+      console.log(err);
+      setIsError(true);
+    }
+    setDeleteIsLoading(false);
+  };
+
+  /*  const handleDeleteOnClick = () => {
+    deleteNote()
+  } */
+
+  if (isLoading) return <Loading />;
+
+  if (isSucess) {
+    return (
+      <MessageModal
+        type="sucess"
+        message="Sua conta foi excluida com sucesso"
+        onClick={() => navigate("/logout", { replace: true })}
+      />
+    );
+  }
+
+  if (isError) {
+    return (
+      <MessageModal
+        type="sucess"
+        message="Ocorreu um erro ao excluir conta"
+        onClick={() => isError(false)}
+      />
+    );
+  }
 
   return (
     <S.Container>
@@ -26,22 +106,21 @@ const ConfigPage = () => {
 
       <S.WrapperInfo>
         <S.WrapperPicture>
-          <img
-            src="https://avatars.dicebear.com/api/croodles-neutral/kwNw5US1.svg"
-            alt="foto de perfil do usuario"
-          />
+          <img src={data.picture} alt="foto de perfil do usuario" />
         </S.WrapperPicture>
         <S.WrapperUser>
           <S.field>
-            <S.Span>Nome: </S.Span>Gustavo Parlandim
+            <S.Span>Nome: </S.Span>
+            {data.name}
           </S.field>
 
           <S.field>
-            <S.Span>E-mail: </S.Span> gustavoparlandim@gmail.com
+            <S.Span>E-mail: </S.Span> {data.email}
           </S.field>
 
           <S.field>
-            <S.Span>Criado em: </S.Span> 24/08/2022
+            <S.Span>Criado em: </S.Span>
+            {new Date(data.created_at).toLocaleDateString()}
           </S.field>
         </S.WrapperUser>
 
@@ -52,7 +131,7 @@ const ConfigPage = () => {
             label="Excluir conta"
             backgroudFill={true}
             reverse={false}
-            onClick={handleOnClickBack}
+            onClick={deleteNote}
           />
         </S.WrapperButton>
       </S.WrapperInfo>
