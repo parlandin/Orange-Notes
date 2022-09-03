@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-const Container = styled.div``;
+const Container = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+`;
 
 const Header = styled.div`
   padding: 10px 10px 0;
@@ -32,6 +36,7 @@ const WrapperPicture = styled.div`
   overflow: hidden;
   border-radius: 6px;
   border: 1px solid #ff5f19;
+  margin: 10px;
 
   width: 100px;
   height: 100px;
@@ -58,26 +63,14 @@ const field = styled.p`
   }
 `;
 
-const WrapperUser = styled.div`
-  width: 70%;
-
-  @media (max-width: 882px) {
-    width: 65%;
-  }
-
-  @media (max-width: 771px) {
-    width: 60%;
-  }
-`;
+const WrapperUser = styled.div``;
 
 const WrapperButton = styled.div`
-  @media (max-width: 756px) {
-    width: 100%;
-    margin: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 `;
 
 const Warnig = styled.p`
@@ -89,7 +82,7 @@ const Warnig = styled.p`
   color: #626060;
   text-align: center;
 
-  @media (max-width: 464px) {
+  @media (max-width: 530px) {
     top: 80%;
     transform: translate((0, -50%));
   }

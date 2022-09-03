@@ -26,7 +26,7 @@ const ConfigPage = () => {
   const { user, token } = authUser;
 
   useDocumentTitle(
-    user ? `${user.name} | Orange-notes` : "Perfil | Orange-notes"
+    user ? `${user.username} | Orange-notes` : "Perfil | Orange-notes"
   );
 
   const requestUserInfo = async () => {
@@ -123,18 +123,19 @@ const ConfigPage = () => {
             {new Date(data.created_at).toLocaleDateString()}
           </S.field>
         </S.WrapperUser>
-
-        <S.WrapperButton>
-          <ButtonWithIcon
-            icon={<BsTrash size="100%" />}
-            padding="2px 4px"
-            label="Excluir conta"
-            backgroudFill={true}
-            reverse={false}
-            onClick={deleteNote}
-          />
-        </S.WrapperButton>
       </S.WrapperInfo>
+
+      <S.WrapperButton>
+        <ButtonWithIcon
+          icon={<BsTrash size="100%" />}
+          padding="2px 4px"
+          label="Excluir conta"
+          backgroudFill={true}
+          reverse={false}
+          onClick={deleteNote}
+        />
+      </S.WrapperButton>
+
       <S.Warnig>
         Essa página é destinada a edição do perfil, funcionalidade que chegará
         em breve
