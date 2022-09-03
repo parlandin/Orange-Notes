@@ -1,6 +1,9 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
-const Container = styled.div``;
+const Container = styled.div`
+  width: 100%;
+  height: 100%;
+`;
 
 const Header = styled.div`
   padding: 10px 10px 0;
@@ -16,80 +19,15 @@ const Title = styled.h1`
 `;
 
 const SectionCourses = styled.div`
-  display: flex;
+  display: grid;
   padding: 10px;
-`;
-
-const ContentBorder = css`
-  content: "";
-  position: absolute;
-  height: 0;
-  width: 0;
-  border: 1px solid transparent;
-  box-sizing: border-box;
-  border-radius: 4px;
-`;
-
-const ContentBorderHover = css`
-  height: 100%;
+  gap: 30px;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(190px, ${({ columns }) => (columns ? "1fr" : "250px")})
+  );
   width: 100%;
-  border: 2px solid #ff5f19;
-  transition: height 0.1s linear, width 0.1s linear 0.1s;
-`;
-
-const CourseCard = styled.a`
-  text-decoration: none;
-  box-shadow: 1px 1px 3px #e0dcdcf0, 1px 1px 3px #e0dcdcf0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 180px;
-  border-radius: 4px;
-  position: relative;
-  overflow: hidden;
-
-  &:before {
-    ${ContentBorder}
-    bottom: 0;
-    left: 0;
-  }
-
-  &:after {
-    ${ContentBorder}
-    top: 0;
-    right: 0;
-  }
-
-  &:hover {
-    box-shadow: none;
-  }
-
-  &:hover::before {
-    ${ContentBorderHover}
-    border-right: none;
-    border-bottom: none;
-  }
-
-  &:hover::after {
-    ${ContentBorderHover}
-    border-left: none;
-    border-top: none;
-  }
-`;
-
-const CardImg = styled.div`
-  width: 100%;
-  height: 120px;
-  & img {
-    width: 100%;
-    height: 100%;
-  }
-`;
-
-const CardTitle = styled.h3`
-  padding: 5px;
-  color: #1f1f1f;
-  margin-top: 10px;
+  margin: 0 auto;
 `;
 
 export default {
@@ -97,7 +35,4 @@ export default {
   Header,
   Title,
   SectionCourses,
-  CourseCard,
-  CardImg,
-  CardTitle,
 };

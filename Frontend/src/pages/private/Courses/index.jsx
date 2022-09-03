@@ -4,6 +4,7 @@ import ButtonWithIcon from "../../../components/ButtonWithIcon";
 import { FaPlus } from "react-icons/fa";
 import useDocumentTitle from "../../../hooks/useDocumentTitle";
 import ExempleImg from "../../../assets/images/exemplo.jpg";
+import CourseCard from "../../../components/CourseCard";
 
 const Courses = () => {
   useDocumentTitle("Seus cursos | Orange-notes");
@@ -22,13 +23,13 @@ const Courses = () => {
         />
       </S.Header>
 
-      <S.SectionCourses>
-        <S.CourseCard href="https://github.com/gu-parlandim" target="_blank">
-          <S.CardImg>
-            <img src={ExempleImg} alt="aqui vai a imagem" />
-          </S.CardImg>
-          <S.CardTitle>Esse é o primeiro curso</S.CardTitle>
-        </S.CourseCard>
+      <S.SectionCourses columns={false}>
+        <CourseCard
+          title="Esse é o primeiro curso e o titulo vai ter aquel etamanho padrão
+              de 20 e um pouco mais"
+          img={ExempleImg}
+          href="https://github.com/gu-parlandim"
+        />
       </S.SectionCourses>
     </S.Container>
   );
