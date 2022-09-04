@@ -1,5 +1,6 @@
 import db from "../db";
 import { QueryResultRow } from "pg";
+import { query } from "express";
 
 class CoursesRepositories {
   public async createCourse(
@@ -20,6 +21,23 @@ class CoursesRepositories {
       "SELECT title, url, image_url, category, course_id, user_id FROM courses WHERE user_id = $1";
 
     return db.query(query, [user_id]);
+  }
+
+  public async updateCourse(
+    title: string,
+    url: string,
+    image_url: string,
+    category: string,
+    id: number,
+    user_id: number
+  ) {
+    const query = `UPDATE courses set title = $1, 
+                  url = $2, 	
+                  image_url = $3, 
+                  category = $4
+                  WHERE course_id = $5 AND user_id = $6 RETURNING  *;`;
+
+    return db.query(query, [title, url, image_url, category, id, user_id]);
   }
 }
 

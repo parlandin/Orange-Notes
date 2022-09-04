@@ -67,7 +67,38 @@ class CoursesController {
     }
   }
 
-  public updateCourseById(id: number) {}
+  public async updateCourseById(
+    req: AuthenticationRequest,
+    res: Response
+  ): Promise<Response> {
+    const { title, url, image_url, category } = req.body;
+
+    const { id } = req.params;
+
+    try {
+      if (req.userId) {
+        const data = await CoursesService.updateById(
+          title,
+          url,
+          image_url,
+          category,
+          parseInt(id),
+          req.userId
+        );
+
+        if (!data) {
+          throw Error("Ocorreu um erro ao atualizar o curso");
+        }
+      }
+
+      return res.status(200).json({ message: "Atualizado com sucesso" });
+    } catch (err) {
+      console.log(err);
+      return res
+        .status(500)
+        .json({ error: true, message: "Ocorreu um erro ao atualizar o curso" });
+    }
+  }
 }
 
 export default new CoursesController();

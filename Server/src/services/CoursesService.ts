@@ -23,6 +23,26 @@ class CoursesService {
 
     return rows;
   }
+
+  public async updateById(
+    title: string,
+    url: string,
+    image_url: string,
+    category: string,
+    id: number,
+    user_id: number
+  ) {
+    const { rows } = await CoursesRepositorie.updateCourse(
+      title,
+      url,
+      image_url,
+      category,
+      id,
+      user_id
+    );
+
+    return rows[0];
+  }
 }
 
 export default new CoursesService();
