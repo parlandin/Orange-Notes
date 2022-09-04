@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
-const Container = styled.div`
+const Container = styled.nav`
   min-width: 55px;
   height: calc(100vh - 55px);
   overflow: hidden;
   position: relative;
 `;
 
-const Menu = styled.nav`
+const Menu = styled.ul`
   display: flex;
   flex-direction: column;
   transition: width 300ms ease-in-out;
@@ -22,7 +22,8 @@ const Menu = styled.nav`
   padding-top: 10px;
 `;
 
-const Item = styled.div`
+const Item = styled.li`
+  list-style: none;
   color: var(${({ theme }) => theme.color.secondary});
   margin: 15px 11px;
 
