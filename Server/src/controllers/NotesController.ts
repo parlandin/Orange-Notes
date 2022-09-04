@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import NotesService from "../services/NotesService";
 import AuthenticationRequest from "../types/express";
 
-class UserController {
+class NotesController {
   public async createNote(
     req: AuthenticationRequest,
     res: Response
@@ -166,4 +166,4 @@ class UserController {
   }
 }
 
-export default new UserController();
+export default new NotesController();
