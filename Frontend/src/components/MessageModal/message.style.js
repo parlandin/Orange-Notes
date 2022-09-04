@@ -16,11 +16,11 @@ const Container = styled.div`
   text-align: center;
 
   &.error {
-    background-color: #e35b5b6b;
+    background-color: ${({ bgColor }) => (bgColor ? bgColor : "#e35b5b6b")};
   }
 
   &.sucess {
-    background-color: #60be3157;
+    background-color: ${({ bgColor }) => (bgColor ? bgColor : "#60be3157")};
   }
 
   & p {
