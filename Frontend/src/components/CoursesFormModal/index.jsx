@@ -14,7 +14,7 @@ import scheme from "./validation";
 const CoursesFormModal = ({
   cancelOnClick,
   isOpen,
-  current,
+  currentId,
   setIsOpenModal,
 }) => {
   const [authUser] = useAuth();
@@ -24,10 +24,10 @@ const CoursesFormModal = ({
   const queryClient = useQueryClient();
   const cache = queryClient
     .getQueryData("courses")
-    ?.find((d) => d.course_id === current);
+    ?.find((d) => d.course_id === currentId);
 
   const UpdateCourse = async (data) => {
-    const response = await api.put(`courses/update/${current}`, data, {
+    const response = await api.put(`courses/update/${currentId}`, data, {
       headers: { Authorization: `Bearer ${token}` },
     });
 
@@ -45,7 +45,10 @@ const CoursesFormModal = ({
       const optimiticity = cache;
 
       queryClient.setQueryData("courses", (currentCourses) => {
-        return [optimiticity, ...currentCourses];
+        const filterResult = currentCourses.filter(
+          (course) => course.course_id !== optimiticity.course_id
+        );
+        return [optimiticity, ...filterResult];
       });
 
       return previousState;
@@ -72,7 +75,7 @@ const CoursesFormModal = ({
     resolver: yupResolver(scheme),
   });
 
-  //fetch
+  //fetch create new
   const onSubmit = async (input) => {
     const data = { ...input, user_id: user.id };
     const response = await api.post("/courses/newcourse", data, {
@@ -80,6 +83,7 @@ const CoursesFormModal = ({
     });
   };
 
+  //mumation on new course
   const newCourseMutation = useMutation({
     mutationFn: onSubmit,
     onMutate: async (data) => {
@@ -107,7 +111,7 @@ const CoursesFormModal = ({
 
   //values for update
   useEffect(() => {
-    if (current != "new" && cache) {
+    if (currentId != "new" && cache) {
       setValue("title", cache.title);
       setValue("url", cache.url);
       setValue("image_url", cache.image_url);
@@ -119,10 +123,10 @@ const CoursesFormModal = ({
     <>
       <S.Container isOpen={isOpen}>
         <S.Title>Informações do curso</S.Title>
-        <S.Span>{current == "new" ? "Novo curso" : "Editar curso"}</S.Span>
+        <S.Span>{currentId == "new" ? "Novo curso" : "Editar curso"}</S.Span>
         <S.Form
           onSubmit={
-            current == "new"
+            currentId == "new"
               ? handleSubmit(newCourseMutation.mutate)
               : handleSubmit(CoursesMutation.mutate)
           }

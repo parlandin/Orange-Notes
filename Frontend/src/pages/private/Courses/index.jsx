@@ -61,7 +61,7 @@ const Courses = () => {
         <CoursesFormModal
           isOpen={isOpenModal}
           cancelOnClick={() => setIsOpenModal(false)}
-          current={currentCourse}
+          currentId={currentCourse}
           setIsOpenModal={setIsOpenModal}
         />
       )}
