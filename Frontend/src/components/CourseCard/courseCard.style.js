@@ -84,6 +84,7 @@ const CardTitle = styled.h3`
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+  margin-left: 5px;
 `;
 
 const Link = styled.a`

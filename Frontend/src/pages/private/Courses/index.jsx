@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useId } from "react";
 import S from "./courses.style";
 import ButtonWithIcon from "../../../components/ButtonWithIcon";
 import { FaPlus } from "react-icons/fa";
@@ -95,7 +95,7 @@ const Courses = () => {
           ) : (
             data.map(({ course_id, image_url, title, url }) => (
               <CourseCard
-                key={course_id}
+                key={course_id ? course_id : title}
                 title={title}
                 img={image_url}
                 href={url}

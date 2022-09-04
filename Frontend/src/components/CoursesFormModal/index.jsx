@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import S from "./coursesModal";
 import ButtonWithIcon from "../ButtonWithIcon";
 import { MdOutlineHighlightOff } from "react-icons/md";
 import { IoIosSave } from "react-icons/io";
+import { BsTrash } from "react-icons/bs";
 import InputLabel from "../InputLabel";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
@@ -10,6 +11,7 @@ import api from "../../api";
 import { useQueryClient, useMutation } from "react-query";
 import useAuth from "../../hooks/useAuth";
 import scheme from "./validation";
+import OptionModal from "../OptionModal";
 
 const CoursesFormModal = ({
   cancelOnClick,
@@ -17,6 +19,8 @@ const CoursesFormModal = ({
   currentId,
   setIsOpenModal,
 }) => {
+  //TODO: Separar responsabilidades
+  const [optionModalIsOpen, setOptionModalIsOpen] = useState(false);
   const [authUser] = useAuth();
   const { user, token } = authUser;
 
@@ -36,7 +40,7 @@ const CoursesFormModal = ({
     }
   };
 
-  //mutation on update
+  //mumation para atualizar cache ao atualizar
   const CoursesMutation = useMutation({
     mutationFn: UpdateCourse,
     onMutate: async (data) => {
@@ -65,7 +69,7 @@ const CoursesFormModal = ({
     },
   });
 
-  //validation
+  //validações
   const {
     register,
     handleSubmit,
@@ -83,7 +87,7 @@ const CoursesFormModal = ({
     });
   };
 
-  //mumation on new course
+  //mumation para atualizar cache no submit
   const newCourseMutation = useMutation({
     mutationFn: onSubmit,
     onMutate: async (data) => {
@@ -109,7 +113,38 @@ const CoursesFormModal = ({
     },
   });
 
-  //values for update
+  //fetch para deletar curso
+  const deleteCourse = async () => {
+    const response = await api.delete(`/courses/delete/${currentId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    if (response.status !== 200) {
+      throw Error("Ocorreu um erro ao excluir curso");
+    }
+  };
+
+  //mumation para atualizar cache ao deletar curso
+  const onDeleteMutation = useMutation({
+    mutationFn: deleteCourse,
+    onMutate: async () => {
+      await queryClient.cancelQueries("courses");
+      const previousState = queryClient.getQueryData("courses");
+      return previousState;
+    },
+    onError: (err, data, previousState) => {
+      queryClient.setQueryData("courses", previousState);
+    },
+    onSettled: async () => {
+      await queryClient.invalidateQueries("courses");
+    },
+    onSuccess: () => {
+      setOptionModalIsOpen(false);
+      return setIsOpenModal(false);
+    },
+  });
+
+  //valores padrão para update
   useEffect(() => {
     if (currentId != "new" && cache) {
       setValue("title", cache.title);
@@ -121,80 +156,103 @@ const CoursesFormModal = ({
 
   return (
     <>
-      <S.Container isOpen={isOpen}>
-        <S.Title>Informações do curso</S.Title>
-        <S.Span>{currentId == "new" ? "Novo curso" : "Editar curso"}</S.Span>
-        <S.Form
-          onSubmit={
-            currentId == "new"
-              ? handleSubmit(newCourseMutation.mutate)
-              : handleSubmit(CoursesMutation.mutate)
-          }
-        >
-          <S.WrapperGeneric>
-            <InputLabel
-              name="title"
-              register={register}
-              type="text"
-              placeholder="Digite o Titulo do curso"
-              borderRadius="6px"
-            />
-            <S.Warning>{errors.title?.message}</S.Warning>
-          </S.WrapperGeneric>
+      {optionModalIsOpen ? (
+        <OptionModal
+          isOpen={optionModalIsOpen}
+          message="Você tem certeza que deseja excluir esse curso?"
+          cancelOnClick={() => setOptionModalIsOpen(false)}
+          confirmOnClick={onDeleteMutation.mutate}
+        />
+      ) : (
+        <>
+          <S.Container isOpen={isOpen}>
+            <S.Title>Informações do curso</S.Title>
+            <S.Span>
+              {currentId == "new" ? "Novo curso" : "Editar curso"}
+            </S.Span>
+            <S.Form
+              onSubmit={
+                currentId == "new"
+                  ? handleSubmit(newCourseMutation.mutate)
+                  : handleSubmit(CoursesMutation.mutate)
+              }
+            >
+              <S.WrapperGeneric>
+                <InputLabel
+                  name="title"
+                  register={register}
+                  type="text"
+                  placeholder="Digite o Titulo do curso"
+                  borderRadius="6px"
+                />
+                <S.Warning>{errors.title?.message}</S.Warning>
+              </S.WrapperGeneric>
 
-          <S.WrapperGeneric>
-            <InputLabel
-              name="url"
-              register={register}
-              type="text"
-              placeholder="Digite a URL do curso"
-              borderRadius="6px"
-            />
-            <S.Warning>{errors.url?.message}</S.Warning>
-          </S.WrapperGeneric>
+              <S.WrapperGeneric>
+                <InputLabel
+                  name="url"
+                  register={register}
+                  type="text"
+                  placeholder="Digite a URL do curso"
+                  borderRadius="6px"
+                />
+                <S.Warning>{errors.url?.message}</S.Warning>
+              </S.WrapperGeneric>
 
-          <S.WrapperGeneric>
-            <InputLabel
-              name="image_url"
-              register={register}
-              type="text"
-              placeholder="Digite o LINK(URL) da imagem do curso"
-              borderRadius="6px"
-            />
-            <S.Warning>{errors.image_url?.message}</S.Warning>
-          </S.WrapperGeneric>
+              <S.WrapperGeneric>
+                <InputLabel
+                  name="image_url"
+                  register={register}
+                  type="text"
+                  placeholder="Digite o LINK(URL) da imagem do curso"
+                  borderRadius="6px"
+                />
+                <S.Warning>{errors.image_url?.message}</S.Warning>
+              </S.WrapperGeneric>
 
-          <S.WrapperGeneric>
-            <InputLabel
-              name="category"
-              register={register}
-              type="text"
-              placeholder="Informe a categoria do curso"
-              borderRadius="6px"
-            />
-            <S.Warning>{errors.category?.message}</S.Warning>
-          </S.WrapperGeneric>
+              <S.WrapperGeneric>
+                <InputLabel
+                  name="category"
+                  register={register}
+                  type="text"
+                  placeholder="Informe a categoria do curso"
+                  borderRadius="6px"
+                />
+                <S.Warning>{errors.category?.message}</S.Warning>
+              </S.WrapperGeneric>
 
-          <S.WrapperButton>
-            <ButtonWithIcon
-              type="reset"
-              backgroudFill={true}
-              label="Cancelar"
-              icon={<MdOutlineHighlightOff size="100%" />}
-              onClick={cancelOnClick}
-            />
+              <S.WrapperButton>
+                <ButtonWithIcon
+                  type="reset"
+                  backgroudFill={true}
+                  label="Cancelar"
+                  icon={<MdOutlineHighlightOff size="100%" />}
+                  onClick={cancelOnClick}
+                />
 
-            <ButtonWithIcon
-              type="submit"
-              backgroudFill={true}
-              label="Salvar"
-              icon={<IoIosSave size="100%" />}
-            />
-          </S.WrapperButton>
-        </S.Form>
-      </S.Container>
+                {currentId != "new" && (
+                  <ButtonWithIcon
+                    type="reset"
+                    backgroudFill={true}
+                    label="Excluir"
+                    icon={<BsTrash size="100%" />}
+                    onClick={() => setOptionModalIsOpen(true)}
+                  />
+                )}
 
-      <S.CloseModal isOpen={isOpen} onClick={cancelOnClick}></S.CloseModal>
+                <ButtonWithIcon
+                  type="submit"
+                  backgroudFill={true}
+                  label={currentId == "new" ? "Salvar" : "Atualizar"}
+                  icon={<IoIosSave size="100%" />}
+                />
+              </S.WrapperButton>
+            </S.Form>
+          </S.Container>
+
+          <S.CloseModal isOpen={isOpen} onClick={cancelOnClick}></S.CloseModal>
+        </>
+      )}
     </>
   );
 };

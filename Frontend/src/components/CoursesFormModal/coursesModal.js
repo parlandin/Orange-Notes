@@ -5,7 +5,8 @@ const Container = styled.div`
   align-items: center;
   flex-direction: column;
   position: fixed;
-  width: 300px;
+  max-width: 350px;
+  width: 100%;
   border-radius: 6px;
   top: 50%;
   left: 50%;
