@@ -53,7 +53,7 @@ class CoursesController {
       const data = await CoursesService.getAllCourses(parseInt(userid));
 
       if (data.length <= 0) return res.status(200).json([]);
-      console.log(data);
+
       const { user_id } = data[0];
 
       if (!req.userId || req.userId != parseInt(user_id)) {

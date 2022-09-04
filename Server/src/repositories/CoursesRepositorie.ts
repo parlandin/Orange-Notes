@@ -18,7 +18,7 @@ class CoursesRepositories {
 
   public async getlAllCourses(user_id: number) {
     const query =
-      "SELECT title, url, image_url, category, course_id, user_id FROM courses WHERE user_id = $1";
+      "SELECT title, url, image_url, category, course_id, user_id FROM courses WHERE user_id = $1 ORDER BY course_id DESC";
 
     return db.query(query, [user_id]);
   }
