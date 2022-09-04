@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 const Container = styled.div`
   position: absolute;
-  box-shadow: 2px 1px 7px #d3cfcf, -2px -1px 7px #d3cfcf;
   padding: 20px;
   border-radius: 6px;
   opacity: 0;
@@ -12,7 +11,7 @@ const Container = styled.div`
   &.active {
     top: 50%;
     left: 50%;
-    z-index: 2;
+    z-index: 4;
     background-color: #fff;
     opacity: 1;
     width: auto;
@@ -98,8 +97,8 @@ const CloseModal = styled.div`
     inset: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
-    background-color: #0d020245;
+    z-index: 3;
+    background-color: #b7b0b057;
   }
 `;
 
