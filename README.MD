@@ -1,6 +1,6 @@
 # Orange notes
 
-### o orange notes chegou para centalizar todas suas ferramentas de estudos em um único lugar, faça anotações, salve o link de cursos, use pomodoro time para se concentra em suas tarefas e mais...
+### O orange notes chegou para centalizar todas suas ferramentas de estudos em um único lugar, faça anotações, salve o link de cursos, use pomodoro time para se concentra em suas tarefas e mais...
 
 <br>
 
