@@ -33,3 +33,20 @@ CREATE TABLE IF NOT EXISTS  notes (
 
 CREATE INDEX note_id ON notes (note_id)
 CREATE INDEX user_id ON notes (user_id)
+
+CREATE TABLE IF NOT EXISTS courses (
+  course_id SERIAL NOT NULL,
+  title VARCHAR NOT NULL,
+	url VARCHAR NOT NULL,
+	image_url VARCHAR NOT NULL,
+	category VARCHAR NOT NULL,
+	created_at TIMESTAMP DEFAULT now(),
+	user_id SERIAL,
+    PRIMARY KEY (course_id),
+   	CONSTRAINT fk_user
+      FOREIGN KEY(user_id) 
+	  REFERENCES users(id)
+	  ON DELETE CASCADE
+)
+
+CREATE INDEX course_id ON courses (course_id)

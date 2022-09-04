@@ -1,6 +1,6 @@
 import React from "react";
 import S from "./dropDown.style";
-import { GoSignOut } from "react-icons/go";
+import { GoSignOut, GoPerson } from "react-icons/go";
 
 const DropDownMenu = ({ isOpenModal, setIsOpenModal }) => {
   return (
@@ -11,12 +11,19 @@ const DropDownMenu = ({ isOpenModal, setIsOpenModal }) => {
       ></S.CloseModal>
       <S.Container className={isOpenModal ? "open" : "close"}>
         <S.List>
-          <S.Item to="/logout">
-            <li>
+          <li>
+            <S.Item to="/configs" onClick={() => setIsOpenModal(false)}>
+              <span>Perfil</span>
+              <GoPerson />
+            </S.Item>
+          </li>
+
+          <li>
+            <S.Item to="/logout" onClick={() => setIsOpenModal(false)}>
               <span>Sair</span>
-            </li>
-            <GoSignOut />
-          </S.Item>
+              <GoSignOut />
+            </S.Item>
+          </li>
         </S.List>
         <S.Span>só tem isso</S.Span>
       </S.Container>

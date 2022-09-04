@@ -11,9 +11,11 @@ const ButtonWithIcon = ({
   backgroudFill,
   margin,
   fontSize,
+  type,
 }) => {
   return (
     <S.Button
+      type={type}
       onClick={onClick}
       padding={padding}
       color={color}
