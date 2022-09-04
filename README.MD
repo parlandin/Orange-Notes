@@ -135,3 +135,9 @@ As seguintes ferramentas foram usadas na construção do projeto:
 [Frontend deploy](https://orangemynotes.netlify.app/)
 
 [Backend deploy](https://orangemynotes.herokuapp.com/)
+
+<br>
+
+<div align="center"  height="100px">
+  <img  height="20px" src="https://viewscount.vercel.app/get/@orangenotes" alt="contador de visitas no perfil" />
+</div>
