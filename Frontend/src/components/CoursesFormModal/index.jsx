@@ -74,16 +74,36 @@ const CoursesFormModal = ({
 
   //fetch
   const onSubmit = async (input) => {
-    console.log(input);
     const data = { ...input, user_id: user.id };
     const response = await api.post("/courses/newcourse", data, {
       headers: { Authorization: `Bearer ${token}` },
     });
-
-    if (response.status == 201) {
-      return setIsOpenModal(false);
-    }
   };
+
+  const newCourseMutation = useMutation({
+    mutationFn: onSubmit,
+    onMutate: async (data) => {
+      await queryClient.cancelQueries("courses");
+      const previousState = queryClient.getQueryData("courses");
+      const optimiticity = data;
+
+      queryClient.setQueryData("courses", (currentCourses) => {
+        return [optimiticity, ...currentCourses];
+      });
+
+      return previousState;
+    },
+    onError: (err, data, previousState) => {
+      queryClient.setQueryData("courses", previousState);
+    },
+
+    onSettled: async () => {
+      await queryClient.invalidateQueries("courses");
+    },
+    onSuccess: () => {
+      return setIsOpenModal(false);
+    },
+  });
 
   //values for update
   useEffect(() => {
@@ -103,7 +123,7 @@ const CoursesFormModal = ({
         <S.Form
           onSubmit={
             current == "new"
-              ? handleSubmit(onSubmit)
+              ? handleSubmit(newCourseMutation.mutate)
               : handleSubmit(CoursesMutation.mutate)
           }
         >
