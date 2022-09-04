@@ -54,7 +54,7 @@
 
 ### Pomodoro
 
-<img src="https://github.com/Gu-Parlandim/Orange-Notes/blob/f90157e2b493dfab5997bb763ba53431f3a1473b/exemples/pomodoro.jpg" alt="gif"  align="center">
+<img src="https://github.com/Gu-Parlandim/Orange-Notes/blob/b297e3865bdd8006255c6640d71554e96e59167d/exemples/pomodoro.png" alt="gif"  align="center">
 
 <br>
 
