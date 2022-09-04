@@ -2,7 +2,7 @@ import React from "react";
 import S from "./courseCard.style";
 import { FiMoreVertical } from "react-icons/fi";
 
-const CourseCard = ({ title, img, href }) => {
+const CourseCard = ({ title, img, href, onClickMenu }) => {
   return (
     <S.Container title={`ir para ${title}`}>
       <S.CardImg>
@@ -12,8 +12,12 @@ const CourseCard = ({ title, img, href }) => {
       <S.WrapperInfo>
         <S.CardTitle>{title}</S.CardTitle>
 
-        <S.WrapperButton onClick={() => console.log("foi")}>
-          <S.CardButton title="ver mais" aria-label="botão menu">
+        <S.WrapperButton>
+          <S.CardButton
+            title="ver mais"
+            aria-label="botão menu"
+            onClick={onClickMenu}
+          >
             <FiMoreVertical />
           </S.CardButton>
         </S.WrapperButton>

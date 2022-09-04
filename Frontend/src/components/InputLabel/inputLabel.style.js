@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 const Label = styled.label`
-  border-radius: 20px;
+  border-radius: ${({ borderRadius }) =>
+    borderRadius ? borderRadius : "20px"};
   border: 2px solid var(${({ theme }) => theme.color.secondary});
   padding: 5px;
   max-width: 350px;

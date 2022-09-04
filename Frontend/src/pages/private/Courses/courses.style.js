@@ -27,7 +27,20 @@ const SectionCourses = styled.div`
     minmax(190px, ${({ columns }) => (columns ? "1fr" : "250px")})
   );
   width: 100%;
-  margin: 0 auto;
+  margin: 44px auto 0px;
+
+  @media (max-width: 905px) {
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(190px, ${({ columns900 }) => (columns900 ? "1fr" : "250px")})
+    );
+  }
+  @media (max-width: 626px) {
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(190px, ${({ columns600 }) => (columns600 ? "1fr" : "250px")})
+    );
+  }
 `;
 
 export default {
