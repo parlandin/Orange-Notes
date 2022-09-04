@@ -12,6 +12,7 @@ import { useQueryClient, useMutation } from "react-query";
 import useAuth from "../../hooks/useAuth";
 import scheme from "./validation";
 import OptionModal from "../OptionModal";
+import MessageModal from "../MessageModal";
 
 const CoursesFormModal = ({
   cancelOnClick,
@@ -21,6 +22,17 @@ const CoursesFormModal = ({
 }) => {
   //TODO: Separar responsabilidades
   const [optionModalIsOpen, setOptionModalIsOpen] = useState(false);
+  const [isSucess, setIsSucess] = useState({
+    sucess: false,
+    message: "",
+    type: null,
+  });
+
+  const [isError, setIsError] = useState({
+    error: false,
+    message: "",
+  });
+
   const [authUser] = useAuth();
   const { user, token } = authUser;
 
@@ -59,13 +71,26 @@ const CoursesFormModal = ({
     },
     onError: (err, data, previousState) => {
       queryClient.setQueryData("courses", previousState);
+      setIsError((prev) => {
+        return {
+          ...prev,
+          error: true,
+          message: "Ocorreu um erro ao atualizar o curso",
+        };
+      });
     },
 
     onSettled: () => {
       queryClient.invalidateQueries("courses");
     },
     onSuccess: () => {
-      return setIsOpenModal(false);
+      return setIsSucess((prev) => {
+        return {
+          ...prev,
+          sucess: true,
+          message: "Curso atualizado com sucesso",
+        };
+      });
     },
   });
 
@@ -87,7 +112,7 @@ const CoursesFormModal = ({
     });
   };
 
-  //mumation para atualizar cache no submit
+  //mumation para atualizar cache ao criar novo curso
   const newCourseMutation = useMutation({
     mutationFn: onSubmit,
     onMutate: async (data) => {
@@ -103,13 +128,27 @@ const CoursesFormModal = ({
     },
     onError: (err, data, previousState) => {
       queryClient.setQueryData("courses", previousState);
+      setIsError((prev) => {
+        return {
+          ...prev,
+          error: true,
+          message: "Ocorreu um erro ao criar novo curso",
+        };
+      });
     },
 
     onSettled: async () => {
       await queryClient.invalidateQueries("courses");
     },
     onSuccess: () => {
-      return setIsOpenModal(false);
+      return setIsSucess((prev) => {
+        return {
+          ...prev,
+          sucess: true,
+          message: "O curso  foi criado com sucesso",
+          type: "new",
+        };
+      });
     },
   });
 
@@ -134,13 +173,26 @@ const CoursesFormModal = ({
     },
     onError: (err, data, previousState) => {
       queryClient.setQueryData("courses", previousState);
+      setIsError((prev) => {
+        return {
+          ...prev,
+          error: true,
+          message: "Ocorreu um erro ao excluir o curso",
+        };
+      });
     },
     onSettled: async () => {
       await queryClient.invalidateQueries("courses");
     },
     onSuccess: () => {
-      setOptionModalIsOpen(false);
-      return setIsOpenModal(false);
+      return setIsSucess((prev) => {
+        return {
+          ...prev,
+          sucess: true,
+          message: "O curso  foi excluido com sucesso",
+          type: "delete",
+        };
+      });
     },
   });
 
@@ -154,105 +206,138 @@ const CoursesFormModal = ({
     }
   }, []);
 
+  const closeAllModalOnDeleteCourse = () => {
+    setOptionModalIsOpen(false);
+    return setIsOpenModal(false);
+  };
+
+  if (isSucess.sucess) {
+    return (
+      <MessageModal
+        type="sucess"
+        message={isSucess.message}
+        onClick={() =>
+          isSucess.type !== "delete"
+            ? setIsOpenModal(false)
+            : closeAllModalOnDeleteCourse()
+        }
+        bgColor="#78cb4ee8"
+      />
+    );
+  }
+
+  if (isError.error) {
+    return (
+      <MessageModal
+        type="error"
+        message={isError.message}
+        onClick={() =>
+          setIsError((prev) => {
+            return { ...prev, error: false };
+          })
+        }
+        bgColor="#e35b5bf0"
+      />
+    );
+  }
+
+  if (optionModalIsOpen) {
+    return (
+      <OptionModal
+        isOpen={optionModalIsOpen}
+        message="Você tem certeza que deseja excluir esse curso?"
+        cancelOnClick={() => setOptionModalIsOpen(false)}
+        confirmOnClick={onDeleteMutation.mutate}
+      />
+    );
+  }
+
   return (
     <>
-      {optionModalIsOpen ? (
-        <OptionModal
-          isOpen={optionModalIsOpen}
-          message="Você tem certeza que deseja excluir esse curso?"
-          cancelOnClick={() => setOptionModalIsOpen(false)}
-          confirmOnClick={onDeleteMutation.mutate}
-        />
-      ) : (
-        <>
-          <S.Container isOpen={isOpen}>
-            <S.Title>Informações do curso</S.Title>
-            <S.Span>
-              {currentId == "new" ? "Novo curso" : "Editar curso"}
-            </S.Span>
-            <S.Form
-              onSubmit={
-                currentId == "new"
-                  ? handleSubmit(newCourseMutation.mutate)
-                  : handleSubmit(CoursesMutation.mutate)
-              }
-            >
-              <S.WrapperGeneric>
-                <InputLabel
-                  name="title"
-                  register={register}
-                  type="text"
-                  placeholder="Digite o Titulo do curso"
-                  borderRadius="6px"
-                />
-                <S.Warning>{errors.title?.message}</S.Warning>
-              </S.WrapperGeneric>
+      <S.Container isOpen={isOpen}>
+        <S.Title>Informações do curso</S.Title>
+        <S.Span>{currentId == "new" ? "Novo curso" : "Editar curso"}</S.Span>
+        <S.Form
+          onSubmit={
+            currentId == "new"
+              ? handleSubmit(newCourseMutation.mutate)
+              : handleSubmit(CoursesMutation.mutate)
+          }
+        >
+          <S.WrapperGeneric>
+            <InputLabel
+              name="title"
+              register={register}
+              type="text"
+              placeholder="Digite o Titulo do curso"
+              borderRadius="6px"
+            />
+            <S.Warning>{errors.title?.message}</S.Warning>
+          </S.WrapperGeneric>
 
-              <S.WrapperGeneric>
-                <InputLabel
-                  name="url"
-                  register={register}
-                  type="text"
-                  placeholder="Digite a URL do curso"
-                  borderRadius="6px"
-                />
-                <S.Warning>{errors.url?.message}</S.Warning>
-              </S.WrapperGeneric>
+          <S.WrapperGeneric>
+            <InputLabel
+              name="url"
+              register={register}
+              type="text"
+              placeholder="Digite a URL do curso"
+              borderRadius="6px"
+            />
+            <S.Warning>{errors.url?.message}</S.Warning>
+          </S.WrapperGeneric>
 
-              <S.WrapperGeneric>
-                <InputLabel
-                  name="image_url"
-                  register={register}
-                  type="text"
-                  placeholder="Digite o LINK(URL) da imagem do curso"
-                  borderRadius="6px"
-                />
-                <S.Warning>{errors.image_url?.message}</S.Warning>
-              </S.WrapperGeneric>
+          <S.WrapperGeneric>
+            <InputLabel
+              name="image_url"
+              register={register}
+              type="text"
+              placeholder="Digite o LINK(URL) da imagem do curso"
+              borderRadius="6px"
+            />
+            <S.Warning>{errors.image_url?.message}</S.Warning>
+          </S.WrapperGeneric>
 
-              <S.WrapperGeneric>
-                <InputLabel
-                  name="category"
-                  register={register}
-                  type="text"
-                  placeholder="Informe a categoria do curso"
-                  borderRadius="6px"
-                />
-                <S.Warning>{errors.category?.message}</S.Warning>
-              </S.WrapperGeneric>
+          <S.WrapperGeneric>
+            <InputLabel
+              name="category"
+              register={register}
+              type="text"
+              placeholder="Informe a categoria do curso"
+              borderRadius="6px"
+            />
+            <S.Warning>{errors.category?.message}</S.Warning>
+          </S.WrapperGeneric>
 
-              <S.WrapperButton>
-                <ButtonWithIcon
-                  type="reset"
-                  backgroudFill={true}
-                  label="Cancelar"
-                  icon={<MdOutlineHighlightOff size="100%" />}
-                  onClick={cancelOnClick}
-                />
+          <S.WrapperButton>
+            <ButtonWithIcon
+              type="reset"
+              backgroudFill={true}
+              label="Cancelar"
+              icon={<MdOutlineHighlightOff size="100%" />}
+              onClick={cancelOnClick}
+            />
 
-                {currentId != "new" && (
-                  <ButtonWithIcon
-                    type="reset"
-                    backgroudFill={true}
-                    label="Excluir"
-                    icon={<BsTrash size="100%" />}
-                    onClick={() => setOptionModalIsOpen(true)}
-                  />
-                )}
+            {currentId != "new" && (
+              <ButtonWithIcon
+                type="reset"
+                backgroudFill={true}
+                label="Excluir"
+                icon={<BsTrash size="100%" />}
+                onClick={() => setOptionModalIsOpen(true)}
+              />
+            )}
 
-                <ButtonWithIcon
-                  type="submit"
-                  backgroudFill={true}
-                  label={currentId == "new" ? "Salvar" : "Atualizar"}
-                  icon={<IoIosSave size="100%" />}
-                />
-              </S.WrapperButton>
-            </S.Form>
-          </S.Container>
+            <ButtonWithIcon
+              type="submit"
+              backgroudFill={true}
+              label={currentId == "new" ? "Salvar" : "Atualizar"}
+              icon={<IoIosSave size="100%" />}
+            />
+          </S.WrapperButton>
+        </S.Form>
+      </S.Container>
 
-          <S.CloseModal isOpen={isOpen} onClick={cancelOnClick}></S.CloseModal>
-        </>
-      )}
+      <S.CloseModal isOpen={isOpen} onClick={cancelOnClick}></S.CloseModal>
     </>
   );
 };

@@ -3,10 +3,10 @@ import S from "./message.style";
 import ButtonWithIcon from "../ButtonWithIcon";
 import { MdOutlineCheck } from "react-icons/md";
 
-const MessageModal = ({ type, message, onClick }) => {
+const MessageModal = ({ type, message, onClick, bgColor }) => {
   return (
     <>
-      <S.Container className={type}>
+      <S.Container className={type} bgColor={bgColor}>
         <p>{message} </p>
 
         <ButtonWithIcon

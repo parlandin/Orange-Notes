@@ -11,13 +11,15 @@ const schema = yup
       .string()
       .required("Esse campo é obrigatório")
       .min(6, "Mínimo de 6 caracteres")
-      .max(1000, "O tamanho máximo é de 1000 caracteres"),
+      .max(1000, "O tamanho máximo é de 1000 caracteres")
+      .url("Informe uma URL Válida"),
 
     image_url: yup
       .string()
       .required("Esse campo é obrigatório")
       .min(6, "Mínimo de 6 caracteres")
-      .max(1000, "O tamanho máximo é de 1000 caracteres"),
+      .max(1000, "O tamanho máximo é de 1000 caracteres")
+      .url("Informe uma URL Válida"),
 
     category: yup
       .string()
