@@ -33,20 +33,41 @@ class CoursesController {
         category: resCategory,
         course_id: resId,
       } = data;
-      return res
-        .status(201)
-        .json({
-          title: resTitle,
-          url: resUrl,
-          image_url: resImg,
-          category: resCategory,
-          id: resId,
-        });
+      return res.status(201).json({
+        title: resTitle,
+        url: resUrl,
+        image_url: resImg,
+        category: resCategory,
+        id: resId,
+      });
     } catch (err) {
       console.log(err);
       return res.status(500).json({ error: "Ocorreu um erro ao criar nota" });
     }
   }
+
+  public async getAllCourses(req: AuthenticationRequest, res: Response) {
+    const { userid } = req.params;
+
+    try {
+      const data = await CoursesService.getAllCourses(parseInt(userid));
+
+      if (data.length <= 0) return res.status(200).json([]);
+      console.log(data);
+      const { user_id } = data[0];
+
+      if (!req.userId || req.userId != parseInt(user_id)) {
+        return res.status(404).json({ erro: true, message: "não encontrado" });
+      }
+
+      return res.status(200).json(data);
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({ error: true, message: "Ocorreu um erro" });
+    }
+  }
+
+  public updateCourseById(id: number) {}
 }
 
 export default new CoursesController();

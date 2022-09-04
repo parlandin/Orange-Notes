@@ -14,6 +14,13 @@ class CoursesRepositories {
 
     return db.query(query, [title, url, image_url, category, user_id]);
   }
+
+  public async getlAllCourses(user_id: number) {
+    const query =
+      "SELECT title, url, image_url, category, course_id, user_id FROM courses WHERE user_id = $1";
+
+    return db.query(query, [user_id]);
+  }
 }
 
 export default new CoursesRepositories();

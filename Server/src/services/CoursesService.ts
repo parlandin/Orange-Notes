@@ -17,6 +17,12 @@ class CoursesService {
     );
     return rows[0];
   }
+
+  public async getAllCourses(user_id: number) {
+    const { rows } = await CoursesRepositorie.getlAllCourses(user_id);
+
+    return rows;
+  }
 }
 
 export default new CoursesService();
