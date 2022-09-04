@@ -10,6 +10,7 @@
 - [Demostração](#link2)
 - [Instalação](#link3)
 - [Tecnologias utilizadaas](#link4)
+- [Links](#link5)
 
 <br>
 
@@ -129,3 +130,8 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - [pg](https://node-postgres.com/)
 - [Node.js](https://nodejs.org/en/)
 - [TypeScript](https://www.typescriptlang.org/)
+
+<a id="link5"></a>
+[Frontend deploy](https://orangemynotes.netlify.app/)
+
+[Backend deploy](https://orangemynotes.herokuapp.com/)
