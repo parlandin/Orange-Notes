@@ -35,6 +35,7 @@
 - Página com pomodoro time com ajuste de tempo
   - Modal para configurar
 - Página de detalhes da conta e botão para deletar conta
+- Contador de dias consecutivos que volta a 1 se ficar 24 Offline
 
 <a id="link2"></a>
 
