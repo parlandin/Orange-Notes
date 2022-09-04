@@ -34,7 +34,16 @@ const Span = styled.span`
 const Form = styled.form``;
 
 const WrapperGeneric = styled.div`
-  margin: 20px 0;
+  margin: 25px 0;
+  position: relative;
+`;
+
+const Warning = styled.span`
+  font-size: 0.7rem;
+  color: #e70404e3;
+  position: absolute;
+  left: 4px;
+  bottom: -14px;
 `;
 
 const WrapperButton = styled.div`
@@ -58,4 +67,5 @@ export default {
   Title,
   WrapperGeneric,
   Span,
+  Warning,
 };

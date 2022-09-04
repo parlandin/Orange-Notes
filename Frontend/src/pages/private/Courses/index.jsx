@@ -14,7 +14,7 @@ import { useQuery } from "react-query";
 
 const Courses = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const [currentCourse, setCurrentCourse] = useState();
+  const [currentCourse, setCurrentCourse] = useState("new");
 
   const [authUser] = useAuth();
   const { user, token } = authUser;
@@ -38,11 +38,11 @@ const Courses = () => {
     if (!response.status == 200) {
       throw new Error("Ocorreu um erro");
     }
-    console.log(response.data);
+
     return response.data;
   };
 
-  const { data, isError, isLoading } = useQuery(["notes"], getAllCourses, {
+  const { data, isError, isLoading } = useQuery(["courses"], getAllCourses, {
     refetchOnWindowFocus: false,
     retry: false,
   });
@@ -57,11 +57,14 @@ const Courses = () => {
 
   return (
     <>
-      <CoursesFormModal
-        isOpen={isOpenModal}
-        cancelOnClick={() => setIsOpenModal(false)}
-        current={currentCourse}
-      />
+      {isOpenModal && (
+        <CoursesFormModal
+          isOpen={isOpenModal}
+          cancelOnClick={() => setIsOpenModal(false)}
+          current={currentCourse}
+          setIsOpenModal={setIsOpenModal}
+        />
+      )}
       <S.Container>
         <S.Header>
           <S.Title>Seus cursos</S.Title>
