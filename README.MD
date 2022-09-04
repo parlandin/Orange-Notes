@@ -40,4 +40,14 @@
 
 ## Demostrações
 
-<img src="" alt="gif" widht="250px" height="190px" align="center">
+### Login e registro
+
+<img src="https://github.com/Gu-Parlandim/Orange-Notes/blob/f023cb116d2b4aaaf99e59cbcf9e52a274a2e820/exemples/login.gif" alt="gif"  align="center">
+
+### Anotações
+
+<img src="https://github.com/Gu-Parlandim/Orange-Notes/blob/f023cb116d2b4aaaf99e59cbcf9e52a274a2e820/exemples/notes.gif" alt="gif"  align="center">
+
+### Link de Curso
+
+<img src="https://github.com/Gu-Parlandim/Orange-Notes/blob/f023cb116d2b4aaaf99e59cbcf9e52a274a2e820/exemples/courses.gif" alt="gif"  align="center">
