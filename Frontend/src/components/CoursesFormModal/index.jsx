@@ -6,6 +6,7 @@ import { IoIosSave } from "react-icons/io";
 import InputLabel from "../InputLabel";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
+import api from "../../api";
 
 const CoursesFormModal = ({
   confirmOnClick,
@@ -13,7 +14,6 @@ const CoursesFormModal = ({
   isOpen,
   current,
 }) => {
-  console.log(current);
   const {
     register,
     handleSubmit,
