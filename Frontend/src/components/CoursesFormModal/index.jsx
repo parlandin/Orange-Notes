@@ -25,15 +25,42 @@ const CoursesFormModal = ({
   const cache = queryClient
     .getQueryData("courses")
     ?.find((d) => d.course_id === current);
-  console.log(cache);
 
-  /*  const UpdateCourse = async(current) => {
-    const response
-  } */
+  const UpdateCourse = async (data) => {
+    const response = await api.put(`courses/update/${current}`, data, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
 
-  /* const CoursesMutation = useMutation({
-    mutationFn: 
-  }) */
+    if (response == 200) {
+      return response.data;
+    }
+  };
+
+  //mutation on update
+  const CoursesMutation = useMutation({
+    mutationFn: UpdateCourse,
+    onMutate: async (data) => {
+      await queryClient.cancelQueries("courses");
+      const previousState = queryClient.getQueryData("courses");
+      const optimiticity = cache;
+
+      queryClient.setQueryData("courses", (currentCourses) => {
+        return [optimiticity, ...currentCourses];
+      });
+
+      return previousState;
+    },
+    onError: (err, data, previousState) => {
+      queryClient.setQueryData("courses", previousState);
+    },
+
+    onSettled: () => {
+      queryClient.invalidateQueries("courses");
+    },
+    onSuccess: () => {
+      return setIsOpenModal(false);
+    },
+  });
 
   //validation
   const {
@@ -73,7 +100,13 @@ const CoursesFormModal = ({
       <S.Container isOpen={isOpen}>
         <S.Title>Informações do curso</S.Title>
         <S.Span>{current == "new" ? "Novo curso" : "Editar curso"}</S.Span>
-        <S.Form onSubmit={handleSubmit(onSubmit)}>
+        <S.Form
+          onSubmit={
+            current == "new"
+              ? handleSubmit(onSubmit)
+              : handleSubmit(CoursesMutation.mutate)
+          }
+        >
           <S.WrapperGeneric>
             <InputLabel
               name="title"
