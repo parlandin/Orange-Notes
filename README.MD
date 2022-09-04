@@ -38,6 +38,11 @@
 - Página de detalhes da conta e botão para deletar conta
 - Contador de dias consecutivos que volta a 1 se ficar 24 Offline
 
+### Observações 
+- O mapa mental era o diferencial do meu site dos outros, mas devido o curto tempo não foi possivel desenvolver
+- O carousel funciona com touch no mobile, assim não precisando das setas, porém no desktop o touch não está disponivel
+- para testa o carousel no desktop abra o devtools (F12) e clique em "ativar emulação de dispositivo ou mobile"
+ 
 <a id="link2"></a>
 
 ## Demostrações
