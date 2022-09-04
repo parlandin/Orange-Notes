@@ -43,6 +43,12 @@ class CoursesService {
 
     return rows[0];
   }
+
+  public async deleteCourseById(id: number, user_id: number) {
+    const { rows } = await CoursesRepositorie.deleteCourseById(id, user_id);
+
+    return rows[0];
+  }
 }
 
 export default new CoursesService();

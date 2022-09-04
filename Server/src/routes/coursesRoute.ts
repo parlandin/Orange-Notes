@@ -6,5 +6,6 @@ const coursesRouter = Router();
 coursesRouter.get("/courses/getall/:userid", CoursesController.getAllCourses);
 coursesRouter.post("/courses/newcourse", CoursesController.createCourse);
 coursesRouter.put("/courses/update/:id", CoursesController.updateCourseById);
+coursesRouter.delete("/courses/delete/:id", CoursesController.deleteCourse);
 
 export default coursesRouter;

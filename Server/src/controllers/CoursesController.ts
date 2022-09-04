@@ -99,6 +99,33 @@ class CoursesController {
         .json({ error: true, message: "Ocorreu um erro ao atualizar o curso" });
     }
   }
+
+  public async deleteCourse(
+    req: AuthenticationRequest,
+    res: Response
+  ): Promise<Response> {
+    const { id } = req.params;
+
+    try {
+      if (req.userId) {
+        const data = await CoursesService.deleteCourseById(
+          parseInt(id),
+          req.userId
+        );
+
+        if (!data) {
+          throw Error("Ocorreu um erro ao excluir o curso");
+        }
+      }
+
+      return res.status(200).json({ message: "Curso excluido com sucesso" });
+    } catch (err) {
+      console.log(err);
+      return res
+        .status(500)
+        .json({ error: true, message: "Ocorreu um erro ao excluir o curso" });
+    }
+  }
 }
 
 export default new CoursesController();

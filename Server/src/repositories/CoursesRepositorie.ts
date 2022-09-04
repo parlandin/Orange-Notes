@@ -39,6 +39,13 @@ class CoursesRepositories {
 
     return db.query(query, [title, url, image_url, category, id, user_id]);
   }
+
+  public async deleteCourseById(id: number, user_id: number) {
+    const query =
+      "DELETE  FROM courses WHERE course_id = $1 AND user_id = $2 RETURNING *";
+
+    return db.query(query, [id, user_id]);
+  }
 }
 
 export default new CoursesRepositories();
