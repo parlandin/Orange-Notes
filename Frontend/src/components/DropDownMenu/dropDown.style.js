@@ -41,6 +41,10 @@ const List = styled.ul`
   flex-direction: column;
   align-items: center;
   margin-top: 7px;
+
+  & li {
+    margin: 5px 0;
+  }
 `;
 
 const Span = styled.span`
@@ -59,6 +63,7 @@ const Item = styled(Link)`
   text-decoration: none;
   color: #2c2c2c;
   margin: 3px 0;
+  align-items: center;
 
   &:hover {
     border-bottom: 1px solid #ff5f19;
