@@ -42,6 +42,8 @@
 - O mapa mental era o diferencial do meu site dos outros, mas devido o curto tempo não foi possivel desenvolver
 - O carousel funciona com touch no mobile, assim não precisando das setas, porém no desktop o touch não está disponivel
 - para testa o carousel no desktop abra o devtools (F12) e clique em "ativar emulação de dispositivo ou mobile"
+- Ao olhar o codigo irá perceber que alguns components usam as cores do thema e outros tem a propria cor, devido ao curto tempo os themas foi deixado de lado
+- Clicando fora do modal de criação ou edição de curso, o modal ira resertar
  
 <a id="link2"></a>
 
