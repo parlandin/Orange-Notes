@@ -94,7 +94,7 @@ const LoginForm = () => {
             <S.Span>{errors.password?.message}</S.Span>
           </S.WrapperGeneric>
 
-          <S.Button>Entar</S.Button>
+          <S.Button>Entrar</S.Button>
 
           <S.LinkWithStyle to="/newaccount">
             Não tem uma conta? Criar agora
