@@ -1,6 +1,6 @@
 # Orange notes
 
-### o orange notes chegou para centalizar todas suas ferramentas de estudos em um único lugar, faça anotações, salve o link de cursos, use pomodoro time para se concentra em suas tarefas e mais...
+### O orange notes chegou para centalizar todas as suas ferramentas de estudos em um único lugar, faça anotações, salve links de cursos, use pomodoro time para se concentra em suas tarefas e mais...
 
 <br>
 
@@ -10,6 +10,7 @@
 - [Demostração](#link2)
 - [Instalação](#link3)
 - [Tecnologias utilizadaas](#link4)
+- [Links](#link5)
 
 <br>
 
@@ -35,7 +36,15 @@
 - Página com pomodoro time com ajuste de tempo
   - Modal para configurar
 - Página de detalhes da conta e botão para deletar conta
+- Contador de dias consecutivos que volta a 1 se ficar 24 Offline
 
+### Observações 
+- O mapa mental era o diferencial do meu site dos outros, mas devido o curto tempo não foi possivel desenvolver
+- O carousel funciona com touch no mobile, assim não precisando das setas, porém no desktop o touch não está disponivel
+- para testa o carousel no desktop abra o devtools (F12) e clique em "ativar emulação de dispositivo ou mobile"
+- Ao olhar o codigo irá perceber que alguns components usam as cores do thema e outros tem a propria cor, devido ao curto tempo os themas foi deixado de lado
+- Clicando fora do modal de criação ou edição de curso, o modal ira resertar
+ 
 <a id="link2"></a>
 
 ## Demostrações
@@ -128,3 +137,14 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - [pg](https://node-postgres.com/)
 - [Node.js](https://nodejs.org/en/)
 - [TypeScript](https://www.typescriptlang.org/)
+
+<a id="link5"></a>
+[Frontend deploy](https://orangemynotes.netlify.app/)
+
+[Backend deploy](https://orangemynotes.herokuapp.com/)
+
+<br>
+
+<div align="center"  height="100px">
+  <img  height="20px" src="https://viewscount.vercel.app/get/@orangenotes" alt="contador de visitas no perfil" />
+</div>
