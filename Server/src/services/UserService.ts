@@ -21,7 +21,7 @@ class UserService {
     password: string
   ): Promise<object> {
     //foto de perfil temporaria
-    const randomSeed = randomBytes(6).toString("base64url");
+    const randomSeed = randomBytes(32).toString("hex");
     const randomPicture = `https://avatars.dicebear.com/api/croodles-neutral/${randomSeed}.svg`;
 
     const defaultSalt = 10;
