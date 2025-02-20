@@ -1,11 +1,7 @@
 import "dotenv/config";
 
 export default {
-  USER: process.env.USER,
-  HOST: process.env.HOST,
-  DATABASE: process.env.DATABASE,
-  PASSWORD: process.env.PASSWORD,
-  DBPORT: process.env.DBPORT,
+  DATABASE_URL: process.env.DATABASE_URL,
   PORT: process.env.PORT,
   SECRET_JWT: process.env.SECRET_JWT,
 };
