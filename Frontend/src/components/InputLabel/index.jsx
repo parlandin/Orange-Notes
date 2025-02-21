@@ -1,5 +1,7 @@
 import React from "react";
 import S from "./inputLabel.style";
+import { useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const InputLabel = ({
   icon,
@@ -11,6 +13,8 @@ const InputLabel = ({
   borderRadius,
   label,
 }) => {
+  const [passwordVisible, setPasswordVisible] = useState(false);
+
   return (
     <S.Label>
       {label && <S.LabelText>{label}</S.LabelText>}
@@ -20,9 +24,16 @@ const InputLabel = ({
           {...register(name)}
           name={name}
           placeholder={placeholder}
-          type={type}
+          type={
+            type === "password" ? (passwordVisible ? "text" : "password") : type
+          }
           onFocus={onFocus}
         />
+        {type === "password" && (
+          <S.ButtonEye onClick={() => setPasswordVisible(!passwordVisible)}>
+            {passwordVisible ? <FaEyeSlash /> : <FaEye />}
+          </S.ButtonEye>
+        )}
       </S.InputWrapper>
     </S.Label>
   );

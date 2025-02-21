@@ -36,4 +36,13 @@ const Input = styled.input`
   color: var(${({ theme }) => theme.color.text});
 `;
 
-export default { Label, InputWrapper, Input, LabelText };
+const ButtonEye = styled.button`
+  color: var(${({ theme }) => theme.color.secondary});
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  display: flex;
+`;
+
+export default { ButtonEye, Label, InputWrapper, Input, LabelText };
