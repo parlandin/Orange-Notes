@@ -271,6 +271,7 @@ const CoursesFormModal = ({
               type="text"
               placeholder="Digite o Titulo do curso"
               borderRadius="6px"
+              label={"Titulo"}
             />
             <S.Warning>{errors.title?.message}</S.Warning>
           </S.WrapperGeneric>
@@ -282,6 +283,7 @@ const CoursesFormModal = ({
               type="text"
               placeholder="Digite a URL do curso"
               borderRadius="6px"
+              label={"URL"}
             />
             <S.Warning>{errors.url?.message}</S.Warning>
           </S.WrapperGeneric>
@@ -293,6 +295,7 @@ const CoursesFormModal = ({
               type="text"
               placeholder="Digite o LINK(URL) da imagem do curso"
               borderRadius="6px"
+              label={"URL da imagem"}
             />
             <S.Warning>{errors.image_url?.message}</S.Warning>
           </S.WrapperGeneric>
@@ -304,6 +307,7 @@ const CoursesFormModal = ({
               type="text"
               placeholder="Informe a categoria do curso"
               borderRadius="6px"
+              label={"Categoria"}
             />
             <S.Warning>{errors.category?.message}</S.Warning>
           </S.WrapperGeneric>
