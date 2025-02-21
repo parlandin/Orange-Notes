@@ -30,7 +30,7 @@ const Login = () => {
           aria-label="botão para abri o modal"
           title="Clique para ver informações"
         >
-          <BiInfoCircle size="1.6rem" />
+          <BiInfoCircle size="1.6rem" color="#FF5F19" />
         </S.ButtonModal>
 
         <S.WrapperForm modalIsOpen={modalIsOpen}>

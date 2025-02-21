@@ -24,14 +24,14 @@ const Button = styled.button`
   font-size: 1.4rem;
   cursor: pointer;
   font-weight: 600;
-  margin: 20px 0;
+  margin: 20px 0 10px;
 `;
 
 const LinkWithStyle = styled(Link)`
   border-bottom: 1px solid var(${({ theme }) => theme.color.secondary});
   text-decoration: none;
   color: var(${({ theme }) => theme.color.text});
-  margin-top: 20px;
+  margin-top: 15px;
 `;
 
 const Span = styled.span`

@@ -45,7 +45,7 @@ const Title = styled.h2`
   color: var(${({ theme }) => theme.color.text});
   font-weight: 600;
   font-size: 1.8rem;
-  margin-top: 40px;
+  margin-top: 30px;
 `;
 
 const ButtonModal = styled.button`

@@ -1,6 +1,19 @@
 import styled from "styled-components";
 
 const Label = styled.label`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+`;
+
+const LabelText = styled.span`
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+  margin-left: 2px;
+  color: var(${({ theme }) => theme.color.text});
+`;
+
+const InputWrapper = styled.div`
   border-radius: ${({ borderRadius }) =>
     borderRadius ? borderRadius : "20px"};
   border: 2px solid var(${({ theme }) => theme.color.secondary});
@@ -23,4 +36,13 @@ const Input = styled.input`
   color: var(${({ theme }) => theme.color.text});
 `;
 
-export default { Label, Input };
+const ButtonEye = styled.button`
+  color: var(${({ theme }) => theme.color.secondary});
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  display: flex;
+`;
+
+export default { ButtonEye, Label, InputWrapper, Input, LabelText };

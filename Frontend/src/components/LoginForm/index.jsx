@@ -76,9 +76,10 @@ const LoginForm = () => {
             <InputLabel
               icon={<FiMail size="1.6rem" color="1E1E1E" />}
               type="email"
-              placeholder="E-mail"
+              placeholder="digite seu e-mail"
               name="email"
               register={register}
+              label="E-mail"
             />
             <S.Span>{errors.email?.message}</S.Span>
           </S.WrapperGeneric>
@@ -87,9 +88,10 @@ const LoginForm = () => {
             <InputLabel
               icon={<FiLock size="1.6rem" color="1E1E1E" />}
               type="password"
-              placeholder="Senha"
+              placeholder="digite sua senha"
               name="password"
               register={register}
+              label="Senha"
             />
             <S.Span>{errors.password?.message}</S.Span>
           </S.WrapperGeneric>
