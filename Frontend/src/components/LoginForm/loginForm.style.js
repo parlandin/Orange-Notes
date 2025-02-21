@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 const Form = styled.form`
-  margin-top: 60px;
+  margin-top: 34px;
   display: flex;
   flex-direction: column;
   align-items: center;
