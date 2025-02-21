@@ -31,7 +31,11 @@ const InputLabel = ({
         />
         {type === "password" && (
           <S.ButtonEye onClick={() => setPasswordVisible(!passwordVisible)}>
-            {passwordVisible ? <FaEyeSlash /> : <FaEye />}
+            {passwordVisible ? (
+              <FaEyeSlash size="20px" />
+            ) : (
+              <FaEye size="20px" />
+            )}
           </S.ButtonEye>
         )}
       </S.InputWrapper>
