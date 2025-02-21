@@ -33,8 +33,9 @@ const WrapperForm = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px 0 5px;
+  /* padding: 20px 0 5px; */
   position: relative;
+  min-height: 500px;
 
   @media (max-width: 570px) {
     opacity: ${({ modalIsOpen }) => (modalIsOpen ? 0 : 1)};
