@@ -9,17 +9,21 @@ const InputLabel = ({
   register,
   onFocus,
   borderRadius,
+  label,
 }) => {
   return (
-    <S.Label borderRadius={borderRadius}>
-      {icon ? icon : ""}
-      <S.Input
-        {...register(name)}
-        name={name}
-        placeholder={placeholder}
-        type={type}
-        onFocus={onFocus}
-      />
+    <S.Label>
+      {label && <S.LabelText>{label}</S.LabelText>}
+      <S.InputWrapper borderRadius={borderRadius}>
+        {icon ? icon : ""}
+        <S.Input
+          {...register(name)}
+          name={name}
+          placeholder={placeholder}
+          type={type}
+          onFocus={onFocus}
+        />
+      </S.InputWrapper>
     </S.Label>
   );
 };
